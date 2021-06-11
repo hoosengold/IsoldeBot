@@ -1,14 +1,10 @@
-//Array with emojis for react(), currently not used, see line 84 for reactions array
-//const reactArray = require("../util/reactArray");
-
-
 //Import all required modules
 const Discord = require("discord.js"),
     config = require("../config.json"),
     bot = new Discord.Client(),
     prefix = "!",
-    poll = require("../util/poll.js");
-    //setInterval = require('../util/countdownTimer.js'),
+    poll = require("../util/poll.js"),
+    setInterval = require("../util/countdownTimer.js");
     //emojiArray = require("../util/emojiArray.js");
 
 
@@ -36,7 +32,7 @@ bot.on("message", function(message){
     }else if (command === "poll"){
             poll(message, args);
     }else if(command === "countdown"){
-
+            setInterval(message, args);
     }
 
 });
