@@ -1,12 +1,16 @@
+//Array with emojis for react(), currently not used, see line 53 for reactions array
+//const reactArray = require("../util/reactArray");
+
+//Import all required modules
 const Discord = require("../src/node_modules/discord.js"),
-    setInterval = require('../util/countdownTimer.js'),
+    //setInterval = require('../util/countdownTimer.js'),
     emojiArray = require("../util/emojiArray.js");
 
 function poll(message, args){
     //format the output/messsage body
         const squigglyRegex = RegExp(/{(.*?)}/),
             squareRegex = RegExp(/\[[^[]+\]/g), 
-            timeRegex = RegExp(/{(\h)}/), //time format, should only read hours and not dates
+            //timeRegex = RegExp(/{(\h)}/), //time format, should only read hours and not dates
             pollParameters = args.join(' '),
             pollTitle = squigglyRegex.test(pollParameters) ? squigglyRegex.exec(pollParameters)[1] : null;
     
