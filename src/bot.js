@@ -18,7 +18,7 @@ bot.once("ready", () => {
 })
 
 bot.on("message", function(message){
-    if (message.author.bot) return; //checks if the author og the message is a bot, if it is, then it does not respond
+    if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
     if (!message.content.startsWith(prefix)) return; //checks if the message starts with !, if it does not, then it does not respond
 
 
@@ -65,8 +65,8 @@ function poll(message, args){
     }
 
     //should take the hours from the args and separate it
-    const timedPoll = timeRegex.test(args[0]) ? timeRegex.exec(args[0])[0] : null;
-    console.log("timedPoll: " + timedPoll);
+    /*const timedPoll = timeRegex.test(args[0]) ? timeRegex.exec(args[0])[0] : null;
+    console.log("timedPoll: " + timedPoll);*/
     
     //creates the poll message
     let i = 0;
@@ -113,10 +113,10 @@ function poll(message, args){
 
 
     //checks if the poll is timed, if it is, it starts a countdown timer, see countdownTimer.js, work in progress
-    if(timedPoll){
+    /*if(timedPoll){
         var hoursLeft = timeRegex.exec(args[1])[1];//should only take the hours argument
         console.log("hoursLeft:" + hoursLeft);
         message.channel.send('You have ' + hoursLeft + 'hours left to vote!');
         return setInterval(hoursLeft);
-    }
+    }*/
 }
