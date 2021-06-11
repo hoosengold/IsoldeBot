@@ -2,8 +2,7 @@ const Discord = require("../src/node_modules/discord.js");
 //var hoursLeft = require('../src/bot.js');
 
 // Set the date we're counting down to
-var timeleft = hoursLeft * 3600000;
-var countDownDate = new Date().getTime() + timeleft;
+//var timeleft = hoursLeft * 3600000;
 
 // Update the count down every 1 second
 function setInterval(message, args) {
@@ -55,8 +54,6 @@ function setInterval(message, args) {
 
   // If the count down is finished, write some text
   if (distance < 0) {
-    /*clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";*/
     return message.channel.send('@everyone Voting time has expired!');
   }
 };
