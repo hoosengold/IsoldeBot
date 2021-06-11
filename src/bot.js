@@ -35,7 +35,7 @@ bot.on("message", function(message){
         return message.channel.send('How to use the `!poll` command: \n\n `!poll {question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.');
     }else if (command === "poll"){
             poll(message, args);
-    }else if(command === "timedPoll"){
+    }else if(command === "countdown"){
 
     }
 
