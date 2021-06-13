@@ -3,7 +3,7 @@ const Discord = require("discord.js"),
     //config = require("./config.json"),
     bot = new Discord.Client(),
     prefix = "!",
-    poll = require("./util/poll.js"),
+    poll = require("../util/poll.js"),
     setInterval = require("./util/countdownTimer.js");
     //emojiArray = require("../util/emojiArray.js");
 
