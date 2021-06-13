@@ -4,7 +4,7 @@ const Discord = require("discord.js"),
     bot = new Discord.Client(),
     prefix = "!",
     poll = require("../util/poll.js"),
-    setInterval = require("./util/countdownTimer.js");
+    setInterval = require("../util/countdownTimer.js");
     //emojiArray = require("../util/emojiArray.js");
 
 require('dotenv').config();
