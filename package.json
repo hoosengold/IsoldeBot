@@ -1,5 +1,25 @@
 {
   "dependencies": {
-    "discord.js": "^12.5.3"
-  }
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  },
+  "name": "ai_furnee-discord-bot",
+  "description": "Multipurpose discord bot",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoosengold/ai_furnee-discord-bot.git"
+  },
+  "author": "hoosengold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoosengold/ai_furnee-discord-bot/issues"
+  },
+  "homepage": "https://github.com/hoosengold/ai_furnee-discord-bot#readme"
 }
