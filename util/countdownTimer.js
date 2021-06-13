@@ -1,4 +1,4 @@
-const Discord = require("../src/node_modules/discord.js");
+const Discord = require("../node_modules/discord.js");
 //var hoursLeft = require('../src/bot.js');
 
 // Set the date we're counting down to
