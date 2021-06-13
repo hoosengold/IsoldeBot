@@ -2,7 +2,7 @@
 //const reactArray = require("../util/reactArray");
 
 //Import all required modules
-const Discord = require("../src/node_modules/discord.js"),
+const Discord = require("../node_modules/discord.js"),
     //setInterval = require('../util/countdownTimer.js'),
     emojiArray = require("../util/emojiArray.js");
 
