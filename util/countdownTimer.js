@@ -13,7 +13,7 @@ function countdown(message, args){
     var countdownDate = new Date();
     countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft);
 
-    //Message when will the countdow end
+    //Message when the countdow ends
     message.channel.send('The Countdown will end after ' + hoursLeft + ' hours on **' + countdownDate +'**');
 
     setInterval(function() {
