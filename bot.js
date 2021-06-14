@@ -2,7 +2,7 @@
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
     prefix = "!",
-    config = ("./config.json"),
+    config = require("./config.json"),
     poll = require("./util/poll.js"),
     setInterval = require("./util/countdownTimer.js");
 
@@ -11,7 +11,7 @@ const Discord = require("discord.js"),
 
 
 //Login with test bot
-bot.login(config.DISCORD_TOKEN);
+bot.login(config.token);
 
 //Print Ready in the console when the bot is ready
 bot.once("ready", () => { 
