@@ -4,7 +4,7 @@ const Discord = require("discord.js"),
     prefix = "!",
     config = require("./config.json"),
     poll = require("./util/poll.js"),
-    setInterval = require("./util/countdownTimer.js"),
+    countdown = require("./util/countdownTimer.js"),
     updates = require('./text/changelog.json'),
     help = require('./text/help.json');
 
@@ -29,7 +29,9 @@ bot.on("message", function(message){
     const commandBody = message.content.slice(prefix.length),
         args = commandBody.split(' '),
         command = args.shift().toLowerCase();
-        console.log(command);
+        console.log("command: " + command);
+        console.log("args: " + args);
+        console.log("commandBody: " + commandBody);
 
 //check for the different commands
     switch (command){
@@ -39,9 +41,9 @@ bot.on("message", function(message){
         case "poll":
             poll(message, args);
             break;
-        //case "countdown":
-            //return setInterval(message, args);
-            //break;  
+        case "countdown":
+            countdown(message, args);
+            break;  
         case "updates":
             message.channel.send(updates.changelog);
             break;
