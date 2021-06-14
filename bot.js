@@ -31,14 +31,18 @@ bot.on("message", function(message){
         command = args.shift().toLowerCase();
 
 //check for the different commands
-    if(command === "help"){
-        return message.channel.send(help.help);
-    }else if (command === "poll"){
+    switch (command){
+        case "help":
+            message.channel.send(help.help);
+            break;
+        case "poll":
             poll(message, args);
-    }else if(command === "countdown"){
-            setInterval(message, args);
-    } else if (command === "updates"){
-            message.channel.send(updates.changelog);  
+            break;
+        //case "countdown":
+            //return setInterval(message, args);
+            //break;  
+        case "updates":
+            message.channel.send(updates.changelog);
+            break;   
     }
-
 });
