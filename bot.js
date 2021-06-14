@@ -4,13 +4,13 @@ const Discord = require("discord.js"),
     prefix = "!",
     poll = require("./util/poll.js"),
     setInterval = require("./util/countdownTimer.js");
-    //emojiArray = require("../util/emojiArray.js");
 
+//Login with deploy bot
 require('dotenv').config();
 
 
-//Login with the bot, prints Ready in the console when the bot is ready
-bot.login(process.env.DISCORD_TOKEN);
+//Login with test bot, prints Ready in the console when the bot is ready
+//bot.login(process.env.DISCORD_TOKEN);
 bot.once("ready", () => { 
 	console.log("Ready!");
 })
