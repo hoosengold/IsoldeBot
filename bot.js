@@ -29,6 +29,7 @@ bot.on("message", function(message){
     const commandBody = message.content.slice(prefix.length),
         args = commandBody.split(' '),
         command = args.shift().toLowerCase();
+        console.log(command);
 
 //check for the different commands
     switch (command){
@@ -43,6 +44,7 @@ bot.on("message", function(message){
             //break;  
         case "updates":
             message.channel.send(updates.changelog);
-            break;   
+            break;
+        //default: message.channel.send(help.default);  
     }
 });
