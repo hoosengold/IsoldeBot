@@ -2,15 +2,16 @@
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
     prefix = "!",
+    config = ("./config.json"),
     poll = require("./util/poll.js"),
     setInterval = require("./util/countdownTimer.js");
 
 //Login with deploy bot
-require('dotenv').config();
+//require('dotenv').config();
 
 
 //Login with test bot
-//bot.login(process.env.DISCORD_TOKEN);
+bot.login(config.DISCORD_TOKEN);
 
 //Print Ready in the console when the bot is ready
 bot.once("ready", () => { 
