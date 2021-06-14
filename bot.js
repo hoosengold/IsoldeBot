@@ -4,7 +4,9 @@ const Discord = require("discord.js"),
     prefix = "!",
     config = require("./config.json"),
     poll = require("./util/poll.js"),
-    setInterval = require("./util/countdownTimer.js");
+    setInterval = require("./util/countdownTimer.js"),
+    updates = require('./text/changelog.json'),
+    help = require('./text/help.json');
 
 //Login with deploy bot
 //require('dotenv').config();
@@ -30,11 +32,13 @@ bot.on("message", function(message){
 
 //check for the different commands
     if(command === "help"){
-        return message.channel.send('Help Menu \n -------------------------------------- \n Available Commands: \n\n `!poll {question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.');
+        return message.channel.send(help.help);
     }else if (command === "poll"){
             poll(message, args);
     }else if(command === "countdown"){
             setInterval(message, args);
+    } else if (command === "updates"){
+            message.channel.send(updates.changelog);  
     }
 
 });
