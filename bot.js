@@ -9,8 +9,10 @@ const Discord = require("discord.js"),
 require('dotenv').config();
 
 
-//Login with test bot, prints Ready in the console when the bot is ready
+//Login with test bot
 //bot.login(process.env.DISCORD_TOKEN);
+
+//Print Ready in the console when the bot is ready
 bot.once("ready", () => { 
 	console.log("Ready!");
 })
@@ -27,7 +29,7 @@ bot.on("message", function(message){
 
 //check for the different commands
     if(command === "help"){
-        return message.channel.send('How to use the `!poll` command: \n\n `!poll {question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.');
+        return message.channel.send('Help Menu \n -------------------------------------- \n Available Commands: \n\n `!poll {question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.');
     }else if (command === "poll"){
             poll(message, args);
     }else if(command === "countdown"){
