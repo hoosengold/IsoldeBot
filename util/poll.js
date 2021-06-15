@@ -16,7 +16,7 @@ function poll(message, args){
     
         //checks if the command has title
         if (!pollTitle){
-                return message.channel.send('No poll title specified. Type !help for more info.').catch(err => console.log(err));
+                return message.channel.send('No poll title specified. Type `*help` for more info.').catch(err => console.log(err));
         }
     
     
