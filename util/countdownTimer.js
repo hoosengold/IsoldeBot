@@ -31,9 +31,7 @@ function countdown(message, args) {
 
     //Calculate remaining hours and minutes
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    console.log('hours: ' + hours);
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    console.log('minutes: ' + minutes);
 
     //Message everyone at the last 1 hour/30 minutes
 
@@ -50,7 +48,7 @@ function countdown(message, args) {
     // If the countdown is finished, send message
     if (distance <= 0) {
       clearInterval(x);
-      message.channel.send('The time has expired!');
+      message.channel.send("Time's up!");
       console.log('Message sent: time expired.');
     }
   }, 1000);
