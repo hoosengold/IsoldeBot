@@ -1,7 +1,7 @@
 //Import all required modules
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
-    prefix = "!",
+    prefix = "*",
     config = require("./config.json"),
     poll = require("./util/poll.js"),
     countdown = require("./util/countdownTimer.js"),
