@@ -47,6 +47,6 @@ bot.on("message", function(message){
         case "updates":
             message.channel.send(updates.changelog);
             break;
-        //default: message.channel.send(help.default);  
+        default: message.channel.send(help.default);  
     }
 });
