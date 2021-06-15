@@ -13,25 +13,34 @@ function countdown(message, args) {
   var countdownDate = new Date();
   countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft);
 
-  //Message when the countdow ends
-  message.channel.send('The Countdown will end after ' + hoursLeft + ' hours on **' + countdownDate + '**');
+  //Message when the countdown ends
+  if (hoursLeft = 1) {
+    message.channel.send('The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*');
+  } else {
+    message.channel.send('The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*');
+  }
+
 
   setInterval(function () {
     // Get today's date and time
     var now = new Date();
-    console.log("now: " + now);
 
     // Find the distance between now and the count down date
     var distance = countdownDate - now;
-    console.log("distance: " + distance);
+
+    //Calculate remaining hours and minutes
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    console.log("hours: " + hours);
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    console.log("minutes: " + minutes);
 
     //Message everyone at the ;ast 1 hour/30 minutes
-    if (distance < 3600100 && distance > 3599900) {
-      message.channel.send("Only 1 hour left!");
-    } else if (distance < 1800100 && distance > 1799900) {
-      message.channel.send("Only 30 minutes left!");
-    } else if (distance <= 0) {
-      message.channel.send('@everyone The time has expired!'); // If the count down is finished, write some text
+    if (hours == 1) {
+      message.channel.send("Only **1 hour** left!");
+    } else if (minutes == 30 && hours == 0) {
+      message.channel.send("Only **30 minutes** left!");
+    } else if (hours == 0 && minutes == 0) {
+      message.channel.send('The time has expired!'); // If the count down is finished, write some text
     }
   }, 1000);
 }
