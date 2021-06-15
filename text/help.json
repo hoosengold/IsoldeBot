@@ -1,4 +1,3 @@
 {
-    "help": "Help Menu \n -------------------------------------------------------- \n Available Commands: \n\n **!poll** `{question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.",
     "default": "Maybe you made a typo? Check all available commands with `*help`."
 }
