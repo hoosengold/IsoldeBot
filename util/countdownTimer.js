@@ -11,10 +11,12 @@ function countdown(message, args) {
   countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft);
 
   //Message when the countdown ends
-  if (hoursLeft = 1) {
+  if (hoursLeft == 1) {
     message.channel.send('The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*');
+    console.log('Countdown date messaged.');
   } else {
     message.channel.send('The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*');
+    console.log('Countdown date messaged.');
   }
 
   var messageCountHour = 0;
@@ -29,26 +31,29 @@ function countdown(message, args) {
 
     //Calculate remaining hours and minutes
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    console.log("hours: " + hours);
+    console.log('hours: ' + hours);
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    console.log("minutes: " + minutes);
+    console.log('minutes: ' + minutes);
 
     //Message everyone at the last 1 hour/30 minutes
 
-      if (hours == 1 && messageCountHour == 0) {
-        message.channel.send("Only **1 hour** left!");
-        messageCountHour++;
-      } else if (minutes == 30 && hours == 0 && messageCountMinute == 0) {
-        message.channel.send("Only **30 minutes** left!");
-        messageCountMinute++;
-      }
-    
+    if (hours == 1 && minutes == 0 && messageCountHour == 0) {
+      message.channel.send("Only **1 hour** left!");
+      messageCountHour++;
+      console.log('Message sent: 1 hour left.');
+    } else if (minutes == 30 && hours == 0 && messageCountMinute == 0) {
+      message.channel.send("Only **30 minutes** left!");
+      messageCountMinute++;
+      console.log('Message sent: 30 minutes left.');
+    }
+
     // If the countdown is finished, send message
     if (distance <= 0) {
       clearInterval(x);
       message.channel.send('The time has expired!');
+      console.log('Message sent: time expired.');
     }
   }, 1000);
+  
 }
-
 module.exports = countdown;
