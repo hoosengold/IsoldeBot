@@ -27,7 +27,7 @@ function poll(message, args){
     
         //checks if the command has options and if they are more than 20
         if(!pollsArray){
-            return message.channel.send('No poll options specified. Type !help for more info.').catch(err => console.log(err));
+            return message.channel.send('No poll options specified. Type `*help` for more info.').catch(err => console.log(err));
         } else if (pollsArray.length > 20){
             return message.channel.send('Max. 20 poll options allowed.').catch(err => console.log(err));
         }
