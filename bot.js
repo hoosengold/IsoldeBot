@@ -6,7 +6,8 @@ const Discord = require("discord.js"),
     poll = require("./util/poll.js"),
     countdown = require("./util/countdownTimer.js"),
     updates = require('./text/changelog.json'),
-    help = require('./text/help.json');
+    help = require('./util/help.js'),
+    typo = require('./text/help.json');
 
 //Login with deploy bot
 //require('dotenv').config();
@@ -36,7 +37,7 @@ bot.on("message", function(message){
 //check for the different commands
     switch (command){
         case "help":
-            message.channel.send(help.help);
+            help(message);
             break;
         case "poll":
             poll(message, args);
@@ -47,6 +48,6 @@ bot.on("message", function(message){
         case "updates":
             message.channel.send(updates.changelog);
             break;
-        default: message.channel.send(help.default);  
+        default: message.channel.send(typo.default);  
     }
 });
