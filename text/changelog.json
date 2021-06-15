@@ -1,4 +1,4 @@
 {
     "changelog": 
-    "**1.** Changed the prefix to `*` , the old prefix (`!`) is no longer supported to avoid collision with other bots. \n **2.** Added a `countdown` command. It takes hours as an input and calculates when the end of the countdown is, then messages the date. It messages everyone at the last 1 hour, 30 minutes and when the countdown ends. Type *help if you want to see how to use it."
+    "**1.** Changed the prefix to `*` , the old prefix (`!`) is no longer supported to avoid collision with other bots. \n **2.** Added a `countdown` command. It takes hours as an input and calculates when the end of the countdown is, then messages the date. It messages everyone at the last 1 hour, 30 minutes and when the countdown ends. Type `*help` if you want to see how to use it."
 }
