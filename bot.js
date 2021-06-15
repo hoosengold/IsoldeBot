@@ -11,6 +11,7 @@ const Discord = require("discord.js"),
 
 //Login with deploy bot
 require('dotenv').config();
+bot.login(process.env.DISCORD_TOKEN);
 
 
 //Login with test bot
