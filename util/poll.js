@@ -1,12 +1,9 @@
-//Array with emojis for react(), currently not used, see line 53 for reactions array
-//const reactArray = require("../util/reactArray");
-
 //Import all required modules
 const Discord = require("../node_modules/discord.js"),
     emojiArray = require("../util/emojiArray.js");
 
 function poll(message, args){
-    //format the output/messsage body
+    //format the input
         const squigglyRegex = RegExp(/{(.*?)}/),
             squareRegex = RegExp(/\[[^[]+\]/g), 
             pollParameters = args.join(' '),
