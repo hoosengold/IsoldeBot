@@ -10,7 +10,7 @@ function help(message) {
         " \n `*poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]`"+
         " \n\n *Note:* Each poll can have **up to 20 options**. \n\n" +
         "** *countdown** `hours` \n\n" +
-        "Example: `*countdown 6` \n\n" +
+        "Example: `*countdown 6` \n" +
         "Adds 6 hours to the countdown timer. \n\n"+
         "*Note:* At least 1 hour has to be added, no upper limit (but be reasonable). Sends a message when 1 hour/30 minutes is left and when no time is left. \n\n" +
         "** *updates** \n" +
