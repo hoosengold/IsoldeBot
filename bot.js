@@ -1,17 +1,22 @@
 //Import all required modules
 const Discord = require("discord.js"),
-    //config = require("./config.json"),
     bot = new Discord.Client(),
-    prefix = "!",
+    prefix = "*",
+    config = require("./config.json"),
     poll = require("./util/poll.js"),
-    setInterval = require("./util/countdownTimer.js");
-    //emojiArray = require("../util/emojiArray.js");
+    countdown = require("./util/countdownTimer.js"),
+    updates = require('./text/changelog.json'),
+    help = require('./util/help.js'),
+    typo = require('./text/help.json');
 
+//Login with deploy bot
 require('dotenv').config();
 
 
-//Login with the bot, prints Ready in the console when the bot is ready
-bot.login(process.env.DISCORD_TOKEN);
+//Login with test bot
+//bot.login(config.token);
+
+//Print Ready in the console when the bot is ready
 bot.once("ready", () => { 
 	console.log("Ready!");
 })
@@ -25,14 +30,24 @@ bot.on("message", function(message){
     const commandBody = message.content.slice(prefix.length),
         args = commandBody.split(' '),
         command = args.shift().toLowerCase();
+        console.log("command: " + command);
+        console.log("args: " + args);
+        console.log("commandBody: " + commandBody);
 
 //check for the different commands
-    if(command === "help"){
-        return message.channel.send('How to use the `!poll` command: \n\n `!poll {question} [option1] [option2]` \n\n Example: \n `!poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]` \n\n *Note:* Each poll can have **up to 20 options**.');
-    }else if (command === "poll"){
+    switch (command){
+        case "help":
+            help(message);
+            break;
+        case "poll":
             poll(message, args);
-    }else if(command === "countdown"){
-            setInterval(message, args);
+            break;
+        case "countdown":
+            countdown(message, args);
+            break;  
+        case "updates":
+            message.channel.send(updates.changelog);
+            break;
+        default: message.channel.send(typo.default);  
     }
-
 });
