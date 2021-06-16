@@ -1,5 +1,3 @@
-const music = require("./util/music");
-
 //Import all required modules
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
@@ -33,7 +31,7 @@ bot.on("message", function (message) {
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
     const commandBody = message.content.slice(prefix.length),
         args = commandBody.split(' '),
-        command = args.shift().toLowerCase();
+        command = args.shift();
     console.log("command: " + command);
     console.log("args: " + args);
     console.log("commandBody: " + commandBody);
@@ -54,6 +52,7 @@ bot.on("message", function (message) {
             break;
         case "addMusic":
             music(message, args);
+            console.log('command taken');
             break;
         default: message.channel.send(typo.default);
     }
