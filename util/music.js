@@ -1,5 +1,7 @@
 //Import all required modules
-const Discord = require("../node_modules/discord.js");
+const Discord = require("../node_modules/discord.js"),
+    fsLib = require('fs'),
+    musicBackup = require('../text/music-backup.json');
 var musicSuggestion = require('../bot.js');
 
 //Initialize hash map to store the data
@@ -8,6 +10,12 @@ let musicMap = new Map();
 //The function of the command
 function music(message, args) {
     //Save the link in a variable
+    if (musicMap.size == 0) {
+        fsLib.readFile('../text/music-backup.json', (error, textInFile) => {
+            if (error) throw error;
+            console.log(err.toString());
+        })
+    }
     musicSuggestion = args[0];
     //check if the link is already in the map
     if (musicMap.has(musicSuggestion)) {
@@ -22,6 +30,12 @@ function music(message, args) {
         musicMap.set(musicSuggestion, { musicSuggestion });
         console.log("Music hash map size:" + musicMap.size);
         message.channel.send('The Song has been successfully added. Thank you for the suggestion! :purple_heart:');
+
+        //add the link to the backup file
+        fsLib.writeFile('../text/music-backup.json', '"' + musicSuggestion + '": ' + '"' + musicSuggestion + '", \n', (error) => {
+            if (error) throw error;
+            console.log(err.toString());
+        })
     }
 }
 
