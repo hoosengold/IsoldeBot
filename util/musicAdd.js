@@ -36,8 +36,12 @@ function musicAdd(message, args) {
             //check if the entry is in the database
             const getAvail = await client.query("select * from music where link = $1", [musicSuggestion])
 
+            //get the row count
+            var rs = await client.query("select * from music")
+            var rowNumber = rs.rows.length + 1;
+
             if (getAvail.rows.length === 0) { //if it isn't, add it and its ID, send message
-                await client.query("insert into music values ($1, $2)", [musicSuggestion, videoID])
+                await client.query("insert into music values ($1, $2, $3)", [musicSuggestion, videoID, rowNumber])
                 await message.channel.send("The song has been successfully added!")
                 console.log(`Item added successfully.`)
             } else { //if it is, send message
