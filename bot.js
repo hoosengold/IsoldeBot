@@ -52,7 +52,6 @@ bot.on("message", function (message) {
             break;
         case "addMusic":
             music(message, args);
-            console.log('command taken');
             break;
         default: message.channel.send(typo.default);
     }
