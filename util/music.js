@@ -3,6 +3,7 @@ const Discord = require("../node_modules/discord.js"),
     //fsLib = require('fs'),
     { Pool } = require('pg');
 
+//variable to store the link
 var musicSuggestion = require('../bot.js')
 
 require('dotenv').config()
