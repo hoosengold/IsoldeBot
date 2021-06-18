@@ -27,7 +27,7 @@ pool.on('error', (err, client) => {
 
 
 //The function of the command
-function music(message, args) {
+function musicAdd(message, args) {
     //async function for the queries
     ; (async () => {
 
@@ -75,4 +75,4 @@ function music(message, args) {
 }
 
 //Export the module so that it can be used by bot.js
-module.exports = music;
+module.exports = musicAdd;
