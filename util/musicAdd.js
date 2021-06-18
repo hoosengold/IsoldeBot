@@ -1,5 +1,5 @@
 //Import all required modules
-const Discord = require("../node_modules/discord.js"),
+const Discord = require("discord.js"),
     //fsLib = require('fs'),
     { Pool } = require('pg');
 
@@ -27,18 +27,18 @@ pool.on('error', (err, client) => {
 })
 
 
-//The function of the command
+//The function of the command addMusic
 function musicAdd(message, args) {
     //async function for the queries
     ; (async () => {
 
         //connect to the database
-        client = await pool.connect()
+        const client = await pool.connect()
         console.log("Connected successfully.")
 
         try {
             //begin transaction
-            await client.query("BEGIN");
+            //await client.query("BEGIN");
 
             //extract video ID from the link
             musicSuggestion = args[0];
@@ -59,7 +59,7 @@ function musicAdd(message, args) {
             }
 
             //end transaction
-            await client.query("COMMIT");
+            //await client.query("COMMIT");
 
         } finally {
             //release the client to the pool
@@ -69,8 +69,8 @@ function musicAdd(message, args) {
 
 
     })().catch(err => { //throw an error and rollback in case of an error
-        client.query("ROLLBACK");
-        console.log(`Rollback`);
+        //client.query("ROLLBACK");
+        //console.log(`Rollback`);
         console.log(err.stack);
     });
 }
