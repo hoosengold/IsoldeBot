@@ -1,6 +1,6 @@
 //Import all required modules
 const Discord = require("discord.js"),
-    pool = require("./musicAdd.js");
+    pool = require("../connections/database.js");
 
 
 //check for idle clients

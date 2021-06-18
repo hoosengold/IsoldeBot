@@ -1,24 +1,11 @@
 //Import all required modules
 const Discord = require("discord.js"),
+    pool = require("../connections/database.js");
     //fsLib = require('fs'),
-    { Pool } = require('pg');
+    //{ Pool } = require('pg');
 
 //variable to store the link
 var musicSuggestion = require('../bot.js')
-
-require('dotenv').config()
-
-//login details for the database
-const pool = new Pool({
-    user: process.env.user,
-    password: process.env.password,
-    host: process.env.host,
-    port: 5432,
-    database: process.env.database,
-    ssl: { rejectUnauthorized: false }
-})
-
-
 
 //throw an error if there are any idle clients
 pool.on('error', (err, client) => {
