@@ -2,7 +2,8 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "pg": "^8.6.0"
   },
   "name": "ai_furnee-discord-bot",
   "description": "Multipurpose discord bot",
