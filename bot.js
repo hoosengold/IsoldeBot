@@ -7,7 +7,7 @@ const Discord = require("discord.js"),
     countdown = require("./util/countdownTimer.js"),
     updates = require('./text/changelog.json'),
     help = require('./util/help.js'),
-    music = require('./util/music.js'),
+    musicAdd = require('./util/music.js'),
     typo = require('./text/help.json');
 
 //Login with deploy bot
