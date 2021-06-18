@@ -8,6 +8,7 @@ const Discord = require("discord.js"),
     updates = require('./text/changelog.json'),
     help = require('./util/help.js'),
     musicAdd = require('./util/music.js'),
+    musicGet = require('./util/music.js'),
     typo = require('./text/help.json');
 
 //Login with deploy bot
@@ -52,6 +53,9 @@ bot.on("message", function (message) {
             break;
         case "addMusic":
             musicAdd(message, args);
+            break;
+        case "getMusic":
+            musicGet();
             break;
         default: message.channel.send(typo.default);
     }
