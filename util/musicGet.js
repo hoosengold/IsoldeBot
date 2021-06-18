@@ -20,17 +20,22 @@ function musicGet(message) {
             //begin transaction
             //await client.query("BEGIN")
 
-            //get the rownumber column populated if it isn't
-            var rowCount = await client.query("select row_number () over (order by link) from music")
-            console.log(`rowCount: ${rowCount}`)
+            //get the row count
+            var rs = await client.query("select * from music")
+            var rowCount = rs.rows.length
+
             //take a random number for a random row
             var randomRow = Math.floor(Math.random() * rowCount + 1);
+            console.log(`randomRow: ${randomRow}`)
 
             //select the song from the random row
             const songSuggestion = await client.query("select link from music where rownumber = $1", [randomRow])
-
-            //message the link 
-            message.channel.send(`A random song was chosen for you! Enjoy the suggestion by our fellow stream fams! :purple_heart: ${songSuggestion}`)
+                .then(result => {
+                    //print the link value
+                    console.table(result.rows[0])
+                    //message the link 
+                    message.channel.send(`A random song was chosen for you! Enjoy the suggestion by our fellow stream fams! :purple_heart: \n\n ${result.rows[0].link}`)
+                })
 
             //commit transaction
             //await client.query("COMMIT")
