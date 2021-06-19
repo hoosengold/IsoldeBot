@@ -5,10 +5,11 @@ const Discord = require("discord.js"),
     config = require("./config.json"), //Login with test bot
     poll = require("./util/poll.js"),
     countdown = require("./util/countdownTimer.js"),
-    updates = require('./text/changelog.json'),
+    updates = require('./text/changelog.js'),
     help = require('./util/help.js'),
     musicAdd = require('./util/musicAdd.js'),
     musicGet = require('./util/musicGet.js'),
+    lore = require('./text/lore.js'),
     typo = require('./text/help.json');
 
 //Login with deploy bot
@@ -49,13 +50,16 @@ bot.on("message", function (message) {
             countdown(message, args);
             break;
         case "updates":
-            message.channel.send(updates.changelog);
+            updates(message);
             break;
         case "addMusic":
             musicAdd(message, args);
             break;
         case "getMusic":
             musicGet(message);
+            break;
+        case "story":
+            lore(message);
             break;
         default: message.channel.send(typo.default);
     }
