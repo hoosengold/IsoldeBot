@@ -22,7 +22,7 @@ bot.login(config.token);
 
 //Print Ready in the console when the bot is ready
 bot.once("ready", () => {
-    console.log(`Ready!`);
+    console.log(`Ready!`)
 })
 
 bot.on("message", function (message) {
@@ -34,9 +34,9 @@ bot.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length), //returns everything without the prefix
         args = commandBody.split(' '), //returns args[] where [0] is the first word arfter the command
         command = args.shift(); //returns the command
-    console.log(`command: ${command}`);
-    console.log(`args: ${args}`);
-    console.log(`commandBody: ${commandBody}`);
+    console.log(`command: ${command}`)
+    console.log(`args: ${args}`)
+    console.log(`commandBody: ${commandBody}`)
 
     //check for the different commands
     switch (command) {
