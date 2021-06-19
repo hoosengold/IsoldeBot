@@ -5,7 +5,7 @@ const Discord = require('../node_modules/discord.js'),
 function poll(message, args) {
     //format the input
     const squigglyRegex = RegExp(/{(.*?)}/),
-        squareRegex = RegExp(/\[[^[]+\]/g),
+        pollOptions = RegExp(/\[[^[]+\]/g),
         pollParameters = args.join(' '),
         pollTitle = squigglyRegex.test(pollParameters) ? squigglyRegex.exec(pollParameters)[1] : null;
 
@@ -17,10 +17,8 @@ function poll(message, args) {
             .catch(err => console.log(err));
     }
 
-
-    //
     pollParameters.replace(`{${pollTitle}}`, '')
-    const pollsArray = pollParameters.match(squareRegex)
+    const pollsArray = pollParameters.match(pollOptions)
 
 
     //checks if the command has options and if they are more than 20
