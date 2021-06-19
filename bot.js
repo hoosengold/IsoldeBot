@@ -2,7 +2,7 @@
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
     prefix = "*",
-    //config = require("./config.json"), //Login with test bot
+    config = require("./config.json"), //Login with test bot
     poll = require("./util/poll.js"),
     countdown = require("./util/countdownTimer.js"),
     updates = require('./text/changelog.js'),
@@ -13,12 +13,12 @@ const Discord = require("discord.js"),
     typo = require('./text/help.json');
 
 //Login with deploy bot
-require('dotenv').config();
-bot.login(process.env.DISCORD_TOKEN);
+//require('dotenv').config();
+//bot.login(process.env.DISCORD_TOKEN);
 
 
 //Login with test bot
-//bot.login(config.token);
+bot.login(config.token);
 
 //Print Ready in the console when the bot is ready
 bot.once("ready", () => {
