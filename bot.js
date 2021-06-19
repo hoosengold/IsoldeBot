@@ -13,12 +13,12 @@ const Discord = require("discord.js"),
     typo = require('./text/help.json');
 
 //Login with deploy bot
-//require('dotenv').config();
-//bot.login(process.env.DISCORD_TOKEN);
+require('dotenv').config();
+bot.login(process.env.DISCORD_TOKEN);
 
 
 //Login with test bot
-bot.login(config.token);
+//bot.login(config.token);
 
 //Print Ready in the console when the bot is ready
 bot.once("ready", () => {
