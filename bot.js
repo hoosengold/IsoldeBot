@@ -2,7 +2,7 @@
 const Discord = require("discord.js"),
     bot = new Discord.Client(),
     prefix = "*",
-    config = require("./config.json"), //Login with test bot
+    //config = require("./config.json"), //Login with test bot
     poll = require("./util/poll.js"),
     countdown = require("./util/countdownTimer.js"),
     updates = require('./text/changelog.js'),
