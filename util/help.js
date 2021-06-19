@@ -18,11 +18,13 @@ Adds 6 hours to the countdown timer.
     
 *Note:* At least 1 hour has to be added, no upper limit (but be reasonable). Sends a message when 1 hour/30 minutes is left and when no time is left.
 
-** *addMusic \`youtube link\`**
+** *addMusic \`youtube_link\`**
 Example: \`*addMusic https://www.youtube.com/...\`
+or
+                \`*addMusic www.youtube.com/...\`
 Adds the song suggestion to a pool with other songs.
 
-*Note:* If you are suggesting youtube link and the command still returns, that it accepts only youtube links, remove all but one empty spaces between the command \`*addMusic\` and the link.
+*Note:* If you are pasting YouTube link and the command still returns, that it accepts only YouTube links, remove all but one empty spaces between the command \`*addMusic\` and the link.
 
 ** *getMusic**
 Returns a random song from the already suggested songs.

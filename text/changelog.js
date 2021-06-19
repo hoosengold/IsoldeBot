@@ -10,7 +10,7 @@ Use the *new* command \`*addMusic\` to suggest songs for other Stream Fams to en
 If you want to see what others are suggesting, just type \`*getMusic\` and enjoy a Brave New World!
 If you are experiencing problems, type \`*help\` in chat.
 
-**2.** The Friend. Such a wonderful name. :smile: But where it's coming from? Why \"The Friend\" and not The Best Discord Bot In Existence? Well, maybe there is a super secret command to reveal the story behind The Friend. :exploding_head:
+**2.** The Friend. Such a wonderful name. :smile: But where it's coming from? Why \"The Friend\" and not \"The Best Discord Bot In Existence\"? Well, maybe there is a super secret command to reveal the story behind The Friend. :exploding_head:
 Or maybe all of this is just a clever ruse. :smiling_imp:`
     );  
 }
