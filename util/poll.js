@@ -1,12 +1,9 @@
-//Array with emojis for react(), currently not used, see line 53 for reactions array
-//const reactArray = require("../util/reactArray");
-
 //Import all required modules
 const Discord = require("../node_modules/discord.js"),
     emojiArray = require("../util/emojiArray.js");
 
 function poll(message, args){
-    //format the output/messsage body
+    //format the input
         const squigglyRegex = RegExp(/{(.*?)}/),
             squareRegex = RegExp(/\[[^[]+\]/g), 
             pollParameters = args.join(' '),
@@ -16,7 +13,7 @@ function poll(message, args){
     
         //checks if the command has title
         if (!pollTitle){
-                return message.channel.send('No poll title specified. Type !help for more info.').catch(err => console.log(err));
+                return message.channel.send('No poll title specified. Type `*help` for more info.').catch(err => console.log(err));
         }
     
     
@@ -27,7 +24,7 @@ function poll(message, args){
     
         //checks if the command has options and if they are more than 20
         if(!pollsArray){
-            return message.channel.send('No poll options specified. Type !help for more info.').catch(err => console.log(err));
+            return message.channel.send('No poll options specified. Type `*help` for more info.').catch(err => console.log(err));
         } else if (pollsArray.length > 20){
             return message.channel.send('Max. 20 poll options allowed.').catch(err => console.log(err));
         }
