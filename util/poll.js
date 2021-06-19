@@ -1,7 +1,6 @@
 //Import all required modules
 const Discord = require('../node_modules/discord.js'),
-    emojiArray = require('./pollutil/emojiArray.js'),
-    reactions = require('./pollutil/reactions.js');
+    emojiArray = require('./pollutil/emojiArray.js');
 
 function poll(message, args) {
     //format the input
