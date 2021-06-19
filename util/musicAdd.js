@@ -48,7 +48,7 @@ function musicAdd(message, args) {
 
                     if (getAvail.rows.length === 0) { //if it isn't, add it and its ID, send message
                         await client.query("insert into music values ($1, $2, $3)", [musicSuggestion, videoID, rowNumber])
-                        await message.channel.send("The song has been successfully added! Thank you for the suggestion! :purple_heart:")
+                        await message.channel.send(`The song has been successfully added! Thank you for the suggestion! :purple_heart: \n\n Total suggestions: ${rowNumber}`)
                         console.log(`Item added successfully.`)
                     } else { //if it is, send message
                         await message.channel.send("The song has already been suggested. Happy listening! :purple_heart:");

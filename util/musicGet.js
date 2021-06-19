@@ -34,7 +34,7 @@ function musicGet(message) {
                     //print the link value
                     console.table(result.rows[0])
                     //message the link 
-                    message.channel.send(`A random song was chosen for you! Enjoy the suggestion by our fellow stream fams! :purple_heart: \n\n ${result.rows[0].link}`)
+                    message.channel.send(`A random song was chosen for you! Enjoy suggestion *\u2116 ${randomRow}* by our fellow stream fams! :purple_heart: \n\n ${result.rows[0].link}`)
                 })
 
             //commit transaction
