@@ -12,7 +12,8 @@ const Discord = require('discord.js'),
     lore = require('./text/lore.js'), //import the module required for the story command
     typo = require('./text/help.json'); //import the module required for the default switch case
 
-//Login with deploy bot
+//Login with deploy bot + 
+//change app id
 //require('dotenv').config();
 //bot.login(process.env.DISCORD_TOKEN);
 
