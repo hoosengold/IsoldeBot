@@ -1,6 +1,6 @@
 //Import all required modules
-const Discord = require("discord.js"),
-    pool = require("../connections/database.js");
+const Discord = require("../../node_modules/discord.js"),
+    pool = require("../../connections/database.js");
 
 //variable to store the link
 var musicSuggestion = require('../bot.js')

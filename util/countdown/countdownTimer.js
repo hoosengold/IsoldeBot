@@ -1,5 +1,5 @@
-const Discord = require("../node_modules/discord.js");
-var hoursLeft = require('../bot.js');
+const Discord = require("../../node_modules/discord.js");
+var hoursLeft = require('../../bot.js');
 
 // Update the count down every 1 second
 function countdown(message, args) {

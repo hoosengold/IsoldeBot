@@ -1,12 +1,12 @@
 //Import all required modules
-const Discord = require('discord.js'),
+const Discord = require('./node_modules/discord.js'),
     bot = new Discord.Client(), //initialize client for the bot
     prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
     poll = require('./util/poll/poll.js'), //import the module required for the poll command
-    countdown = require('./util/countdownTimer.js'), //import the module required for the countdown command
+    countdown = require('./util/countdown/countdownTimer.js'), //import the module required for the countdown command
     updates = require('./text/changelog.js'), //import the module required for the updates command
-    help = require('./util/help.js'), //import the module required for the help command
+    help = require('./util/help/help.js'), //import the module required for the help command
     musicAdd = require('./util/musicAdd.js'), //import the module required for the addMusic command
     musicGet = require('./util/music/musicGet.js'), //import the module required for the getMusic command
     lore = require('./text/lore.js'), //import the module required for the story command

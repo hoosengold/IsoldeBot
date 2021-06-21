@@ -1,5 +1,5 @@
-const Discord = require("../node_modules/discord.js");
-const helpMessage = require('../bot.js');
+const Discord = require("discord.js");
+const helpMessage = require('../../bot.js');
 
 function help(message) {
     message.channel.send(
