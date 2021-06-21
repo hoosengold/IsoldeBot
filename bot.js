@@ -1,9 +1,8 @@
 //Import all required modules
-const Discord = require('./node_modules/discord.js'),
+const Discord = require('discord.js'),
     //bot = new Discord.Client(), //initialize client for the bot
     //prefix = "*", //prefix for all commands
     //config = require('./config.json'), //Login with test bot
-    index = require('./index.js'),
     poll = require('./util/poll/poll.js'), //import the module required for the poll command
     countdown = require('./util/countdown/countdownTimer.js'), //import the module required for the countdown command
     updates = require('./text/changelog.js'), //import the module required for the updates command
@@ -12,6 +11,8 @@ const Discord = require('./node_modules/discord.js'),
     musicGet = require('./util/music/musicGet.js'), //import the module required for the getMusic command
     lore = require('./text/lore.js'), //import the module required for the story command
     typo = require('./text/help.json'); //import the module required for the default switch case
+
+var botReq = require('./index.js');
 
 //Login with deploy bot + 
 //change app id
@@ -27,7 +28,7 @@ const Discord = require('./node_modules/discord.js'),
     console.log(`Ready!`)
 })*/
 
-function botPrefix(message) {
+function bot(message, args){
 
     /*bot.on("message", function (message) {
         if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
@@ -70,4 +71,4 @@ function botPrefix(message) {
     //});
 }
 
-module.exports = botPrefix;
+module.exports = bot;
