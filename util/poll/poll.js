@@ -1,5 +1,5 @@
 //Import all required modules
-const Discord = require('../node_modules/discord.js'),
+const Discord = require('discord.js'),
     emojiArray = require('./pollutil/emojiArray.js');
 
 function poll(message, args) {
