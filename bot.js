@@ -62,6 +62,6 @@ bot.on("message", function (message) {
         case "story": //command story
             lore(message);
             break;
-        default: message.channel.send(typo.default);
+        //default: message.channel.send(typo.default); removed until *word* bug is fixed
     }
 });
