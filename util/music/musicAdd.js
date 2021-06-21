@@ -3,7 +3,7 @@ const Discord = require("../../node_modules/discord.js"),
     pool = require("../../connections/database.js");
 
 //variable to store the link
-var musicSuggestion = require('../bot.js')
+var musicSuggestion = require('../../bot.js')
 
 //throw an error if there are any idle clients
 pool.on('error', (err, client) => {
