@@ -4,13 +4,31 @@ const Discord = require('./node_modules/discord.js'),
     config = require('./config.json'), //Login with test bot
     bot = require('./bot.js'),
     webHookHelper = require('discord-interactions'),
-    { DiscordInteractions } = require('slash-commands');
+    { DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands');
 
 
 //Login with deploy bot + 
 //change app id
-//require('dotenv').config();
+require('dotenv').config();
 //client.login(process.env.DISCORD_TOKEN);
+
+//initialize interactions
+const interaction = new DiscordInteractions({
+    //applicationId: process.env.app_id,  //deploy
+    //authToken: process.env.DISCORD_TOKEN, 
+    //publicKey: process.env.public_key,
+
+    applicationId: config.app_id, //test
+    authToken: config.token,
+    publicKey: config.public_key,
+})
+
+
+//get guild commands
+interaction
+    .getApplicationCommands(config.guild_id)
+    .then(console.log)
+    .catch(console.error)
 
 
 //Login with test bot
@@ -37,9 +55,4 @@ client.on("message", function (message) {
     if (message.content.startsWith(prefix)) {
         bot(message, args, command)
     }
-
-
-
-
 });
-//slash commands
