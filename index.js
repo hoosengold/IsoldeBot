@@ -2,7 +2,9 @@ const Discord = require('./node_modules/discord.js'),
     client = new Discord.Client(), //initialize client for the bot;
     prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
-    bot = require('./bot.js');
+    bot = require('./bot.js'),
+    webHookHelper = require('discord-interactions'),
+    { DiscordInteractions } = require('slash-commands');
 
 
 //Login with deploy bot + 
@@ -35,6 +37,9 @@ client.on("message", function (message) {
     if (message.content.startsWith(prefix)) {
         bot(message, args, command)
     }
+
+
+
 
 });
 //slash commands
