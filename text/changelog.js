@@ -1,8 +1,25 @@
 const Discord = require("../node_modules/discord.js"),
-changelogMessage = require("../bot.js");
+    changelogMessage = require("../bot.js");
 
 function updates(message) {
-    message.channel.send(`The Friend Updates:
+    const embed = {
+        title: 'The Friend Updates',
+        color: '#D4AB29',
+        descrition: '\u200b',
+        fields: [
+            {
+                name: '**1.** *Everything is prettier now!* :purple_heart: ',
+                value: 'All messages are embeded now and all of them have different colors.'
+            },
+            {
+                name: '\u200b',
+                value: '\u200b'
+            },
+        ]
+    }
+
+
+    /*message.channel.send(`The Friend Updates:
 -------------------------------------
 
 **1.** You found a new song and want to share it for others to enjoy as well? Or maybe you want something new and fresh in your YouTube playlist? **The Friend** got your back! 
@@ -14,6 +31,8 @@ If you are experiencing problems, type \`*help\` in chat.
 Or maybe all of this is just a clever ruse. :smiling_imp:
 
 You have an idea how to improve The Friend? Or maybe you encountered a bug? Feel free to @hoosengold and tell him how terrible The Friend is coded. :purple_heart:`
-    );  
+    );*/
+
+    message.channel.send({embed: embed})
 }
 module.exports = updates;
