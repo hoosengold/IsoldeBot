@@ -14,7 +14,7 @@ const Discord = require('discord.js'),
     typo = require('./text/help.json'); //import the module required for the default switch case
 
 
-function bot(message, args, command){
+function bot(message, args, command) {
 
     //check for the different commands
     switch (command) {
@@ -41,7 +41,7 @@ function bot(message, args, command){
             break;
         //default: message.channel.send(typo.default); removed until *word* bug is fixed
     }
-   
+
 }
 
 module.exports = bot;
