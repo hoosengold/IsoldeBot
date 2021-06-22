@@ -1,11 +1,13 @@
 const Discord = require("../node_modules/discord.js"),
     changelogMessage = require("../bot.js");
+//const image = new Discord.MessageAttachment('./images/');
 
 function updates(message) {
     const embed = {
         title: 'The Friend Updates',
         color: '#D4AB29',
-        descrition: '\u200b',
+        description: '\u200b',
+        //thumbnail: 'attachment://',
         fields: [
             {
                 name: '**1.** *Everything is prettier now!* :purple_heart: ',
@@ -15,7 +17,15 @@ function updates(message) {
                 name: '\u200b',
                 value: '\u200b'
             },
-        ]
+            {
+                name: 'BUGS!!! (╯°□°）╯︵ ┻━┻',
+                value: 'If you encountered a bug or have an idea how to improve The Friend, just @hoosengold \(or open an [issue](https://github.com/hoosengold/ai_furnee-discord-bot/issues) on GitHub\) and tell him how terrible The Friend is coded. :purple_heart:'
+            },
+        ],
+        footer: {
+            text: 'Last Update:???????',
+        },
+        timestamp: new Date(),
     }
 
 
@@ -33,6 +43,6 @@ Or maybe all of this is just a clever ruse. :smiling_imp:
 You have an idea how to improve The Friend? Or maybe you encountered a bug? Feel free to @hoosengold and tell him how terrible The Friend is coded. :purple_heart:`
     );*/
 
-    message.channel.send({embed: embed})
+    message.channel.send({ embed: embed })
 }
 module.exports = updates;
