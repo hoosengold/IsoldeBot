@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const helpMessage = require('../../bot.js');
-const images = new Discord.MessageAttachment('./images/git_profile-pic.png');
+const profilePic = new Discord.MessageAttachment('./images/git_profile-pic.png');
 
 function help(message) {
     const helpEmbed = {
-        color: '#AE3FA1',
+        color: '#007F7E',
         title: 'Help Menu',
         author: {
             name: 'hoosengold',
@@ -63,7 +63,7 @@ function help(message) {
         }
     }
 
-    message.channel.send({ embed: helpEmbed, files: [images] })
+    message.channel.send({ embed: helpEmbed, files: [profilePic] })
 }
 
 module.exports = help;
