@@ -23,11 +23,16 @@ const interaction = new DiscordInteractions({
     publicKey: config.public_key,
 })
 
+if (interaction) {
+    console.log(`Interaction initialization: Done`)
+} else {
+    console.error
+}
 
 //get guild commands
 interaction
     .getApplicationCommands(config.guild_id)
-    .then(console.log)
+    .then(console.log(`Getting guild commands: Done`))
     .catch(console.error)
 
 
