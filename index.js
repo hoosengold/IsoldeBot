@@ -33,7 +33,7 @@ client.on("message", function (message) {
     console.log(`commandBody: ${commandBody}`)
 
     if (message.content.startsWith(prefix)) {
-        bot(message, args)
+        bot(message, args, command)
     }
 
 });

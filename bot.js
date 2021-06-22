@@ -28,7 +28,7 @@ var botReq = require('./index.js');
     console.log(`Ready!`)
 })*/
 
-function bot(message, args){
+function bot(message, args, command){
 
     /*bot.on("message", function (message) {
         if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
