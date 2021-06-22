@@ -36,11 +36,10 @@ function poll(message, args) {
 
     //poll message format and content
     const embed = {
-        color: 'PURPLE',
+        color: '#840099',
         title: pollTitle,
         description: pollMessage,
     }
-
 
     //array with the reactions amojis
     const reactions = ['🇦',
@@ -66,12 +65,16 @@ function poll(message, args) {
         '🇹']
 
     //messages the poll and then reacts to it with the reactions[]
-    const msg = message.channel.send({ embed: embed }).catch(err => console.log(err))
-        .then(function (message) {
-            for (let j = 0; j < i + 1; j++) {
-                message.react(reactions[j])
-            }
-        });
+    try {
+        const msg = message.channel.send({ embed: embed })
+            .then(function (message) {
+                for (let j = 0; j < i + 1; j++) {
+                    message.react(reactions[j])
+                }
+            });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 module.exports = poll;
