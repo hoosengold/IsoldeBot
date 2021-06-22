@@ -2,7 +2,18 @@ const Discord = require("discord.js");
 const helpMessage = require('../../bot.js');
 
 function help(message) {
-    message.channel.send(
+    const helpEmbed = new Discord.MessageEmbed()
+        .setColor('#AE3FA1')
+        .setTitle('Help Menu')
+        .setDescription('How to use The Friend')
+        .addFields(
+            { name: 'A comprehensive list with all commands:', values: '\*poll' },
+        );
+
+
+            message.channel.send(helpEmbed)
+
+    /*message.channel.send(
 `Help Menu
 --------------------------------------------------------
 Available Commands:
@@ -31,7 +42,7 @@ Returns a random song from the already suggested songs.
 
 ** *updates** 
 Returns a list with the most recent changes to the bot.`
-    );
+    );*/
 }
 
 module.exports = help;
