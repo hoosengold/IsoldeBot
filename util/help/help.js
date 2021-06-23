@@ -14,7 +14,7 @@ function help(message) {
         description: 'A comprehensive list with all commands and how to use them.',
         fields: [
             {
-                name: '** \u2217poll** \`{question} [option1] [option2]\`',
+                name: '** \*poll** \`{question} [option1] [option2]\`',
                 value: 'Example: \n \`*poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]\` \n *Note:* Each poll can have **up to 20 options**.',
                 
             },
@@ -23,7 +23,7 @@ function help(message) {
                 value: '\u200b'
             },
             {
-                name: '** \u2217countdown** \`hours\`',
+                name: '** \*countdown** \`hours\`',
                 value: 'Example: \`\*countdown 6\` \n Adds 6 hours to the countdown timer. \n *Note:* At least 1 hour has to be added, no upper limit (but be reasonable). Sends a message when 1 hour/30 minutes is left and when no time is left.'
             },
             {
@@ -31,7 +31,7 @@ function help(message) {
                 value: '\u200b'
             },
             {
-                name: '** \u2217addMusic \`youtube_link\`**',
+                name: '** \*addMusic \`youtube_link\`**',
                 value: 'Example: \`\*addMusic https://www.youtube.com/...\` \n Also: \u2003 \`\*addMusic www.youtube.com/...\` \n Adds the song suggestion to a pool with other songs.'
             },
             {
@@ -39,17 +39,17 @@ function help(message) {
                 value: '\u200b'
             },
             {
-                name: '** \u2217getMusic**',
+                name: '** \*getMusic**',
                 value: 'Returns a random song from the already suggested songs.',
                 inline: true
             },
             {
-                name: '** \u2217updates** ',
+                name: '** \*updates** ',
                 value: 'Returns a list with the most recent changes to the bot.',
                 inline: true
             },
             {
-                name: '** \u2217story**',
+                name: '** \*story**',
                 value: 'Returns the lore behind The Friend.',
                 inline: true
             },
