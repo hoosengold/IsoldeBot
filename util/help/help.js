@@ -32,7 +32,7 @@ function help(message) {
             },
             {
                 name: '** \*addMusic \`youtube_link\`**',
-                value: 'Example: \`\*addMusic https://www.youtube.com/...\` \n Also: \u2003 \`\*addMusic www.youtube.com/...\` \n Adds the song suggestion to a pool with other songs.'
+                value: 'Example: \`\*addMusic https://www.youtube.com/...\` \n Also: \u2003 \`\*addMusic www.youtube.com/...\` \n Adds the song suggestion to a pool with other songs. \n *Note:* Only YouTube links are allowed.'
             },
             {
                 name: '\u200b',
