@@ -40,7 +40,7 @@ client.once("ready", () => {
 
 client.on("message", async function (message) {
     if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
-    if (!message.content.startsWith(prefix)) return; //checks if the message starts with *, if it does not, then it does not respond
+    if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
 
 
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
