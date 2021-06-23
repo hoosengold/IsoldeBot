@@ -39,7 +39,7 @@ function bot(message, args, command) {
         case "story": //command story
             lore(message);
             break;
-        //default: message.channel.send(typo.default); removed until *word* bug is fixed
+        default: message.channel.send(typo.default);
     }
 
 }
