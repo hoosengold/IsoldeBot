@@ -1,5 +1,5 @@
 //Import all required modules
-const Discord = require("../../node_modules/discord.js"),
+const Discord = require("discord.js"),
     pool = require("../../connections/database.js");
 
 //variable to store the link
@@ -14,6 +14,11 @@ pool.on('error', (err, client) => {
 
 //The function of the command addMusic
 function musicAdd(message, args) {
+    //check if args is empty
+    if (args[0] == null) {
+        return message.channel.send('You forgot to paste the YouTube link. :yum:')
+          .catch(err => console.log(err))
+      }
 
     musicSuggestion = args[0];
     console.log(`musicSuggestion: ${musicSuggestion}`)
