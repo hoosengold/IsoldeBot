@@ -8,6 +8,19 @@ const Discord = require('discord.js'),
     //slash = require('./slash_commands/testcommand.js'),
     bot = require('./bot.js');
 
+client.commands = new Discord.Collection(); //make new collection for the commands
+const commandFolders = fs.readdirSync('./util') //find and filter the command files
+
+//set a new item in the Collection with the key as the command name and the value as the exported module
+for (const folder of commandFolders) {
+    const commandFiles = fs.readdirSync(`./util/${folder}`).filter(file => file.endsWith('.js'))
+    for (const file of commandFiles) {
+        const command = require(`./util/${folder}/${file}`);
+        client.commands.set(command.name, command)
+    }
+}
+
+
 //Login with deploy bot + 
 //change app id
 //require('dotenv').config();
@@ -46,12 +59,21 @@ client.on("message", async function (message) {
 
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
     const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word arfter the command
-        command = args.shift().toLowerCase(); //returns the command
-    console.log(`command: ${command}`)
+        commandName = args.shift().toLowerCase(); //returns the command
+
+    console.log(`command: ${commandName}`)
     console.log(`args: ${args}`)
 
-    if (message.content.startsWith(prefix)) {
-        bot(message, args, command)
+    const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+    if (!command) return; //check is the command exists
+
+    try {
+        command.execute(message, args)
+    } catch (error) {
+        console.log(error)
+        message.reply(`Something went wrong while trying to execute the command!`)
     }
 
     //slash(interaction, client)
