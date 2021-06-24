@@ -2,11 +2,11 @@ const Discord = require('discord.js'),
     client = new Discord.Client(), //initialize client for the bot;
     prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
-    fs = require('fs'),
-    //webHookHelper = require('discord-interactions'),
-    //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
-    //slash = require('./slash_commands/testcommand.js'),
-    bot = require('./bot.js');
+    fs = require('fs');
+//webHookHelper = require('discord-interactions'),
+//{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
+//slash = require('./slash_commands/testcommand.js');
+
 
 client.commands = new Discord.Collection(); //make new collection for the commands
 client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
@@ -71,14 +71,6 @@ client.on("message", async function (message) {
 
     if (!command) return; //check is the command exists
 
-    //execute the command
-    try {
-        command.execute(message, args)
-    } catch (error) {
-        console.log(error)
-        message.reply(`Something went wrong while trying to execute the command!`)
-    }
-
     //cooldown for the specific command for the specific user
     const { cooldowns } = client
 
@@ -87,22 +79,32 @@ client.on("message", async function (message) {
         cooldowns.set(command.name, new Discord.Collection())
     }
 
-    const now = new Date(),
+    const now = Date.now(),
         timestamps = cooldowns.get(command.name),
         cooldownAmount = (command.cooldown || 5) * 1000;
 
-    //get the timestamp and calculate the remaining time if the user already used the command in this session
-    if (cooldowns.has(message.author.id)) {
-        const expirationDate = timestamps.get(message.author.id) + cooldownAmount;
-        if (now < expirationDate) { //checks if there is still cooldown
-            const timeLeft = (expirationDate - now) / 1000
-            return message.reply(`Please wait ${timeLeft.toFixed(1)} secon(s) before using the ${command.name} command again.`)
+    console.log(`timestamps: ${timestamps}`)
+
+    //execute the command
+    try {
+        //get the timestamp and calculate the remaining time if the user already used the command in this session
+        if (timestamps.has(message.author.id)) {
+            const expirationDate = timestamps.get(message.author.id) + cooldownAmount;
+            if (now < expirationDate) { //checks if there is still cooldown
+                const timeLeft = (expirationDate - now) / 1000
+                return message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
+            }
         }
+
+        //clear the entry on the collection after the cooldown
+        timestamps.set(message.author.id, now)
+        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+
+        command.execute(message, args)
+    } catch (error) {
+        console.log(error)
+        message.reply(`Something went wrong while trying to execute the command!`)
     }
-
-    timestamps.set(message.author.id, now)
-    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
-
 
 
     //slash(interaction, client)
