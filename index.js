@@ -9,6 +9,8 @@ const Discord = require('discord.js'),
     bot = require('./bot.js');
 
 client.commands = new Discord.Collection(); //make new collection for the commands
+client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
+
 const commandFolders = fs.readdirSync('./util') //find and filter the command files
 
 //set a new item in the Collection with the key as the command name and the value as the exported module
@@ -69,12 +71,39 @@ client.on("message", async function (message) {
 
     if (!command) return; //check is the command exists
 
+    //execute the command
     try {
         command.execute(message, args)
     } catch (error) {
         console.log(error)
         message.reply(`Something went wrong while trying to execute the command!`)
     }
+
+    //cooldown for the specific command for the specific user
+    const { cooldowns } = client
+
+    //check if the cooldown collection already has a cooldown for the command
+    if (!cooldowns.has(command.name)) {
+        cooldowns.set(command.name, new Discord.Collection())
+    }
+
+    const now = new Date(),
+        timestamps = cooldowns.get(command.name),
+        cooldownAmount = (command.cooldown || 5) * 1000;
+
+    //get the timestamp and calculate the remaining time if the user already used the command in this session
+    if (cooldowns.has(message.author.id)) {
+        const expirationDate = timestamps.get(message.author.id) + cooldownAmount;
+        if (now < expirationDate) { //checks if there is still cooldown
+            const timeLeft = (expirationDate - now) / 1000
+            return message.reply(`Please wait ${timeLeft.toFixed(1)} secon(s) before using the ${command.name} command again.`)
+        }
+    }
+
+    timestamps.set(message.author.id, now)
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+
+
 
     //slash(interaction, client)
 
