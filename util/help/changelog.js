@@ -1,5 +1,5 @@
 const Discord = require("discord.js"),
-    changelogMessage = require("../bot.js");
+    changelogMessage = require("../../bot.js");
 //const image = new Discord.MessageAttachment('./images/');
 
 function updates(message) {
