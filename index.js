@@ -2,6 +2,7 @@ const Discord = require('discord.js'),
     client = new Discord.Client(), //initialize client for the bot;
     prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
+    fs = require('fs'),
     //webHookHelper = require('discord-interactions'),
     //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
     //slash = require('./slash_commands/testcommand.js'),
@@ -44,12 +45,10 @@ client.on("message", async function (message) {
 
 
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
-    const commandBody = message.content.slice(prefix.length), //returns everything without the prefix
-        args = commandBody.split(/ +/), //returns args[] where [0] is the first word arfter the command
+    const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word arfter the command
         command = args.shift().toLowerCase(); //returns the command
     console.log(`command: ${command}`)
     console.log(`args: ${args}`)
-    console.log(`commandBody: ${commandBody}`)
 
     if (message.content.startsWith(prefix)) {
         bot(message, args, command)
