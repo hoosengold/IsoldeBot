@@ -25,7 +25,15 @@ module.exports = {
                 },
                 {
                     name: "**2.** *Bugs are no more!* :space_invader:",
-                    value: "Various bug fixes including the infamous \"NOT NOW BOT\" bug (thanks Ultra :grin:)! "
+                    value: "Various bug fixes including the infamous \"NOT NOW BOT\" bug (thanks Ultra :grin:)! \n The Friend is a lot faster now thanks to performance improvements (60 FPS! Only on FriendStation! :scream_cat:). Added spam protection. Now a command can be sent only once every 5 seconds (But who will stop The Friend from spamming?! :grimacing:)."
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
+                    name: '**3.** Tired of the bad command names? Aliases are here to the rescue! ',
+                    value: 'add alias command for all aliases; addAlias to add alias to a command (db, to be implemented in the next update)'
                 },
                 {
                     name: '\u200b',
