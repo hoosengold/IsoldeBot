@@ -30,10 +30,10 @@ function bot(message, args, command) {
         case "updates": //command updates
             updates(message);
             break;
-        case "addMusic": //command addMusic
+        case "addmusic": //command addMusic
             musicAdd(message, args);
             break;
-        case "getMusic": //command getMusic
+        case "getmusic": //command getMusic
             musicGet(message);
             break;
         case "story": //command story

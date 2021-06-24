@@ -46,7 +46,7 @@ client.on("message", async function (message) {
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
     const commandBody = message.content.slice(prefix.length), //returns everything without the prefix
         args = commandBody.split(/ +/), //returns args[] where [0] is the first word arfter the command
-        command = args.shift(); //returns the command
+        command = args.shift().toLowerCase(); //returns the command
     console.log(`command: ${command}`)
     console.log(`args: ${args}`)
     console.log(`commandBody: ${commandBody}`)
