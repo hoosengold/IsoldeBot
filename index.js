@@ -54,10 +54,23 @@ client.once("ready", () => {
     console.log(`Ready!`)
 })
 
-client.on("message", async function (message) {
+//listen for joining users
+client.on("guildMemberAdd", (member) => {
+    console.log(`New member detected.`)
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'general')
+    if (!channel) return;
+    channel.send(`Welcome to the Stream Fam, ${member}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+})
+
+//listen for messages, main function of the bot
+client.on('message', function (message) {
+    //check for youtube links
+    if (message.content.includes('youtube.com/')) {
+        message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
+    }
+
     if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
     if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
-
 
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
     const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word arfter the command
@@ -97,7 +110,7 @@ client.on("message", async function (message) {
         //clear the entry on the collection after the cooldown
         timestamps.set(message.author.id, now)
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
-
+        //execute the command
         command.execute(message, args)
     } catch (error) {
         console.log(error)
