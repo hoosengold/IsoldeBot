@@ -41,7 +41,7 @@ module.exports = {
                 },
                 {
                     name: '**4.**Do you need a hug? Anyway, have one! Or two! Or all the hugs! :hugging:',
-                    value: 'New Members will be greeted with a message. They can receive a \`*hug\` or maybe two. :smile: "But I\'m not a new member, how do I get a hug? :pleading_face:". Hugs are for everyone! You can also @ someone and send them a hug! Hugs know no borders! :purple_heart:'
+                    value: 'New Members will be greeted with a message. They can receive a \`*hug\` or maybe two. :smile: *"But I\'m not a new member, how do I get a hug? :pleading_face:".* Hugs are for everyone! You can also @someone and send them a hug! Hugs know no borders! :purple_heart:'
                 },
                 {
                     name: '\u200b',
@@ -53,7 +53,7 @@ module.exports = {
                 },
             ],
             footer: {
-                text: 'Last Update:???????',
+                text: 'Last Update: 25. June 2021',
             },
             timestamp: new Date(),
         }

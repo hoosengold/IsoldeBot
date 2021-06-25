@@ -44,6 +44,14 @@ module.exports = {
                     value: '\u200b'
                 },
                 {
+                    name: '** \*hug**',
+                    value: 'Example: \`\*hug @someone\` \n Returns a hug. \n *Note:* The command can used with or without tagging someone. More than 1 person can be tagged. It returns a different message for 0 tagged and 1 or more tagged.'
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
                     name: '** \*getMusic**',
                     value: 'Returns a random song from the already suggested songs.',
                     inline: true
@@ -59,14 +67,13 @@ module.exports = {
                     inline: true
                 },
                 {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
                     name: '** \*commands**',
                     value: 'Returns a list with commands and their aliases.',
                     inline: true
-                },
-                {
-                    name: '** \*hug**',
-                    value: 'Example: \`\*hug @ someone\` \n Returns a hug. \n *Note:* More than 1 person can be tagged. The command can used with or without tagging someone. It returns a different message for 0 tagged and 1 or more tagged.',
-                    inline:true
                 },
             ],
             //thumbnail: {
@@ -74,7 +81,7 @@ module.exports = {
             //},
             timestamp: new Date(),
             footer: {
-                text: 'Last Update:????????'
+                text: 'Last Update: 25. June 2021'
             }
         }
 

@@ -10,7 +10,7 @@ module.exports = {
         const embed = {
             color: '#AD0000',
             title: 'Command Aliases',
-            description: 'A comprehensive list with all commands and their aliases.',
+            description: 'A comprehensive list with all commands and their aliases. Type \`*help\` for more info about the commands. :grin:',
             fields: [
                 {
                     name: '\`*countdown\`',
@@ -67,7 +67,7 @@ module.exports = {
                 },
             ],
             footer: {
-                text: 'Last Update: ?????????'
+                text: 'Last Update: 25. June 2021'
             },
             timestamp: new Date()
         }
