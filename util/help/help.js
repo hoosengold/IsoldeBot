@@ -65,7 +65,7 @@ module.exports = {
                 },
                 {
                     name: '** \*hug**',
-                    value: 'Returns a hug.',
+                    value: 'Example: \`\*hug @ someone\` \n Returns a hug. \n *Note:* More than 1 person can be tagged. The command can used with or without tagging someone. It returns a different message for 0 tagged and 1 or more tagged.',
                     inline:true
                 },
             ],
