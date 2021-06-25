@@ -58,13 +58,18 @@ module.exports = {
                     value: 'Returns the lore behind The Friend.',
                     inline: true
                 },
+                {
+                    name: '** \*commands**',
+                    value: 'Returns a list with commands and their aliases.',
+                    inline: true
+                },
             ],
             //thumbnail: {
             //url: '',
             //},
             timestamp: new Date(),
             footer: {
-                text: 'Last update:????????'
+                text: 'Last Update:????????'
             }
         }
 
