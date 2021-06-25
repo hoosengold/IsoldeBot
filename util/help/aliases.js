@@ -33,7 +33,7 @@ module.exports = {
                 },
                 {
                     name: '\`*addMusic\`',
-                    value: 'Aliases: \'suggestmusic\', \'addmusicsuggestion\', \'addsuggestion\', \'suggest\'',
+                    value: 'Aliases: \'addmusic\', \'suggestmusic\', \'addmusicsuggestion\', \'addsuggestion\', \'suggest\'',
                     inline: true
                 },
                 {
