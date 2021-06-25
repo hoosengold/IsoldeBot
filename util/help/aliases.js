@@ -60,6 +60,11 @@ module.exports = {
                     value: 'Aliases: \'commands\', \'cmd\', \'allcommands\', \'all\'',
                     inline: true
                 },
+                {
+                    name: '\`*hug\`',
+                    value: 'Aliases: \'huggies\', \'welcome\'',
+                    inline: true
+                },
             ],
             footer: {
                 text: 'Last Update: ?????????'

@@ -63,6 +63,11 @@ module.exports = {
                     value: 'Returns a list with commands and their aliases.',
                     inline: true
                 },
+                {
+                    name: '** \*hug**',
+                    value: 'Returns a hug.',
+                    inline:true
+                },
             ],
             //thumbnail: {
             //url: '',
