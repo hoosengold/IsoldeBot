@@ -1,7 +1,7 @@
 module.exports = {
     name: 'lore',
     description: 'The Story behind The Friend.',
-    aliases: ['story', 'friend', 'thefriend', 'origin', 'originstory'],
+    aliases: ['story', 'friend', 'thefriend', 'origin', 'originstory', 'trivia'],
     cooldown: 5,
     args: false,
     execute(message){
@@ -29,7 +29,8 @@ module.exports = {
                 "He never appears in chat, never responds, never stops lurking. \n\n" +
                 "*The Friend's legacy shall never die!* \n\n" +
                 "**Long live The Friend!**",
-            color: '#0D9300'
+            color: '#0D9300',
+            timestamp: new Date()
         }
 
         message.channel.send({ embed: embed })
