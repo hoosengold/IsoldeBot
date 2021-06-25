@@ -44,6 +44,7 @@ module.exports = {
             color: '#840099',
             title: pollTitle,
             description: pollMessage,
+            timestamp: new Date()
         }
 
         //array with the reactions amojis
