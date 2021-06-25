@@ -64,12 +64,14 @@ client.on("guildMemberAdd", (member) => {
 
 //listen for messages, main function of the bot
 client.on('message', function (message) {
+    //checks if the author of the message is a bot, if it is, then it does not respond
+    if (message.author.bot) return; 
+
     //check for youtube links
     if (message.content.includes('youtube.com/')) {
         message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
     }
 
-    if (message.author.bot) return; //checks if the author of the message is a bot, if it is, then it does not respond
     if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
 
     //takes the message body, removes the prefix !, splits the message body and makes everything lower case
