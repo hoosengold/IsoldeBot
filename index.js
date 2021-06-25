@@ -11,11 +11,11 @@ const Discord = require('discord.js'),
 client.commands = new Discord.Collection(); //make new collection for the commands
 client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
 
-const commandFolders = fs.readdirSync('./util') //find and filter the command files
+const commandFolders = fs.readdirSync('./util') //find the command files
 
 //set a new item in the Collection with the key as the command name and the value as the exported module
 for (const folder of commandFolders) {
-    const commandFiles = fs.readdirSync(`./util/${folder}`).filter(file => file.endsWith('.js'))
+    const commandFiles = fs.readdirSync(`./util/${folder}`).filter(file => file.endsWith('.js')) //filter the command files
     for (const file of commandFiles) {
         const command = require(`./util/${folder}/${file}`);
         client.commands.set(command.name, command)
@@ -82,8 +82,6 @@ client.on("message", async function (message) {
     const now = Date.now(),
         timestamps = cooldowns.get(command.name),
         cooldownAmount = (command.cooldown || 5) * 1000;
-
-    console.log(`timestamps: ${timestamps}`)
 
     //execute the command
     try {
