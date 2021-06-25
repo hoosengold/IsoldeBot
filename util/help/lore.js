@@ -29,7 +29,7 @@ module.exports = {
                 "He never appears in chat, never responds, never stops lurking. \n\n" +
                 "*The Friend's legacy shall never die!* \n\n" +
                 "**Long live The Friend!**",
-            color: '#0D9300',
+            color: 'RANDOM',
             timestamp: new Date()
         }
 

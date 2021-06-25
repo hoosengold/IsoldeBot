@@ -8,7 +8,7 @@ module.exports = {
         const Discord = require('discord.js')
 
         const embed = {
-            color: '#AD0000',
+            color: 'RANDOM',
             title: 'Command Aliases',
             description: 'A comprehensive list with all commands and their aliases. Type \`*help\` for more info about the commands. :grin:',
             fields: [

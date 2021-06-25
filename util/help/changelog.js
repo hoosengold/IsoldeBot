@@ -11,7 +11,7 @@ module.exports = {
 
         const embed = {
             title: 'The Friend Updates',
-            color: '#D4AB29',
+            color: 'RANDOM',
             description: '\u200b',
             //thumbnail: 'attachment://',
             fields: [

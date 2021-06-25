@@ -9,7 +9,7 @@ module.exports = {
         const profilePic = new Discord.MessageAttachment('./images/git_profile-pic.png');
 
         const helpEmbed = {
-            color: '#007F7E',
+            color: 'RANDOM',
             title: 'Help Menu',
             author: {
                 name: 'hoosengold',
