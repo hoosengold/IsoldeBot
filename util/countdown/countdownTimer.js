@@ -8,7 +8,7 @@ module.exports = {
     const Discord = require("discord.js");
     //check for args
     if (args[0] == null) {
-      return message.channel.send('Please specify hours for the countdown.')
+      return message.reply('Please specify hours for the countdown.')
         .catch(err => console.log(err))
     }
 
@@ -17,7 +17,7 @@ module.exports = {
 
     //check is hoursLeft is a number
     if (isNaN(hoursLeft)) {
-      return message.channel.send('Only numbers are accepted. No strings allowed.')
+      return message.reply('Only numbers are accepted. No strings allowed.')
         .catch(err => console.log(err))
     }
 
@@ -27,10 +27,10 @@ module.exports = {
 
     //Message when the countdown ends
     if (hoursLeft == 1) {
-      message.channel.send('The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*');
+      message.reply('The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*');
       console.log('Countdown date messaged.');
     } else {
-      message.channel.send('The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*');
+      message.reply('The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*');
       console.log('Countdown date messaged.');
     }
 

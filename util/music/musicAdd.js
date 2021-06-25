@@ -10,7 +10,8 @@ module.exports = {
             pool = require("../../connections/database.js");
 
         //variable to store the link
-        var musicSuggestion = require('../../bot.js')
+        var musicSuggestion = musicSuggestion = args[0];
+        console.log(`musicSuggestion: ${musicSuggestion}`)
 
         //throw an error if there are any idle clients
         pool.on('error', (err, client) => {
@@ -20,12 +21,11 @@ module.exports = {
 
         //check if args is empty
         if (args[0] == null) {
-            return message.channel.send('You forgot to paste the YouTube link. :yum:')
+            return message.reply('You forgot to paste the YouTube link. :yum:')
                 .catch(err => console.log(err))
         }
 
-        musicSuggestion = args[0];
-        console.log(`musicSuggestion: ${musicSuggestion}`)
+        
 
         //split the link to see if it's an youtbue link
         var yt = musicSuggestion.split('watch?')[0]
@@ -57,10 +57,10 @@ module.exports = {
 
                         if (getAvail.rows.length === 0) { //if it isn't, add it and its ID, send message
                             await client.query("insert into music values ($1, $2, $3)", [musicSuggestion, videoID, rowNumber])
-                            await message.channel.send(`The song has been successfully added! Thank you for the suggestion! :purple_heart: \n\n Total suggestions: ${rowNumber}`)
+                            await message.reply(`The song has been successfully added! Thank you for the suggestion! :purple_heart: \n\n Total suggestions: ${rowNumber}`)
                             console.log(`Item added successfully.`)
                         } else { //if it is, send message
-                            await message.channel.send("The song has already been suggested. Happy listening! :purple_heart:");
+                            await message.reply("The song has already been suggested. Happy listening! :purple_heart:");
                             console.log(`Item already added.`)
                         }
 
@@ -82,7 +82,7 @@ module.exports = {
 
         } else {
             //send a message if the link is not from youtube
-            message.channel.send(`Only YouTube links (www.youtube.com) are accepted.`)
+            message.reply(`Only YouTube links (www.youtube.com) are accepted.`)
         }
     }
 }
