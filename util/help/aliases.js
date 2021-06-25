@@ -65,6 +65,14 @@ module.exports = {
                     value: 'Aliases: \'huggies\', \'welcome\'',
                     inline: true
                 },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
+                    name: '\`*bug\`',
+                    value: 'Aliases: \'bugreport\', \'reportbug\',\'reportabug\', \'bugs\', \'issue\', \'openissue\''
+                },
             ],
             footer: {
                 text: 'Last Update: 25. June 2021'

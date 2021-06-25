@@ -14,7 +14,7 @@ module.exports = {
             author: {
                 name: 'hoosengold',
                 icon_url: 'attachment://git_profile-pic.png',
-                //url: 'https://github.com/hoosengold/ai_furnee-discord-bot'
+                url: 'https://github.com/hoosengold/ai_furnee-discord-bot'
             },
             description: 'A comprehensive list with all commands and how to use them.',
             fields: [
@@ -73,6 +73,11 @@ module.exports = {
                 {
                     name: '** \*commands**',
                     value: 'Returns a list with commands and their aliases.',
+                    inline: true
+                },
+                {
+                    name: '** \*bug**',
+                    value: 'Returns a guide how to report a bug.',
                     inline: true
                 },
             ],
