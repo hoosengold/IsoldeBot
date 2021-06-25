@@ -32,8 +32,8 @@ module.exports = {
                     value: '\u200b'
                 },
                 {
-                    name: '**3.** Tired of the bad command names? Aliases are here to the rescue! ',
-                    value: 'add alias command for all aliases; addAlias to add alias to a command (db, to be implemented in the next update)'
+                    name: '**3.** Tired of the bad command names? Aliases to the rescue! :superhero:',
+                    value: 'Now you can see all commands and their aliases! Just type \`*commands\`! The names will continue to be bad but at least now there are (less) bad alternatives. :yum:'
                 },
                 {
                     name: '\u200b',
