@@ -47,7 +47,7 @@ module.exports = {
             timestamp: new Date()
         }
 
-        //array with the reactions amojis
+        //array with the reactions emojis
         const reactions = ['🇦',
             '🇦',
             '🇧',

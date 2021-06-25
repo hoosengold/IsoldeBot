@@ -27,7 +27,7 @@ module.exports = {
 
         
 
-        //split the link to see if it's an youtbue link
+        //split the link to see if it's an youtube link
         var yt = musicSuggestion.split('watch?')[0]
         console.log(`Website: ${yt}`)
 
