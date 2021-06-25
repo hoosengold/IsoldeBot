@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     description: 'Provide help menu with all available commands',
-    aliases: ['commands', 'cmd', 'helpmenu', 'menu'],
+    aliases: ['helpmenu', 'menu'],
     cooldown: 5,
     args: false,
     execute(message) {
