@@ -1,3 +1,14 @@
+const Discord = require('discord.js'),
+    countdownTimer = require('../countdown/countdownTimer.js'),
+    poll = require('../poll/poll.js'),
+    musicGet = require('../music/musicGet.js'),
+    musicAdd = require('../music/musicAdd.js'),
+    welcome = require('../wholesome/welcome.js'),
+    help = require('./help.js'),
+    lore = require('./lore.js'),
+    changelog = require('./changelog.js'),
+    reportbug = require('./reportbug');
+
 module.exports = {
     name: 'aliases',
     description: 'Returns a lis with all commands  and their aliases.',
@@ -5,8 +16,7 @@ module.exports = {
     cooldown: 5,
     args: false,
     execute(message) {
-        const Discord = require('discord.js')
-
+        const aliases = require('./aliases.js')
         const embed = {
             color: 'RANDOM',
             title: 'Command Aliases',
@@ -14,68 +24,47 @@ module.exports = {
             fields: [
                 {
                     name: '\`*countdown\`',
-                    value: 'Aliases: \'timer\', \'countdowntimer\', \'timercountdown\'',
-                    inline: true
+                    value: `Aliases: ${countdownTimer.aliases}`,
                 },
                 {
                     name: '\`*poll\`',
-                    value: 'Aliases: None',
-                    inline: true
+                    value: `Aliases: ${poll.aliases}`,
                 },
                 {
                     name: '\`*getMusic\`',
-                    value: 'Aliases: \'getmusic\', \'listen\', \'getsuggestion\', \'whattolisten\'',
-                    inline: true
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b'
+                    value: `Aliases: ${musicGet.aliases}`,
                 },
                 {
                     name: '\`*addMusic\`',
-                    value: 'Aliases: \'addmusic\', \'suggestmusic\', \'addmusicsuggestion\', \'addsuggestion\', \'suggest\'',
-                    inline: true
+                    value: `Aliases: ${musicAdd.aliases}`,
                 },
                 {
                     name: '\`*help\`',
-                    value: 'Aliases: \'helpmenu\', \'menu\'',
-                    inline: true
+                    value: `Aliases: ${help.aliases}`,
                 },
                 {
                     name: '\`*story\`',
-                    value: 'Aliases: \'story\', \'friend\', \'thefriend\', \'origin\', \'originstory\', \'trivia\'',
-                    inline: true
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b'
+                    value: `Aliases: ${lore.aliases}`,
                 },
                 {
                     name: '\`*updates\`',
-                    value: 'Aliases: \'changes\', \'changelog\', \'update\'',
-                    inline: true
+                    value: `Aliases: ${changelog.aliases}`,
                 },
                 {
                     name: '\`*aliases\`',
-                    value: 'Aliases: \'commands\', \'cmd\', \'allcommands\', \'all\'',
-                    inline: true
+                    value: `Aliases: ${aliases.aliases}`,
                 },
                 {
                     name: '\`*hug\`',
-                    value: 'Aliases: \'huggies\', \'welcome\'',
-                    inline: true
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b'
+                    value: `Aliases: ${welcome.aliases}`,
                 },
                 {
                     name: '\`*bug\`',
-                    value: 'Aliases: \'bugreport\', \'reportbug\',\'reportabug\', \'bugs\', \'issue\', \'openissue\''
+                    value: `Aliases: ${reportbug.aliases}`
                 },
             ],
             footer: {
-                text: 'Last Update: 25. June 2021'
+                text: '*Note*: \'undefined\' = no aliases \n Last Update: 25. June 2021'
             },
             timestamp: new Date()
         }
