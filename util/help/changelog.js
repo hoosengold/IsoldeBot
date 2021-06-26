@@ -17,7 +17,7 @@ module.exports = {
             fields: [
                 {
                     name: '**1.** *Everything is prettier now!* :purple_heart: ',
-                    value: 'All messages are embeded now and all of them have different colors.'
+                    value: 'All messages are embeded now and all of them have random colors!'
                 },
                 {
                     name: '\u200b',
