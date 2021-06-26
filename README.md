@@ -14,7 +14,6 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 <li> <a href="#features">Features</a> </li>
 <li> <a href="#how-to-use-the-bot">How To Use The Bot</a> </li>
 <li> <a href="#roadmap">Roadmap</a> </li>
-<li> <a href="#license">License</a> </li>
 </ol>
 </p>
 
@@ -80,7 +79,7 @@ database=
 ```
 
 <li>Change the prefix if you don't like the <code>*</code> prefix.</li>
-<li>That's it! The bot is ready to be deployed! <strong>Be sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
+<li>That's it! The bot is ready to be deployed! <strong>Make sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
 </ol>
 <h4>Adding new commands:</h4>
 <ol>
@@ -108,6 +107,3 @@ module.exports = {
 <li>Add automod features like scanning links and files for potential threats,</li>
 <li>General bug fixes and performance improvements;</li>
 </ul>
-
-# License
-The Project is licensed under the
