@@ -91,6 +91,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <ol>
 <li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (make sure that the folder is a subfolder of <code>util/</code>)</li>
 <li>Write your new command in the file. Here is a template you can use:</li>
+
 ```
 module.exports = {
     name: '', //name of the command
@@ -101,9 +102,15 @@ module.exports = {
     //put your code here, you can list dependencies here or before module.exports
     }
 ```
+
 <li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>help.js</code> so that they include your new command.</li>
 </ol>
 
 # Roadmap
+<ul>
+<li>Implement slash commands,</li>
+<li>Add automod features like scanning links and files for potemtial threats,</li>
+<li>General bug fixes and performance improvements;</li>
+</ul>
 
 # License
