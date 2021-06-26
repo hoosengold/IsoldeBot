@@ -35,26 +35,31 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 
 # How To Use The Bot
 <br>
-<h6>Prerequisites:</h6>
-<br>
+<h4>Prerequisites:</h4>
 <ol>
 <li>Node.js</li>
 <li>Code editor</li>
+<li>Git</li>
 <li>All packages used in the project (all can be installed through <code>npm</code>):</li>
-<ol>
+<ul>
 <li>discord.js</li>
 <li>dotenv</li>
 <li>fs</li>
 <li>pg</li>
-<em>The following packages will be used in future releases:</em>
+
+<em>The following # packages will be used in future releases:</em>
+
 <li>slash-commands</li>
 <li>discord-interactions</li>
 <li>tweetnacl</li>
 <li>axios</li>
+</ul>
 </ol>
+<h4>Setup:</h4>
+<ol>
+<li>Clone the repository</li>
+<li>Install the dependency <a href=#packges> packages </a></li>
 </ol>
-<br>
-<h6>Setup:</h6>
 
 # Roadmap
 
