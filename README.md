@@ -91,14 +91,19 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <ol>
 <li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (make sure that the folder is a subfolder of <code>util/</code>)</li>
 <li>Write your new command in the file. Here is a template you can use:</li>
-<code>module.exports = {
-        name: '', //name of the command
-        description: '', //short description of the command
-        aliases: ['', '', ...], //aliases for the command
-        cooldown: 2, //cooldown for the command in seconds, the dafault cooldown is 5 seconds
-        args: true, //does the command have arguments, type false if it doesn't and remove aegs in execute(message, args) {
+<html>
+    <head>
+        <code>module.exports = {
+            name: '', //name of the command
+            description: '', //short description of the command
+            aliases: ['', '', ...], //aliases for the command
+            cooldown: 2, //cooldown for the command in seconds, the dafault cooldown is 5 seconds
+            args: true, //does the command have arguments, type false if it doesn't and remove aegs in execute(message, args) {
             //put your code here, you can list dependencies here or before module.exports
-        }</code>
+            }
+        </code>
+    </head>
+</html>
 <li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>help.js</code> so that they include your new command.</li>
 </ol>
 
