@@ -87,6 +87,20 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li>Change the prefix if you don't like the <code>*</code> prefix.</li>
 <li>That's it! The bot is ready to be deployed! <strong>Be sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
 </ol>
+<h4>Adding new commands:</h4>
+<ol>
+<li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (make sure that the folder is a subfolder of <code>util/</code>)</li>
+<li>Write your new command in the file. Here is a template you can use:</li>
+<code>module.exports = {
+        name: '', //name of the command
+        description: '', //short description of the command
+        aliases: ['', '', ...], //aliases for the command
+        cooldown: 2, //cooldown for the command in seconds, the dafault cooldown is 5 seconds
+        args: true, //does the command have arguments, type false if it doesn't and remove aegs in execute(message, args) {
+            //put your code here, you can list dependencies here or before module.exports
+        }</code>
+<li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>help.js</code> so that they include your new command.</li>
+</ol>
 
 # Roadmap
 
