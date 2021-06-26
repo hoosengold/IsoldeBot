@@ -28,7 +28,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li><em>Tight integration with PostgreSQL databases.</em> New tables can be added without any hassle.</li>
 <li>Greeting Messages for new guild members.</li>
 <li>Command handling with <strong>Collections</strong> - no <code>if-else</code> or <code>switch-case</code> blocks! That way the performance of the bot is a lot better and messages sent by it are almost instant (depending on the quality of the internet connection).</li>
-<li><em>Aliases</em> for all commands means that the users don't have to memorise the speficic command names - they can use the names that they find the best.</li>
+<li><em>Aliases</em> for all commands means that the users don't have to memorise the specific command names - they can use the names that they find the best.</li>
 <li><em>Adding new commands</em> is extremely easy.</li>
 </ol>
 
@@ -61,7 +61,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li>Install the dependency packages </a></li>
 <li>Make a <code> .env </code>file in the main folder for all environment variables like the Discord bot token. </li>
 <ul>
-<li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you wan to test the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
+<li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you want to test the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
 </ul>
 <li>Put the variables in the <code>.env/cofig.json</code> file. You can use the following template:</li>
 
@@ -98,7 +98,7 @@ module.exports = {
     }
 ```
 
-<li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>help.js</code> so that they include your new command.</li>
+<li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>changelog.js</code> so that they include your new command.</li>
 </ol>
 
 # Roadmap
