@@ -23,10 +23,12 @@ for (const folder of commandFolders) {
 }
 
 
-//Login with deploy bot + 
-//change app id
+//Login with deploy bot
 //require('dotenv').config();
 //client.login(process.env.DISCORD_TOKEN);
+
+//Login with test bot
+client.login(config.token); //comment out config require
 
 //initialize interactions
 /*const interaction = new DiscordInteractions({
@@ -45,8 +47,7 @@ if (interaction) {
     console.error
 }*/
 
-//Login with test bot
-client.login(config.token);
+
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
