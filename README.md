@@ -67,13 +67,21 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li>Put the variables in the <code>.env/cofig.json</code> file. You can use the following template:</li>
 
 >DISCORD_TOKEN= //login token of the bot
+>
 >app_id= //bot application id
+>
 >public_key= //public key of the bot application
+>
 >guild_id= //id of the guild/server
+>
 >//the following variables are needed for the database integration
+>
 >host=
+>
 >password=
+>
 >user=
+>
 >database=
 
 <li>Change the prefix if you don't like the <code>*</code> prefix.</li>
