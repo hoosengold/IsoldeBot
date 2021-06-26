@@ -66,23 +66,18 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 </ul>
 <li>Put the variables in the <code>.env/cofig.json</code> file. You can use the following template:</li>
 
->DISCORD_TOKEN= //login token of the bot
->
->app_id= //bot application id
->
->public_key= //public key of the bot application
->
->guild_id= //id of the guild/server
->
->//the following variables are needed for the database integration
->
->host=
->
->password=
->
->user=
->
->database=
+```
+DISCORD_TOKEN= //login token of the bot
+app_id= //bot application id
+public_key= //public key of the bot application
+guild_id= //id of the guild/server
+
+//the following variables are needed for the database integration
+host=
+password=
+user=
+database=
+```
 
 <li>Change the prefix if you don't like the <code>*</code> prefix.</li>
 <li>That's it! The bot is ready to be deployed! <strong>Be sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
@@ -98,7 +93,8 @@ module.exports = {
     description: '', //short description of the command
     aliases: ['', '', ...], //aliases for the command
     cooldown: 2, //cooldown for the command in seconds, the dafault cooldown is 5 seconds
-    args: true, //does the command have arguments, type false if it doesn't and remove aegs in execute(message, args) {
+    args: true, //does the command have arguments, type false if it doesn't and remove args in execute
+    execute(message, args) {
     //put your code here, you can list dependencies here or before module.exports
     }
 ```
@@ -109,8 +105,9 @@ module.exports = {
 # Roadmap
 <ul>
 <li>Implement slash commands,</li>
-<li>Add automod features like scanning links and files for potemtial threats,</li>
+<li>Add automod features like scanning links and files for potential threats,</li>
 <li>General bug fixes and performance improvements;</li>
 </ul>
 
 # License
+The Project is licensed under the
