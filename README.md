@@ -40,14 +40,14 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li>Node.js</li>
 <li>Code editor</li>
 <li>Git</li>
-<li>All packages used in the project (all can be installed through <code>npm</code>):</li>
+<li>All dependency packages used in the project (all can be installed through <code>npm</code>):</li>
 <ul>
 <li>discord.js</li>
 <li>dotenv</li>
 <li>fs</li>
 <li>pg</li>
 
-# <em>The following packages will be used in future releases:</em>
+<em>The following packages will be used in future releases:</em>
 
 <li>slash-commands</li>
 <li>discord-interactions</li>
@@ -59,12 +59,13 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <ol>
 <li>Make a bot in the Discord Developer Portal and add it to the server.</li>
 <li>Clone the repository</li>
-<li>Install the dependency <a href=#packges> packages </a></li>
+<li>Install the dependency packages </a></li>
 <li>Make a <code> .env </code>file in the main folder for all environment variables like the Discord bot token. </li>
 <ul>
-<li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you wan to test/deploy the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
+<li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you wan to test the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
 </ul>
 <li>Put the variables in the <code>.env/cofig.json</code> file. You can use the following template:</li>
+
 >DISCORD_TOKEN= //login token of the bot
 >app_id= //bot application id
 >public_key= //public key of the bot application
@@ -74,6 +75,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 >password=
 >user=
 >database=
+
 <li>Change the prefix if you don't like the <code>*</code> prefix.</li>
 <li>That's it! The bot is ready to be deployed! <strong>Be sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
 </ol>
