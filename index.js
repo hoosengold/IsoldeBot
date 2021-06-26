@@ -1,6 +1,16 @@
-const Discord = require('discord.js'),
-    client = new Discord.Client(), //initialize client for the bot;
-    prefix = "*", //prefix for all commands
+const help = require('./util/help/help');
+
+const Discord = require('discord.js');
+const client = new Discord.Client({ //initialize client for the bot;
+    presence: {
+        status: 'online',
+        activity: {
+            name: '*help',
+            type: 'PLAYING'
+        }
+    }
+}); 
+const prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
     fs = require('fs');
 //webHookHelper = require('discord-interactions'),
@@ -66,7 +76,7 @@ client.on("guildMemberAdd", (member) => {
 //listen for messages, main function of the bot
 client.on('message', function (message) {
     //checks if the author of the message is a bot, if it is, then it does not respond
-    if (message.author.bot) return; 
+    if (message.author.bot) return;
 
     //check for youtube links
     if (message.content.includes('youtube.com/')) {
