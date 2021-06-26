@@ -22,16 +22,15 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 This Multipurpose Discord Bot is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning this is repository is being maintained actively. This is NOT a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Features
-The Multipurpose has the following features:
+<em>The Multipurpose Bot</em> has the following features:
 <ol>
-<li>`*poll` command for creating polls with up to 20 options. Then the bot reacts automatically to the embeded message. The users can then use the reactions to vote.</li>
-<li>`*countdown` command. For now, only hours can be added, but there is no upper limit \(as far as our testing councludes\). Every embeded message has a timestamp. It can be used as a reference together with the `*countdown` command.</li>
-<li>*Tight integration with PostgreSQL databases.* New tables can be added without any hassle.</li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li><code>*poll</code> command for creating polls with <strong>up to 20 options.</strong> Then the bot reacts automatically to the embeded message. The users can then use the reactions to vote.</li>
+<li><code>*countdown</code> command. For now, only hours can be added, but there is no upper limit (as far as our testing concludes). Every embeded message has a timestamp. It can be used as a reference together with the <code>*countdown</code> command.</li>
+<li><em>Tight integration with PostgreSQL databases.</em> New tables can be added without any hassle.</li>
+<li>Greeting Messages for new guild members.</li>
+<li>Command handling with <strong>Collections</strong> - no <code>if-else</code> or <code>switch-case</code> blocks! That way the performance of the bot is a lot better and messages sent by it are almost instant (depending on the quality of the internet connection).</li>
+<li><em>Aliases</em> for all commands means that the users don't have to memorise the speficic command names - they can use the names that they find the best.</li>
+<li><em>Adding new commands</em> is extremely easy.</li>
 </ol>
 
 # How To Use The Bot
