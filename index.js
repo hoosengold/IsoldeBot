@@ -11,7 +11,7 @@ const client = new Discord.Client({ //initialize client for the bot;
     }
 }); 
 const prefix = "*", //prefix for all commands
-    //config = require('./config.json'), //Login with test bot
+    config = require('./config.json'), //Login with test bot
     fs = require('fs');
 //webHookHelper = require('discord-interactions'),
 //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
@@ -35,10 +35,10 @@ for (const folder of commandFolders) {
 
 //Login with deploy bot
 //require('dotenv').config();
-client.login(process.env.DISCORD_TOKEN);
+//client.login(process.env.DISCORD_TOKEN);
 
 //Login with test bot
-//client.login(config.token); //comment out config require
+client.login(config.token); //comment out config require
 
 //initialize interactions
 /*const interaction = new DiscordInteractions({
