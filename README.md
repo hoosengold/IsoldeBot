@@ -57,7 +57,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 </ol>
 <h4>Setup:</h4>
 <ol>
-<li>Make a new Discord Application in the (Discord Developer Portal)[https://discord.com/developers/docs/intro]. Create a new bot and add it to the server.</li>
+<li>Make a new Discord Application in the [Discord Developer Portal](https://discord.com/developers/docs/intro). Create a new bot and add it to the server.</li>
 <li>Fork this repository.</li>
 <ul>
 <li>You need a GitHub account. If you don't have one, (create one)[https://github.com/join]! It's free!</li>
