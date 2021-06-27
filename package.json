@@ -1,9 +1,13 @@
 {
   "dependencies": {
+    "axios": "^0.21.1",
+    "discord-interactions": "^2.3.0",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "fs": "^0.0.1-security",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "slash-commands": "^1.4.0",
+    "tweetnacl": "^1.0.3"
   },
   "name": "ai_furnee-discord-bot",
   "description": "Multipurpose discord bot",
@@ -12,7 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
