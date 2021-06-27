@@ -14,7 +14,7 @@ module.exports = {
             author: {
                 name: 'hoosengold',
                 icon_url: 'attachment://git_profile-pic.png',
-                url: 'https://github.com/hoosengold/ai_furnee-discord-bot'
+                url: 'https://github.com/hoosengold/IsoldeBot'
             },
             description: 'A comprehensive list with all commands and how to use them.',
             fields: [
