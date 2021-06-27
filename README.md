@@ -18,7 +18,7 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 </p>
 
 # Overview
-IsoldeBot is a Multipurpose Discord Bot. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
+IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Features
 <em>IsoldeBot</em> has the following features:
@@ -57,15 +57,15 @@ IsoldeBot is a Multipurpose Discord Bot. It is perfect for small Discord Servers
 </ol>
 <h4>Setup:</h4>
 <ol>
-<li>Make a new Discord Application in the <a href="#https://discord.com/developers/docs/intro">Discord Developer Portal</a>. Create a new bot and add it to the server.</li>
+<li>Make a new Discord Application in the <a href="https://discord.com/developers/docs/intro">Discord Developer Portal</a>. Create a new bot and add it to the server.</li>
 <li>Fork this repository.</li>
 <ul>
-<li>You need a GitHub account. If you don't have one, <a href="#https://github.com/join">create one</a>! It's free!</li>
-<li>You can follow <a href="#https://docs.github.com/en/get-started/quickstart/fork-a-repo">this guide</a> on how to fork a repository.</li>
+<li><em>You need a GitHub account. If you don't have one, <a href="https://github.com/join">create one</a>! It's free!</em></li>
+<li><em>You can follow <a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">this guide</a> on how to fork a repository.</em></li>
 </ul>
 <li>Install the dependency packages. </a></li>
 <ul>
-<li>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</li>
+<li><em>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</em></li>
 </ul>
 <li>Make a <code> .env </code>file in the root folder for all environment variables like the Discord bot token. </li>
 <ul>
@@ -106,6 +106,7 @@ module.exports = {
     }
 ```
 
+<li>You can test the bot with <code>node index.js</code>.</li>
 <li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>changelog.js</code> so that they include your new command.</li>
 </ol>
 
