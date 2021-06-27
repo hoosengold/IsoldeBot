@@ -14,6 +14,7 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 <li> <a href="#features">Features</a> </li>
 <li> <a href="#how-to-use-the-bot">How To Use The Bot</a> </li>
 <li> <a href="#roadmap">Roadmap</a> </li>
+<li> <a href="#credits">Credits</a> </li>
 </ol>
 </p>
 
@@ -115,4 +116,20 @@ module.exports = {
 <li>Implement slash commands,</li>
 <li>Add automod features like scanning links and files for potential threats,</li>
 <li>General bug fixes and performance improvements;</li>
+</ul>
+
+# Credits
+
+IsoldeBot has been built with the help of:
+
+<ul>
+    <li><a href="https://discordjs.guide/">Discord.js Guide</a> for the Command Handler</li>
+    <li>Used Docs:</li>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/javascript">JavaScript MDN Web Docs</a></li>
+        <li><a href="https://nodejs.org/en/docs/">Node.js Docs</a></li>
+        <li><a href="https://discord.js.org/#/docs/main/stable/general/welcome">Official Discord.js Docs</a></li>
+        <li><a href="https://discord.com/developers/docs/intro">Discord Developer Portal Docs</a></li>
+        <li>Official Docs/Guides of all dependencies</li>
+    </ul>
 </ul>
