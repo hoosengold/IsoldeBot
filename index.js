@@ -34,7 +34,7 @@ for (const folder of commandFolders) {
 
 
 //Login with deploy bot
-//require('dotenv').config();
+require('dotenv').config();
 client.login(process.env.DISCORD_TOKEN);
 
 //Login with test bot
