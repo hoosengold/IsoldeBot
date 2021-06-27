@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-Multipurpose Discord Bot
+IsoldeBot
 <br>
 </h1>
 <h4 align="center">
@@ -18,10 +18,10 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 </p>
 
 # Overview
-This Multipurpose Discord Bot is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
+IsoldeBot is a Multipurpose Discord Bot. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Features
-<em>The Multipurpose Bot</em> has the following features:
+<em>IsoldeBot</em> has the following features:
 <ol>
 <li><code>*poll</code> command for creating polls with <strong>up to 20 options.</strong> Then the bot reacts automatically to the embeded message. The users can then use the reactions to vote.</li>
 <li><code>*countdown</code> command. For now, only hours can be added, but there is no upper limit (as far as the testing concludes). Every embeded message has a timestamp. It can be used as a reference together with the <code>*countdown</code> command.</li>
@@ -57,11 +57,11 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 </ol>
 <h4>Setup:</h4>
 <ol>
-<li>Make a new Discord Application in the [Discord Developer Portal](https://discord.com/developers/docs/intro). Create a new bot and add it to the server.</li>
+<li>Make a new Discord Application in the <a href="#https://discord.com/developers/docs/intro">Discord Developer Portal</a>. Create a new bot and add it to the server.</li>
 <li>Fork this repository.</li>
 <ul>
-<li>You need a GitHub account. If you don't have one, (create one)[https://github.com/join]! It's free!</li>
-<li>You can follow (this guide)[https://docs.github.com/en/get-started/quickstart/fork-a-repo] on how to fork a repository.</li>
+<li>You need a GitHub account. If you don't have one, <a href="#https://github.com/join">create one</a>! It's free!</li>
+<li>You can follow <a href="#https://docs.github.com/en/get-started/quickstart/fork-a-repo">this guide</a> on how to fork a repository.</li>
 </ul>
 <li>Install the dependency packages. </a></li>
 <ul>
