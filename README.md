@@ -46,6 +46,7 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 <li>fs</li>
 <li>pg</li>
 
+
 <em>The following packages will be used in future releases:</em>
 
 <li>slash-commands</li>
@@ -56,16 +57,17 @@ This Multipurpose Discord Bot is perfect for small Discord Servers that need an 
 </ol>
 <h4>Setup:</h4>
 <ol>
-<li>Make a new Discord Application in the [Discord Developer Portal](https://discord.com/developers/docs/intro). Create a new bot and add it to the server.</li>
+<li>Make a new Discord Application in the (Discord Developer Portal)[https://discord.com/developers/docs/intro]. Create a new bot and add it to the server.</li>
 <li>Fork this repository.</li>
 <ul>
-<li>You need a GitHub account. If you don't have one, [create one](https://github.com/join)! It's free!</li>
+<li>You need a GitHub account. If you don't have one, (create one)[https://github.com/join]! It's free!</li>
+<li>You can follow (this guide)[https://docs.github.com/en/get-started/quickstart/fork-a-repo] on how to fork a repository.</li>
 </ul>
 <li>Install the dependency packages. </a></li>
 <ul>
-<li>You can install the packages by running <code>npm install package-name</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</li>
+<li>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</li>
 </ul>
-<li>Make a <code> .env </code>file in the main folder for all environment variables like the Discord bot token. </li>
+<li>Make a <code> .env </code>file in the root folder for all environment variables like the Discord bot token. </li>
 <ul>
 <li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you want to test the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
 </ul>
@@ -89,7 +91,7 @@ database=
 </ol>
 <h4>Adding new commands:</h4>
 <ol>
-<li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (make sure that the folder is a subfolder of <code>util/</code>)</li>
+<li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (the command hadling will not work properly, if the command file is not in a subfolder of <code>util/</code>)</li>
 <li>Write your new command in the file. Here is a template you can use:</li>
 
 ```
@@ -97,7 +99,7 @@ module.exports = {
     name: '', //name of the command
     description: '', //short description of the command
     aliases: ['', '', ...], //aliases for the command
-    cooldown: 2, //cooldown for the command in seconds, the dafault cooldown is 5 seconds
+    cooldown: 2, //cooldown for the command in seconds, the default cooldown is 5 seconds
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     execute(message, args) {
     //put your code here, you can list dependencies here or before module.exports
