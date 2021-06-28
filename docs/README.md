@@ -124,6 +124,7 @@ IsoldeBot has been built with the help of:
 
 <ul>
     <li><a href="https://discordjs.guide/">Discord.js Guide</a> for the Command Handler</li>
+    <li><a href="https://stackoverflow.com/questions/8667070/javascript-regular-expression-to-validate-url">URL Regex</a></li>
     <li>Used Docs:</li>
     <ul>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/javascript">JavaScript MDN Web Docs</a></li>
