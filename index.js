@@ -74,10 +74,15 @@ client.on("guildMemberAdd", (member) => {
 
 //listen for messages, main function of the bot
 client.on('message', function (message) {
+
+    //checks if the author of the message is a bot, if it is, then it does not respond
+    if (message.author.bot) return;
+
     //initialize guild and member
     const guild = client.guilds.cache.get(config.guild_id) // test
     //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
     const member = guild.member(client.user) //convert User to GuildMember
+
     //initialize regex to detect url's
     const urlRegexMain = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi);
     const urlRegexAlphanumeric = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?$/gmi);
@@ -86,10 +91,13 @@ client.on('message', function (message) {
 
     //return the content of the message as an array
     var messageArray = message.content.split(/ +/)
+
     //ban discord invite links
-    const inviteRegex = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(\ )*(\.)*(\ )*gg(\ )*)\/(\ )*)|(discordapp(\ )*(\.)*(\ )*com)$/gmi)
+    const inviteRegex = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(\ )*(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(\ )*(\.)*(\ )*com)$/gmi)
+    
     //initialize a variable to store the possible url
     var url = '';
+    
     //check if the message contains URL or discord invite links
     for (let i = 0; i < messageArray.length; i++) {
         //check for discord invite links
@@ -98,14 +106,14 @@ client.on('message', function (message) {
                 console.log(`Invite link not deleted: posted by admin`)
                 return;
             } else {
-                message.delete({ reason: `No Discord Invite links allowed!` })
+                message.delete()
                 console.log(`Discord invite link deleted`)
                 message.reply(`**No Discord Invite links allowed!**`)
                 return;
             }
         }
         //check for shortened links
-        if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl' || 't.co' || 'rebrand.ly' || 'b.link')) {
+        if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
             message.delete()
             console.log(`Shortened link deleted.`)
             message.reply(`**No shortened links allowed!**`)
@@ -119,11 +127,8 @@ client.on('message', function (message) {
         }
     }
 
-    //checks if the author of the message is a bot, if it is, then it does not respond
-    if (message.author.bot) return;
-
     //check for youtube links
-    if (message.content.includes('youtube.com/')) {
+    if (message.content.includes('youtube.com/') && !message.content.startsWith(prefix)) {
         message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
     }
 
