@@ -4,18 +4,21 @@ module.exports = {
     //aliases: [],
     cooldown: 5,
     args: true,
-    execute(message, args) {
+    execute(message, messageBody) {
         //Import all required modules
         const Discord = require('discord.js'),
             emojiArray = require('./pollutil/emojiArray.js');
 
         //format the input
-        const squigglyRegex = RegExp(/{(.*?)}/),
+        /*const squigglyRegex = RegExp(/{(.*?)}/),
             pollOptions = RegExp(/\[[^[]+\]/g),
-            pollParameters = args.join(' '),
-            pollTitle = squigglyRegex.test(pollParameters) ? squigglyRegex.exec(pollParameters)[1] : null;
+            pollParameters = args.join(' '),*/
+        const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*)*(\ )*\?/gm),
+            optionsRegEx = new RegExp(/((\ )*[a-zA-Z](\ )*)*\d*(\ )*\!/gm),
+            pollTitle = questionRegEx.test(messageBody);
 
-        console.log(squigglyRegex.exec(pollParameters));
+        console.log(questionRegEx.exec(messageBody));
+        console.log(`messageBody: ${messageBody}`)
 
         //checks if the command has title
         if (!pollTitle) {
@@ -23,8 +26,8 @@ module.exports = {
                 .catch(err => console.log(err));
         }
 
-        pollParameters.replace(`{${pollTitle}}`, '')
-        const pollsArray = pollParameters.match(pollOptions)
+        //pollParameters.replace(`{${pollTitle}}`, '')
+        const pollsArray = optionsRegEx.test(messageBody)
 
         //checks if the command has options and if they are more than 20
         if (!pollsArray) {
@@ -36,8 +39,8 @@ module.exports = {
         }
 
         //creates the poll message
-        let i = 0;
-        const pollMessage = pollsArray.map(poll => `${emojiArray()[i++]} ${poll.replace(/\[|\]/g, '')}`).join('\n\n');
+        /*let i = 0;
+        const pollMessage = pollsArray.map(poll => `${emojiArray()[i++]} ${pollsArray.join('\n\n')}`);
 
         //poll message format and content
         const embed = {
@@ -80,6 +83,7 @@ module.exports = {
                 });
         } catch (error) {
             console.error(error);
-        }
+        }*/
+        console.log('test passed')
     }
 }
