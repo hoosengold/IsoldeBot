@@ -110,8 +110,6 @@ module.exports = {
                         message.react(reactions[l])
                     }
                 });
-            message.delete()
-                .catch(err => console.error(err))
         } catch (error) {
             console.error(error)
         }
