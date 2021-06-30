@@ -19,8 +19,8 @@ module.exports = {
             description: 'A comprehensive list with all commands and how to use them.',
             fields: [
                 {
-                    name: '** \*poll** \`{question} [option1] [option2]\`',
-                    value: 'Example: \n \`*poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]\` \n *Note:* Each poll can have **up to 20 options**.',
+                    name: '** \*poll** \`question? option1! option2! ... option20!\`',
+                    value: 'Example: \n \`*poll Do you like the polls? Yes! Of course! Best polls ever!\` \n *Note:* Each poll can have **up to 20 options**.',
 
                 },
                 {
