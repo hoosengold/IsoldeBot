@@ -137,13 +137,11 @@ client.on('message', async function (message) {
 
         try {
             //takes the message body, removes the prefix *, splits the message body and makes everything lower case
-            const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word arfter the command
-                messageBody = message.content.split(prefix.length)[1],
+            const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word after the command
                 commandName = args.shift().toLowerCase(); //returns the command
 
             console.log(`command: ${commandName}`)
             console.log(`args: ${args}`)
-            console.log(`messageBody: ${messageBody}`)
 
             const command = await client.commands.get(commandName)
                 || await client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -187,7 +185,7 @@ client.on('message', async function (message) {
             console.error(error)
         }
     } catch (error) {
-        console.log(`PROBLEM WHILE CHECKING GOT URL`)
+        console.log(`PROBLEM WHILE CHECKING URL`)
         console.error(error)
     }
 
