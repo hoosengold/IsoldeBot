@@ -79,16 +79,13 @@ client.on('message', async function (message) {
         if (message.author.bot) return;
 
         //initialize regex to detect url's
-        const urlRegexMain = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi);
-        const urlRegexAlphanumeric = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?$/gmi);
-        const urlRegexIPv4 = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))$/img);
-        const urlRegexIPv6 = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})$/);
+        const urlRegexMain = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?/gmi); //Subst: /^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi
+        const urlRegexAlphanumeric = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?/gmi);
+        const urlRegexIPv4 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))/img);
+        const urlRegexIPv6 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})/);
 
         //ban discord invite links
-        const inviteRegex = new RegExp(/^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(\ )*(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(\ )*(\.)*(\ )*com)$/gmi)
-
-        //initialize a variable to store the possible url
-        var url = '';
+        const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
         //initialize guild and member
         const guild = client.guilds.cache.get(config.guild_id) // test
@@ -96,36 +93,33 @@ client.on('message', async function (message) {
         //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
         const member = guild.member(client.user) //convert User to GuildMember
 
-        //return the content of the message as an array
-        var messageArray = message.content.split(/ +/)
-
-        //check if the message contains URL or discord invite links
-        for (let i = 0; i < messageArray.length; i++) {
-            //check for discord invite links
-            if (inviteRegex.test(messageArray[i])) {
-                if (member.hasPermission('KICK_MEMBERS')) {
-                    console.log(`Invite link not deleted: posted by admin`)
-                    return;
-                } else {
-                    await message.delete()
-                    console.log(`Discord invite link deleted`)
-                    await message.reply(`**No Discord Invite links allowed!**`)
-                    return;
-                }
-            }
-            //check for shortened links
-            if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
+        //check for discord invite links
+        if (message.content.match(inviteRegex)) {
+            if (member.hasPermission('KICK_MEMBERS')) {
+                console.log(`Invite link not deleted: posted by admin`)
+                return;
+            } else {
                 await message.delete()
-                console.log(`Shortened link deleted.`)
-                await message.reply(`**No shortened links allowed!**`)
+                console.log(`Discord invite link deleted`)
+                await message.reply(`**No Discord Invite links allowed!**`)
                 return;
             }
-            //check for non discord invite links and not hidden links
-            if (urlRegexMain.test(messageArray[i]) || urlRegexAlphanumeric.test(messageArray[i]) || urlRegexIPv4.test(messageArray[i]) || urlRegexIPv6.test(messageArray[i])) {
-                url = messageArray[i]
-                await automod(url)
-                console.log(`URL detected! Redirecting for automod...`)
-            }
+        }
+        //check for shortened links
+        else if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
+            await message.delete()
+            console.log(`Shortened link deleted.`)
+            await message.reply(`**No shortened links allowed!**`)
+        }
+        //check for non discord invite links and not hidden links
+        else if (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)) {
+            //url = message.content.match()
+            console.log(message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6))
+            //initialize a variable to store the possible url and remove all blank spaces
+            const  url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
+            console.log(`url: ${url}`)
+            await automod(url)
+            console.log(`URL detected! Redirecting for automod...`)
         }
 
         //check for youtube links
