@@ -17,7 +17,7 @@ module.exports = {
             fields: [
                 {
                     name: '**1.** *Cleaner chats!* :purple_heart: ',
-                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This will not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`'
+                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This will not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`.'
                 },
                 {
                     name: '\u200b',
@@ -34,5 +34,8 @@ module.exports = {
             timestamp: new Date(),
         }
         message.channel.send({ embed: embed })
+        //delete the call message
+        message.delete()
+        .catch(err => console.error(err))
     }
 }

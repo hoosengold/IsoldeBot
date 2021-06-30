@@ -8,10 +8,15 @@ module.exports = {
         const Discord = require('discord.js')
 
         if (args[0] == null) {
-            return message.reply(`Brace yourself. A biiiiig hug is coming! :orange_heart:`)
+            message.reply(`Brace yourself. A biiiiig hug is coming! :orange_heart:`)
+            message.delete()
+                .catch(err => console.error(err))
         } else {
             console.log(`tagged: ${args}`)
             message.channel.send(`${args} Someone is sending you biiiig hugs! :yellow_heart:`)
+            //delete the call message
+            message.delete()
+                .catch(err => console.error(err))
         }
     }
 }

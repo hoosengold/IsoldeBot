@@ -70,5 +70,8 @@ module.exports = {
         }
 
         message.channel.send({ embed: embed })
+        //delete the call message
+        message.delete()
+        .catch(err => console.error(err))
     }
 }
