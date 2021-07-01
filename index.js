@@ -8,7 +8,7 @@ const client = new Discord.Client({ //initialize client for the bot;
         }
     }
 });
-const prefix = "*", //prefix for all commands
+ const prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
     fs = require('fs');
