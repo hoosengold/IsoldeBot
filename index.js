@@ -8,14 +8,14 @@ const client = new Discord.Client({ //initialize client for the bot;
         }
     }
 });
- const prefix = "*", //prefix for all commands
+const prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
-    fs = require('fs');
+    fs = require('fs'),
+    initializeInteractions = require('./slash_commands/initial'),
+    slash = require('./slash_commands/testcommand.js');
 //webHookHelper = require('discord-interactions'),
 //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
-//slash = require('./slash_commands/testcommand.js');
-
 
 client.commands = new Discord.Collection(); //make new collection for the commands
 client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
@@ -40,23 +40,7 @@ for (const folder of commandFolders) {
 client.login(config.token); //comment out config require
 
 //initialize interactions
-/*const interaction = new DiscordInteractions({
-    //applicationId: process.env.app_id,  //deploy
-    //authToken: process.env.DISCORD_TOKEN, 
-    //publicKey: process.env.public_key,
-
-    applicationId: config.app_id, //test
-    authToken: config.token,
-    publicKey: config.public_key,
-})
-
-if (interaction) {
-    console.log(`Interaction initialization: Done`)
-} else {
-    console.error
-}*/
-
-
+//initializeInteractions()
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
@@ -116,7 +100,7 @@ client.on('message', async function (message) {
             //url = message.content.match()
             console.log(message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6))
             //initialize a variable to store the possible url and remove all blank spaces
-            const  url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
+            const url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
             console.log(`url: ${url}`)
             await automod(url)
             console.log(`URL detected! Redirecting for automod...`)
@@ -182,7 +166,4 @@ client.on('message', async function (message) {
         console.log(`PROBLEM WHILE CHECKING URL`)
         console.error(error)
     }
-
-    //slash(interaction, client)
-
 });
