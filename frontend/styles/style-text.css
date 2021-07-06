@@ -1,0 +1,248 @@
+/*h1{
+    padding: 3%;
+    border: thick double #10afc7;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+}
+
+.commands{
+    border: 1px ridge rgb(53, 53, 53);
+    padding: .5rem;
+}
+
+#grid{
+    height: .5commands;
+    display: grid;
+    grid-template-areas: "a a a a";
+    gap: 10px;
+    grid-auto-columns: .5commands;
+}
+
+.contents{
+    padding: 1em;
+}*/
+
+/*.theme-container{
+
+}*/
+
+.navigation-bar{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.nav-items {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 3%;
+    overflow: hidden;
+    background-color: #333;
+}
+  
+.li-navbar{
+    float: left;
+}
+  
+.li-navbar a {
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.li-navbar:last-child { 
+    border-right: none;
+}
+  
+.li-navbar a:hover:not(.active) {
+    background-color: rgb(94, 93, 93);
+}
+  
+.active {
+    background-color: #0ea099;
+}
+
+.main-wrapper{
+    padding: 1rem;
+}
+
+.main-text{
+    padding-left: 3%;
+}
+
+.page-layout {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-areas: "nav  main"
+                         "spacerA  foot";
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 25%;
+}
+
+.page-layout > spacerA{
+    grid-area: spacerA;
+}
+  
+.page-layout > nav {
+    grid-area: nav;
+}
+  
+.page-layout > main {
+    grid-area: main;
+    padding: 2%;
+}
+  
+.page-layout > footer {
+    grid-area: foot;
+}
+
+.side-nav-menu-main{
+    list-style-type: none;
+    margin-left: 0;
+    margin-top: 0;
+    font-size: 16px;
+    padding-left: 0;
+    padding-top: 2%;
+}
+
+.side-nav-menu-inner{
+    list-style-type: none;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.side-nav-menu-inner-elements{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sidebar-links:link {
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar-links:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.sidebar-links:hover {
+  color: teal;
+  text-decoration: none;
+}
+
+.sidebar-links:active {
+  color: teal;
+  text-decoration: none;
+}
+
+code{
+    padding: 3px;
+    border-radius: 5px;
+    background-color: #E3E3E3;
+}
+
+.anchor{
+    display: block;
+    height: 47px;
+    margin-top: -47px;
+    visibility: hidden;
+}
+
+.side-menu-nav-wrapper{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 46.667px;
+    display: block;
+    max-height: 88vh;
+    overflow-y: auto;
+}
+
+.side-menu-nav-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.side-menu-nav-wrapper::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+}
+
+.side-menu-nav-wrapper::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+}
+
+.side-menu-nav-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgb(120, 120, 120);
+}
+
+.side-menu-nav-wrapper::-webkit-scrollbar-thumb:active {
+    background: rgb(100, 100, 100);
+}
+
+img{
+    width: 60%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+}
+
+.center-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-paragraphs{
+    padding-bottom: 20px;
+}
+
+p{
+    line-height: 1.8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.custom-notes-block{
+    border: solid 2px;
+    border-radius: 5px;
+    border-color: #FFDA47;
+    padding: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #F7EAC8;
+}
+
+.main-last-command-section{
+    border-bottom: solid 1px;
+    border-bottom-color: #C7C7C7;
+    margin-bottom: 50px;
+}
+
+.known-issues-list{
+    list-style-type: circle;
+    list-style-position: outside;
+}
+
+.known-issues-list-elements{
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.main-last-command-section > .known-issues-list-elements:first-child{
+    padding: inherit;
+    margin: inherit;
+}
+
+.main-last-command-section > .known-issues-list-elements:last-child{
+    padding: inherit;
+    margin: inherit;
+}
