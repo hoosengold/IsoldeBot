@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { stringify } = require('querystring');
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
         status: 'online',
@@ -11,9 +12,9 @@ const client = new Discord.Client({ //initialize client for the bot;
 const prefix = "*", //prefix for all commands
     config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
-    fs = require('fs'),
-    initializeInteractions = require('./slash_commands/initial'),
-    slash = require('./slash_commands/testcommand.js');
+    fs = require('fs');
+//initializeInteractions = require('./slash_commands/initial'),
+//slash = require('./slash_commands/testcommand.js');
 //webHookHelper = require('discord-interactions'),
 //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
 
@@ -44,6 +45,23 @@ client.login(config.token); //comment out config require
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
+    /*
+    //initialize guild
+    const guild = client.guilds.cache.get(config.guild_id) // test
+    //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+    
+    fs.writeFile('./test.json', JSON.stringify(guild.members.fetch()) , 'utf8', (err)=>{
+        if (err) {
+            console.log(`Error while writing to test.json ${err}`)
+        }else{
+            console.log(`Successfully written to test.json`)
+        }
+    })
+    guild.members.fetch()
+        //.then(mapID.keys())
+        .then(console.log)
+        .catch(console.error)
+    */
     //the bot is ready
     console.log(`Ready!`)
 })
@@ -71,10 +89,11 @@ client.on('message', async function (message) {
         //ban discord invite links
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
-        //initialize guild and member
+        //initialize guild
         const guild = client.guilds.cache.get(config.guild_id) // test
-
         //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
         const member = guild.member(client.user) //convert User to GuildMember
 
         //check for discord invite links
@@ -107,7 +126,7 @@ client.on('message', async function (message) {
         }
 
         //check for youtube links
-        if (message.content.includes('youtube.com/') && !message.content.startsWith(prefix)) {
+        if (message.content.includes('youtube.com/' || 'youtu.be/') && !message.content.startsWith(prefix)) {
             await message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
         }
 
