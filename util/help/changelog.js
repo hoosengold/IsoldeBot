@@ -15,17 +15,25 @@ module.exports = {
             description: '\u200b',
             //thumbnail: 'attachment://',
             fields: [
-                {
+                /*{
                     name: '**1.** *Cleaner chats!* :purple_heart: ',
-                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This will not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`.'
+                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This does not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`.'
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },*/
+                {
+                    name: '**1.** *Making polls is easier than ever!* :bar_chart: ',
+                    value: 'The \`*poll\` command has a new and easier syntax! There is no more need to type parentheses around the question and the options anymore :grin:. Just write your question adn type **\`?\`**. And that\'s all! It\'s the same for the option - type one option, end it with **\`!\`** and start with the next one! Type \`*help\` for more info and for an example. :purple_heart:'
                 },
                 {
                     name: '\u200b',
                     value: '\u200b'
                 },
                 {
-                    name: '**2.** *Safety before everything else* :space_invader: ',
-                    value: ''
+                    name: '**2.** *Various performance and stability fixes.*',
+                    value: 'This is just the *boring* part of the changelog where I say that the bot is **2000%** faster and that **ALL** bug are __fixed__. Yeah... Um, it\'s totally true. :clown:'
                 },
                 {
                     name: '\u200b',
