@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { stringify } = require('querystring');
+//const { stringify } = require('querystring');
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
         status: 'online',
@@ -10,7 +10,7 @@ const client = new Discord.Client({ //initialize client for the bot;
     }
 });
 const prefix = "*", //prefix for all commands
-    config = require('./config.json'), //Login with test bot
+    //config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
     fs = require('fs');
 //initializeInteractions = require('./slash_commands/initial'),
@@ -34,11 +34,11 @@ for (const folder of commandFolders) {
 
 
 //Login with deploy bot
-//require('dotenv').config();
-//client.login(process.env.DISCORD_TOKEN);
+require('dotenv').config();
+client.login(process.env.DISCORD_TOKEN);
 
 //Login with test bot
-client.login(config.token); //comment out config require
+//client.login(config.token); //comment out config require
 
 //initialize interactions
 //initializeInteractions()
