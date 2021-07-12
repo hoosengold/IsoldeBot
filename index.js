@@ -90,8 +90,8 @@ client.on('message', async function (message) {
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
         //initialize guild
-        const guild = client.guilds.cache.get(config.guild_id) // test
-        //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+        //const guild = client.guilds.cache.get(config.guild_id) // test
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
 
         //initialize member
         const member = guild.member(client.user) //convert User to GuildMember
