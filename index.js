@@ -1,6 +1,5 @@
-const help = require('./util/help/help');
-
 const Discord = require('discord.js');
+//const { stringify } = require('querystring');
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
         status: 'online',
@@ -9,14 +8,15 @@ const client = new Discord.Client({ //initialize client for the bot;
             type: 'PLAYING'
         }
     }
-}); 
+});
 const prefix = "*", //prefix for all commands
     //config = require('./config.json'), //Login with test bot
+    automod = require('./moderation/automod.js'),
     fs = require('fs');
+//initializeInteractions = require('./slash_commands/initial'),
+//slash = require('./slash_commands/testcommand.js');
 //webHookHelper = require('discord-interactions'),
 //{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
-//slash = require('./slash_commands/testcommand.js');
-
 
 client.commands = new Discord.Collection(); //make new collection for the commands
 client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
@@ -41,26 +41,27 @@ client.login(process.env.DISCORD_TOKEN);
 //client.login(config.token); //comment out config require
 
 //initialize interactions
-/*const interaction = new DiscordInteractions({
-    //applicationId: process.env.app_id,  //deploy
-    //authToken: process.env.DISCORD_TOKEN, 
-    //publicKey: process.env.public_key,
-
-    applicationId: config.app_id, //test
-    authToken: config.token,
-    publicKey: config.public_key,
-})
-
-if (interaction) {
-    console.log(`Interaction initialization: Done`)
-} else {
-    console.error
-}*/
-
-
+//initializeInteractions()
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
+    /*
+    //initialize guild
+    const guild = client.guilds.cache.get(config.guild_id) // test
+    //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+    
+    fs.writeFile('./test.json', JSON.stringify(guild.members.fetch()) , 'utf8', (err)=>{
+        if (err) {
+            console.log(`Error while writing to test.json ${err}`)
+        }else{
+            console.log(`Successfully written to test.json`)
+        }
+    })
+    guild.members.fetch()
+        //.then(mapID.keys())
+        .then(console.log)
+        .catch(console.error)
+    */
     //the bot is ready
     console.log(`Ready!`)
 })
@@ -74,63 +75,114 @@ client.on("guildMemberAdd", (member) => {
 })
 
 //listen for messages, main function of the bot
-client.on('message', function (message) {
-    //checks if the author of the message is a bot, if it is, then it does not respond
-    if (message.author.bot) return;
-
-    //check for youtube links
-    if (message.content.includes('youtube.com/')) {
-        message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
-    }
-
-    if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
-
-    //takes the message body, removes the prefix !, splits the message body and makes everything lower case
-    const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word arfter the command
-        commandName = args.shift().toLowerCase(); //returns the command
-
-    console.log(`command: ${commandName}`)
-    console.log(`args: ${args}`)
-
-    const command = client.commands.get(commandName)
-        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-    if (!command) return; //check is the command exists
-
-    //cooldown for the specific command for the specific user
-    const { cooldowns } = client
-
-    //check if the cooldown collection already has a cooldown for the command
-    if (!cooldowns.has(command.name)) {
-        cooldowns.set(command.name, new Discord.Collection())
-    }
-
-    const now = Date.now(),
-        timestamps = cooldowns.get(command.name),
-        cooldownAmount = (command.cooldown || 5) * 1000;
-
-    //execute the command
+client.on('message', async function (message) {
     try {
-        //get the timestamp and calculate the remaining time if the user already used the command in this session
-        if (timestamps.has(message.author.id)) {
-            const expirationDate = timestamps.get(message.author.id) + cooldownAmount;
-            if (now < expirationDate) { //checks if there is still cooldown
-                const timeLeft = (expirationDate - now) / 1000
-                return message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
+        //checks if the author of the message is a bot, if it is, then it does not respond
+        if (message.author.bot) return;
+
+        //initialize regex to detect url's
+        const urlRegexMain = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?/gmi); //Subst: /^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi
+        const urlRegexAlphanumeric = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?/gmi);
+        const urlRegexIPv4 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))/img);
+        const urlRegexIPv6 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})/);
+
+        //ban discord invite links
+        const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
+
+        //initialize guild
+        const guild = client.guilds.cache.get(config.guild_id) // test
+        //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.member(client.user) //convert User to GuildMember
+
+        //check for discord invite links
+        if (message.content.match(inviteRegex)) {
+            if (member.hasPermission('KICK_MEMBERS')) {
+                console.log(`Invite link not deleted: posted by admin`)
+                return;
+            } else {
+                await message.delete()
+                console.log(`Discord invite link deleted`)
+                await message.reply(`**No Discord Invite links allowed!**`)
+                return;
             }
         }
+        //check for shortened links
+        else if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
+            await message.delete()
+            console.log(`Shortened link deleted.`)
+            await message.reply(`**No shortened links allowed!**`)
+        }
+        //check for non discord invite links and not hidden links
+        else if (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)) {
+            //url = message.content.match()
+            console.log(message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6))
+            //initialize a variable to store the possible url and remove all blank spaces
+            const url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
+            console.log(`url: ${url}`)
+            await automod(url)
+            console.log(`URL detected! Redirecting for automod...`)
+        }
 
-        //clear the entry on the collection after the cooldown
-        timestamps.set(message.author.id, now)
-        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
-        //execute the command
-        command.execute(message, args)
+        //check for youtube links
+        if (message.content.includes('youtube.com/' || 'youtu.be/') && !message.content.startsWith(prefix)) {
+            await message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
+        }
+
+        if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
+
+        try {
+            //takes the message body, removes the prefix *, splits the message body and makes everything lower case
+            const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word after the command
+                commandName = args.shift().toLowerCase(); //returns the command
+
+            console.log(`command: ${commandName}`)
+            console.log(`args: ${args}`)
+
+            const command = await client.commands.get(commandName)
+                || await client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+            if (!command) return; //check is the command exists
+
+            //cooldown for the specific command for the specific user
+            const { cooldowns } = client
+
+            //check if the cooldown collection already has a cooldown for the command
+            if (!cooldowns.has(command.name)) {
+                await cooldowns.set(command.name, new Discord.Collection())
+            }
+
+            const now = Date.now(),
+                timestamps = await cooldowns.get(command.name),
+                cooldownAmount = (command.cooldown || 5) * 1000;
+
+            //execute the command
+            try {
+                //get the timestamp and calculate the remaining time if the user already used the command in this session
+                if (timestamps.has(message.author.id)) {
+                    const expirationDate = await timestamps.get(message.author.id) + cooldownAmount;
+                    if (now < expirationDate) { //checks if there is still cooldown
+                        const timeLeft = (expirationDate - now) / 1000
+                        return await message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
+                    }
+                }
+                //clear the entry on the collection after the cooldown
+                await timestamps.set(message.author.id, now)
+                setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+                //execute the command
+                await command.execute(message, args)
+            } catch (error) {
+                console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
+                console.error(error)
+                await message.reply(`Something went wrong while trying to execute the command!`)
+            }
+        } catch (error) {
+            console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)
+            console.error(error)
+        }
     } catch (error) {
-        console.log(error)
-        message.reply(`Something went wrong while trying to execute the command!`)
+        console.log(`PROBLEM WHILE CHECKING URL`)
+        console.error(error)
     }
-
-
-    //slash(interaction, client)
-
 });

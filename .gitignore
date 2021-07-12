@@ -108,3 +108,6 @@ config.json
 
 #ignore before the slash commands are ready
 slash_commands/
+
+#ignore gui template
+frontend/template.html

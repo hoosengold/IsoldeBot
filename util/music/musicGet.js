@@ -56,5 +56,8 @@ module.exports = {
                 //console.log(`Rollback`)
                 console.log(err.stack)
             });
+        //delete the call message
+        message.delete()
+            .catch(err => console.error(err))
     }
 }
