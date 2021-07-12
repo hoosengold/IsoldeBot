@@ -105,6 +105,7 @@ module.exports = {
     execute(message, args) {
     //put your code here, you can list dependencies here or before module.exports
     }
+}
 ```
 
 <li>You can test the bot with <code>node index.js</code>.</li>
