@@ -1,5 +1,5 @@
 const Discord = require('discord.js'),
-    config = require('../config.json'),
+    //config = require('../config.json'),
     index = require('../index.js'),
     automod = require('./automod.js');
 
