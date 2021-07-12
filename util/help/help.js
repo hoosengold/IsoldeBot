@@ -53,7 +53,7 @@ module.exports = {
                 },
                 {
                     name: '**\*say \`statement\`**',
-                    value: 'Example: \`\*say something definitely meaningful\` \n Makes The Friend say anything. No words or characters limit. \n *Note:* Be responsible. Stick to the server rules. '
+                    value: 'Example: \`\*say something definitely meaningful\` \n Makes The Friend say anything. No words/characters count limit. \n *Note:* Be responsible. Stick to the server rules. '
                 },
                 {
                     name: '\u200b',
