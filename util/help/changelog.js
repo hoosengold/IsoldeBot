@@ -15,33 +15,33 @@ module.exports = {
             description: '\u200b',
             //thumbnail: 'attachment://',
             fields: [
+                /*{
+                    name: '**1.** *Cleaner chats!* :purple_heart: ',
+                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This does not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`.'
+                },
                 {
-                    name: '**1.** *Everything is prettier now!* :purple_heart: ',
-                    value: 'All messages are embeded now and all of them have random colors!'
+                    name: '\u200b',
+                    value: '\u200b'
+                },*/
+                {
+                    name: '**1.** *Making polls is easier than ever!* :bar_chart: ',
+                    value: 'The \`*poll\` command has a new and easier syntax! There is no more need to type parentheses around the question and the options anymore :grin:. Just write your question adn type **\`?\`**. And that\'s all! It\'s the same for the option - type one option, end it with **\`!\`** and start with the next one! Type \`*help\` for more info and for an example. :purple_heart:'
                 },
                 {
                     name: '\u200b',
                     value: '\u200b'
                 },
                 {
-                    name: "**2.** *Bugs are no more!* :space_invader:",
-                    value: "Various bug fixes including the infamous \"NOT NOW BOT\" bug (thanks Ultra :grin:)! \n The Friend is a lot faster now thanks to performance improvements (60 FPS! Only on FriendStation! :scream_cat:). Added spam protection. Now a command can be sent only once every 5 seconds (But who will stop The Friend from spamming?! :grimacing:)."
+                    name: '**2.** *Make The Friend say everything! :sunglasses:*',
+                    value: 'BEHOLD the most __**useful**__ command of all time - \`*say\`. With it you can make The Friend say **everything** *. \n\n * *Terms and conditions apply. We, The Friend Inc. and its creator(s), are not responsible for your actions. Everything, that The Friend says, is completely wrong and we do not support it, unless it praises The Friend and his magnificence, majesty and superiority among other bots since that is a **fact** and facts cannot be wrong.*'
                 },
                 {
                     name: '\u200b',
                     value: '\u200b'
                 },
                 {
-                    name: '**3.** Tired of the bad command names? Aliases to the rescue! :superhero:',
-                    value: 'Now you can see all commands and their aliases! Just type \`*commands\`! The names will continue to be bad but at least now there are (less) bad alternatives. :yum:'
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b'
-                },
-                {
-                    name: '**4.**Do you need a hug? Anyway, have one! Or two! Or all the hugs! :hugging:',
-                    value: 'New Members will be greeted with a message. They can receive a \`*hug\` or maybe two. :smile: *"But I\'m not a new member, how do I get a hug? :pleading_face:".* Hugs are for everyone! You can also @someone and send them a hug! Hugs know no borders! :purple_heart:'
+                    name: '**3.** *Various performance and stability fixes.*',
+                    value: 'This is just the *boring* part of the changelog where I say that the bot is **2000%** faster and that **ALL** bug are __fixed__. Yeah... Um, it\'s totally true. :clown:'
                 },
                 {
                     name: '\u200b',
@@ -58,5 +58,8 @@ module.exports = {
             timestamp: new Date(),
         }
         message.channel.send({ embed: embed })
+        //delete the call message
+        message.delete()
+        .catch(err => console.error(err))
     }
 }

@@ -7,7 +7,8 @@ const Discord = require('discord.js'),
     help = require('./help.js'),
     lore = require('./lore.js'),
     changelog = require('./changelog.js'),
-    reportbug = require('./reportbug');
+    reportbug = require('./reportbug'),
+    say = require('../funny/say.js')
 
 module.exports = {
     name: 'aliases',
@@ -62,6 +63,10 @@ module.exports = {
                     name: '\`*bug\`',
                     value: `Aliases: ${reportbug.aliases}`
                 },
+                {
+                    name: '\`*say\`',
+                    value: `Aliases: ${say.aliases}`
+                }
             ],
             footer: {
                 text: '*Note*: \'undefined\' = no aliases \n Last Update: 25. June 2021'
@@ -70,5 +75,8 @@ module.exports = {
         }
 
         message.channel.send({ embed: embed })
+        //delete the call message
+        message.delete()
+        .catch(err => console.error(err))
     }
 }

@@ -19,8 +19,8 @@ module.exports = {
             description: 'A comprehensive list with all commands and how to use them.',
             fields: [
                 {
-                    name: '** \*poll** \`{question} [option1] [option2]\`',
-                    value: 'Example: \n \`*poll {Do you like the polls?} [Yes] [Of course!] [Best polls ever!]\` \n *Note:* Each poll can have **up to 20 options**.',
+                    name: '** \*poll** \`question? option1! option2! ... option20!\`',
+                    value: 'Example: \n \`*poll Do you like the polls? Yes! Of course! Best polls ever!\` \n *Note:* Each poll can have **up to 20 options**.',
 
                 },
                 {
@@ -46,6 +46,14 @@ module.exports = {
                 {
                     name: '** \*hug**',
                     value: 'Example: \`\*hug @someone\` \n Returns a hug. \n *Note:* The command can be used with or without tagging someone. More than 1 person can be tagged. It returns a different message for 0 tagged and 1 or more tagged.'
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
+                    name: '**\*say \`statement\`**',
+                    value: 'Example: \`\*say something definitely meaningful\` \n Makes The Friend say anything. No words/characters count limit. \n *Note:* Be responsible. Stick to the server rules. '
                 },
                 {
                     name: '\u200b',
@@ -80,6 +88,7 @@ module.exports = {
                     value: 'Returns a guide how to report a bug.',
                     inline: true
                 },
+                
             ],
             //thumbnail: {
             //url: '',
@@ -91,5 +100,8 @@ module.exports = {
         }
 
         message.channel.send({ embed: helpEmbed, files: [profilePic] })
+        //delete the call message
+        message.delete()
+        .catch(err => console.error(err))
     }
 }
