@@ -52,6 +52,14 @@ module.exports = {
                     value: '\u200b'
                 },
                 {
+                    name: '**\*say \`statement\`**',
+                    value: 'Example: \`\*say something definitely meaningful\` \n Makes The Friend say anything. No words or characters limit. \n *Note:* Be responsible. Stick to the server rules. '
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
+                },
+                {
                     name: '** \*getMusic**',
                     value: 'Returns a random song from the already suggested songs.',
                     inline: true
@@ -80,6 +88,7 @@ module.exports = {
                     value: 'Returns a guide how to report a bug.',
                     inline: true
                 },
+                
             ],
             //thumbnail: {
             //url: '',
