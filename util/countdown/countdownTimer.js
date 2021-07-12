@@ -21,6 +21,10 @@ module.exports = {
         .catch(err => console.log(err))
     }
 
+    if (hoursLeft > 24) {
+      return message.reply(`The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`)
+    }
+
     //Get the date when the countdown should end
     var countdownDate = new Date();
     countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft);
