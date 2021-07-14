@@ -10,7 +10,6 @@ const client = new Discord.Client({ //initialize client for the bot;
     }
 });
 const prefix = "*", //prefix for all commands
-    //config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
     fs = require('fs');
 //initializeInteractions = require('./slash_commands/initial'),
@@ -33,12 +32,9 @@ for (const folder of commandFolders) {
 }
 
 
-//Login with deploy bot
+//Login with the bot
 require('dotenv').config();
 client.login(process.env.DISCORD_TOKEN);
-
-//Login with test bot
-//client.login(config.token); //comment out config require
 
 //initialize interactions
 //initializeInteractions()
@@ -47,7 +43,6 @@ client.login(process.env.DISCORD_TOKEN);
 client.once("ready", () => {
     /*
     //initialize guild
-    const guild = client.guilds.cache.get(config.guild_id) // test
     //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
     
     fs.writeFile('./test.json', JSON.stringify(guild.members.fetch()) , 'utf8', (err)=>{
@@ -90,7 +85,6 @@ client.on('message', async function (message) {
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
         //initialize guild
-        //const guild = client.guilds.cache.get(config.guild_id) // test
         const guild = client.guilds.cache.get(process.env.guild_id) // deploy
 
         //initialize member
