@@ -9,9 +9,16 @@ const client = new Discord.Client({ //initialize client for the bot;
         }
     }
 });
+
 const prefix = "*", //prefix for all commands
     automod = require('./moderation/automod.js'),
     fs = require('fs');
+
+const disbut = require("discord-buttons");
+disbut(client);
+
+const events = require('./util/quiz/events/event')
+
 //initializeInteractions = require('./slash_commands/initial'),
 //slash = require('./slash_commands/testcommand.js');
 //webHookHelper = require('discord-interactions'),
@@ -41,22 +48,6 @@ client.login(process.env.DISCORD_TOKEN);
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
-    /*
-    //initialize guild
-    //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-    
-    fs.writeFile('./test.json', JSON.stringify(guild.members.fetch()) , 'utf8', (err)=>{
-        if (err) {
-            console.log(`Error while writing to test.json ${err}`)
-        }else{
-            console.log(`Successfully written to test.json`)
-        }
-    })
-    guild.members.fetch()
-        //.then(mapID.keys())
-        .then(console.log)
-        .catch(console.error)
-    */
     //the bot is ready
     console.log(`Ready!`)
 })
@@ -67,6 +58,13 @@ client.on("guildMemberAdd", (member) => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'general')
     if (!channel) return;
     channel.send(`Welcome to the Stream Fam, ${member}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+})
+
+client.on('clickButton', async function (button) {
+    console.log(`clickButton event triggered`)
+    await button.reply.defer('Answer submitted')
+
+    events.execute(button)
 })
 
 //listen for messages, main function of the bot
