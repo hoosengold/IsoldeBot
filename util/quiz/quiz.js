@@ -98,10 +98,14 @@ module.exports = {
                     //let row = new buttons.MessageActionRow()
                     let row = []
 
+                    //get the row count
+                    var rs = await client.query("select * from quiz")
+                    var quizCounter = rs.rows.length;
+
                     for (let m = 1; m < quizArray.length; m++) {
                         let btn = new buttons.MessageButton()
                             .setStyle('blurple')
-                            .setID(`option${m}`)
+                            .setID(`option${m}question${quizCounter}`)
                             .setLabel(`Option ${btnOptions[m - 1]}`)
 
                         //btnRow.push(btn)
@@ -110,10 +114,6 @@ module.exports = {
                     }
 
                     //console.log(`row: ${row}`)
-
-                    //get the row count
-                    var rs = await client.query("select * from quiz")
-                    var quizCounter = rs.rows.length;
 
                     //embed format and content
                     const embed = {
