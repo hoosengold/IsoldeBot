@@ -1,7 +1,6 @@
 const Discord = require('discord.js'),
     //config = require('../config.json'),
-    index = require('../index.js'),
-    roles = require('./roles.js');
+    roles  = require('../index.js');
 
 async function automod(url) {
     console.log(`Test passed! url: ${url}`)
