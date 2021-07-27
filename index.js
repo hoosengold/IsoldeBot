@@ -82,15 +82,9 @@ client.on('message', async function (message) {
         //ban discord invite links
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
-        //initialize guild
-        //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-
-        //initialize member
-        //const member = guild.member(client.user) //convert User to GuildMember
-
         //check for discord invite links
         if (message.content.match(inviteRegex)) {
-            if (roles()) {
+            if (roles.isAdmin()) {
                 console.log(`Invite link not deleted: posted by admin`)
                 return;
             } else {
@@ -179,21 +173,25 @@ client.on('message', async function (message) {
     }
 });
 
-function roles() {
-    //initialize guild
-    const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+const roles = {
 
-    //initialize member
-    const member = guild.member(client.user) //convert User to GuildMember
+    //returns true if the user is admin
+    isAdmin() {
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
 
-    //maybe make a function in index for member and then export it
-    var isAdmin = new Boolean();
+        //initialize member
+        const member = guild.member(client.user) //convert User to GuildMember
 
-    if (member.hasPermission('KICK_MEMBERS')) {
-        return isAdmin = true;
-    } else {
-        return isAdmin = false;
+        //maybe make a function in index for member and then export it
+        var admin = new Boolean();
+
+        if (member.hasPermission('KICK_MEMBERS')) {
+            return admin = true;
+        } else {
+            return admin = false;
+        }
     }
 }
 
-module.exports = roles()
+module.exports = roles
