@@ -9,6 +9,12 @@ module.exports = {
         const Discord = require('discord.js');
         const pool = require('../../connections/database');
         require('dotenv').config()
+        const roles = require('../../index')
+
+        if(!roles.isAdmin()){
+            console.log(`Permission to use a command denied`)
+            return message.reply(`You don't have permissions to use this command!`)
+        }
 
         //throw an error if there are any idle clients
         pool.on('error', (err, client) => {
