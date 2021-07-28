@@ -59,7 +59,7 @@ module.exports = {
 
                 } finally {
                     //release the client to the pool
-                    await client.release()
+                    client.release()
                     console.log("Client released succesfully.")
                 }
             })().catch(err => {

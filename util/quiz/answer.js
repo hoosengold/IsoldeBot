@@ -2,7 +2,7 @@ module.exports = {
     name: 'answer', //name of the command
     description: 'Insert the answers for the quiz', //short description of the command
     aliases: ['quizanswer', 'answerquiz'], //aliases for the command
-    cooldown: 0, //cooldown for the command in seconds, the default cooldown is 5 seconds
+    cooldown: 1, //cooldown for the command in seconds, the default cooldown is 5 seconds
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     execute(message, args) {
         //take answer and question number in args and insert the answer into quiz column answer for the specific question
