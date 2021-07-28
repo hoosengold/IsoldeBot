@@ -173,7 +173,7 @@ client.on('message', async function (message) {
     }
 });
 
-const roles = {
+const index = {
 
     //returns true if the user is admin
     isAdmin() {
@@ -191,7 +191,26 @@ const roles = {
         } else {
             return admin = false;
         }
+    },
+
+    guild() {
+
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.member(client.user) //convert User to GuildMember
+
+        let totalUsers = 0;
+        let listOfUsers = [];
+        guild.members.cache.forEach(member => {
+            totalUsers++;
+            listOfUsers.push(member)
+        });
+
+        console.log(`Total fetched users: ${totalUsers}`);
+        return listOfUsers;
     }
 }
 
-module.exports = roles
+module.exports = index
