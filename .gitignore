@@ -111,3 +111,6 @@ slash_commands/
 
 #ignore gui template
 frontend/template.html
+
+#ignore eval command for the quiz
+util/quiz/eval.js

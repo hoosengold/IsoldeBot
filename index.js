@@ -9,10 +9,16 @@ const client = new Discord.Client({ //initialize client for the bot;
         }
     }
 });
+
 const prefix = "*", //prefix for all commands
-    //config = require('./config.json'), //Login with test bot
     automod = require('./moderation/automod.js'),
     fs = require('fs');
+
+const disbut = require("discord-buttons");
+disbut(client);
+
+const events = require('./util/quiz/events/event')
+
 //initializeInteractions = require('./slash_commands/initial'),
 //slash = require('./slash_commands/testcommand.js');
 //webHookHelper = require('discord-interactions'),
@@ -33,35 +39,15 @@ for (const folder of commandFolders) {
 }
 
 
-//Login with deploy bot
+//Login with the bot
 require('dotenv').config();
 client.login(process.env.DISCORD_TOKEN);
-
-//Login with test bot
-//client.login(config.token); //comment out config require
 
 //initialize interactions
 //initializeInteractions()
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
-    /*
-    //initialize guild
-    const guild = client.guilds.cache.get(config.guild_id) // test
-    //const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-    
-    fs.writeFile('./test.json', JSON.stringify(guild.members.fetch()) , 'utf8', (err)=>{
-        if (err) {
-            console.log(`Error while writing to test.json ${err}`)
-        }else{
-            console.log(`Successfully written to test.json`)
-        }
-    })
-    guild.members.fetch()
-        //.then(mapID.keys())
-        .then(console.log)
-        .catch(console.error)
-    */
     //the bot is ready
     console.log(`Ready!`)
 })
@@ -72,6 +58,13 @@ client.on("guildMemberAdd", (member) => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'general')
     if (!channel) return;
     channel.send(`Welcome to the Stream Fam, ${member}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+})
+
+client.on('clickButton', async function (button) {
+    console.log(`clickButton event triggered`)
+    await button.reply.defer('Answer submitted')
+
+    events.execute(button)
 })
 
 //listen for messages, main function of the bot
@@ -89,16 +82,9 @@ client.on('message', async function (message) {
         //ban discord invite links
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
-        //initialize guild
-        //const guild = client.guilds.cache.get(config.guild_id) // test
-        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-
-        //initialize member
-        const member = guild.member(client.user) //convert User to GuildMember
-
         //check for discord invite links
         if (message.content.match(inviteRegex)) {
-            if (member.hasPermission('KICK_MEMBERS')) {
+            if (roles.isAdmin()) {
                 console.log(`Invite link not deleted: posted by admin`)
                 return;
             } else {
@@ -186,3 +172,45 @@ client.on('message', async function (message) {
         console.error(error)
     }
 });
+
+const index = {
+
+    //returns true if the user is admin
+    isAdmin() {
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.member(client.user) //convert User to GuildMember
+
+        //maybe make a function in index for member and then export it
+        var admin = new Boolean();
+
+        if (member.hasPermission('KICK_MEMBERS')) {
+            return admin = true;
+        } else {
+            return admin = false;
+        }
+    },
+
+    guild() {
+
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.member(client.user) //convert User to GuildMember
+
+        let totalUsers = 0;
+        let listOfUsers = [];
+        guild.members.cache.forEach(member => {
+            totalUsers++;
+            listOfUsers.push(member.id.toString())
+        });
+
+        console.log(`Total fetched users: ${totalUsers}`);
+        return listOfUsers;
+    }
+}
+
+module.exports = index
