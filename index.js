@@ -205,7 +205,7 @@ const index = {
         let listOfUsers = [];
         guild.members.cache.forEach(member => {
             totalUsers++;
-            listOfUsers.push(member)
+            listOfUsers.push(member.id.toString())
         });
 
         console.log(`Total fetched users: ${totalUsers}`);
