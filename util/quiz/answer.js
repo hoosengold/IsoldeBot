@@ -30,23 +30,23 @@ module.exports = {
                 switch (answer.toString()) {
                     case 'A':
                     case 'a':
-                        answerID = 'option1'
+                        answerID = 'option1question' + question
                         break;
                     case 'B':
                     case 'b':
-                        answerID = 'option2'
+                        answerID = 'option2question' + question
                         break;
                     case 'C':
                     case 'c':
-                        answerID = 'option3'
+                        answerID = 'option3question' + question
                         break;
                     case 'D':
                     case 'd':
-                        answerID = 'option4'
+                        answerID = 'option4question' + question
                         break;
                     case 'E':
                     case 'e':
-                        answerID = 'option5'
+                        answerID = 'option5question' + question
                         break;
                 }
 
