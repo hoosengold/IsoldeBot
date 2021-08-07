@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-//const { stringify } = require('querystring');
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
         status: 'online',
@@ -65,6 +64,16 @@ client.on('clickButton', async function (button) {
     await button.reply.defer('Answer submitted')
 
     events.execute(button)
+})
+
+
+const db = require('./connections/database')
+let pool = db.pool
+
+//listen for an error from an idle pool client
+pool.on('error', (err, client) => {
+    console.error('Error on idle client', err)
+    process.exit(0)
 })
 
 //listen for messages, main function of the bot
