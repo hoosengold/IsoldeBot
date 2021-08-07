@@ -122,8 +122,6 @@ module.exports = {
                                 lastEntryCount = currentEntryCount
                             }
 
-                            console.log(`correct answers array: ${mostCorrectAnswers}`)
-
                             var correctCount
                             var correctUsers = ''
                             for (let i = 0; i < mostCorrectAnswers.length; i++) {

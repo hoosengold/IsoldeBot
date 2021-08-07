@@ -28,8 +28,6 @@ module.exports = {
                 //select the song from the random row
                 const songSuggestion = await db.query("select link from music where rownumber = $1", [randomRow])
                     .then(result => {
-                        //print the link value
-                        console.table(result.rows[0])
                         //message the link 
                         message.reply(`A random song was chosen for you! Enjoy suggestion *\u2116 ${randomRow}* by our fellow stream fams! :purple_heart: \n\n ${result.rows[0].link}`)
                     })
