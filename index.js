@@ -61,8 +61,6 @@ client.on("guildMemberAdd", (member) => {
 
 client.on('clickButton', async function (button) {
     console.log(`clickButton event triggered`)
-    await button.reply.defer('Answer submitted')
-
     events.execute(button)
 })
 

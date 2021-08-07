@@ -49,6 +49,7 @@ module.exports = {
                         })
                         .catch(console.error())
                 } finally {
+                    await button.reply.send('Answer submitted successfully!', true)
                     console.log(`Button event executed successfully.`)
                 }
             })().catch(err => {
