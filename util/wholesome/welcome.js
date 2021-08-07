@@ -12,7 +12,6 @@ module.exports = {
             message.delete()
                 .catch(err => console.error(err))
         } else {
-            console.log(`tagged: ${args}`)
             message.channel.send(`${args} Someone is sending you biiiig hugs! :yellow_heart:`)
             //delete the call message
             message.delete()

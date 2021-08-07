@@ -7,25 +7,17 @@ module.exports = {
     execute(message, args) {
         //Import all required modules
         const Discord = require("discord.js"),
-            pool = require("../../connections/database.js");
+            db = require("../../connections/database.js");
 
         //variable to store the link
         var musicSuggestion = musicSuggestion = args[0];
         console.log(`musicSuggestion: ${musicSuggestion}`)
-
-        //throw an error if there are any idle clients
-        pool.on('error', (err, client) => {
-            console.error('Error on idle client', err)
-            process.exit(-1)
-        })
 
         //check if args is empty
         if (args[0] == null) {
             return message.reply('You forgot to paste the YouTube link. :yum:')
                 .catch(err => console.log(err))
         }
-
-        
 
         //split the link to see if it's an youtube link
         var yt = musicSuggestion.split('watch?')[0]
@@ -45,38 +37,27 @@ module.exports = {
                     console.log("Connected successfully.")
 
                     try {
-                        //begin transaction
-                        //await client.query("BEGIN");
-
                         //check if the entry is in the database
-                        const getAvail = await client.query("select * from music where link = $1", [musicSuggestion])
+                        const getAvail = await db.query("select * from music where link = $1", [musicSuggestion])
 
                         //get the row count
-                        var rs = await client.query("select * from music")
+                        var rs = await db.query("select * from music")
                         var rowNumber = rs.rows.length + 1;
 
                         if (getAvail.rows.length === 0) { //if it isn't, add it and its ID, send message
-                            await client.query("insert into music values ($1, $2, $3)", [musicSuggestion, videoID, rowNumber])
+                            await db.query("insert into music values ($1, $2, $3)", [musicSuggestion, videoID, rowNumber])
                             await message.reply(`The song has been successfully added! Thank you for the suggestion! :purple_heart: \n\n Total suggestions: ${rowNumber}`)
                             console.log(`Item added successfully.`)
                         } else { //if it is, send message
                             await message.reply("The song has already been suggested. Happy listening! :purple_heart:");
                             console.log(`Item already added.`)
                         }
-
-                        //end transaction
-                        //await client.query("COMMIT");
-
                     } finally {
-                        //release the client to the pool
-                        await client.release()
-                        console.log("Client released succesfully.")
+                        console.log("Music add successfully.")
                     }
 
 
-                })().catch(err => { //throw an error and rollback in case of an error
-                    //client.query("ROLLBACK");
-                    //console.log(`Rollback`);
+                })().catch(err => {
                     console.log(err.stack);
                 });
 
