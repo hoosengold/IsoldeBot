@@ -189,6 +189,7 @@ client.on('message', async function (message) {
  * @module index
  * @property {function} isAdmin Checks if a member is an admin.
  * @property {function} guild Fetches the ID's of all members in a guild.
+ * @property {function} getMember Fetches a member from a guild with a known ID. 
  * 
  */
 
@@ -197,7 +198,7 @@ const index = {
      * 
      * Checks if a member is an admin. 
      * 
-     * @function isAdmin()
+     * @function isAdmin
      * @returns {boolean} `true` if the member is an admin.
      * 
      */
@@ -218,7 +219,7 @@ const index = {
      * 
      * Fetches the ID's of all members in a guild.
      * 
-     * @function guild()
+     * @function guild
      * @property {string[]} listOfUsers String array with the user ID's.
      * @returns {string[]} listOfUsers
      * 
@@ -240,6 +241,31 @@ const index = {
 
         console.log(`Total fetched users: ${totalUsers}`);
         return listOfUsers;
+    },
+
+/**
+ * 
+ * Fetches a member from a guild with a known ID.
+ * 
+ * @function getMember
+ * @param {*} id The ID of the member that needs to be fetched
+ * @returns {undefined | Discord.member} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
+ * 
+ */
+
+    getMember(id){
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.members.cache.get(id) //convert User to GuildMember
+
+        if(!member) { 
+            console.log(`Couldn't find a member in this guild with this ID.`)
+            return undefined
+        }
+
+        return member
     }
 }
 
