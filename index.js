@@ -173,26 +173,47 @@ client.on('message', async function (message) {
     }
 });
 
-const index = {
+/**
+ * 
+ * Additional methods that need the discord client.
+ * 
+ * @module index
+ * @property {function} isAdmin Checks if a member is an admin.
+ * @property {function} guild Fetches the ID's of all members in a guild.
+ * 
+ */
 
-    //returns true if the user is admin
+const index = {
+    /**
+     * 
+     * Checks if a member is an admin. 
+     * 
+     * @function isAdmin()
+     * @returns {boolean} `true` if the member is an admin.
+     * 
+     */
     isAdmin() {
         //initialize guild
-        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+        const guild = client.guilds.cache.get(process.env.guild_id)
 
         //initialize member
         const member = guild.member(client.user) //convert User to GuildMember
 
-        //maybe make a function in index for member and then export it
-        var admin = new Boolean();
-
         if (member.hasPermission('KICK_MEMBERS')) {
-            return admin = true;
+            return true;
         } else {
-            return admin = false;
+            return false;
         }
     },
-
+    /**
+     * 
+     * Fetches the ID's of all members in a guild.
+     * 
+     * @function guild()
+     * @property {string[]} listOfUsers String array with the user ID's.
+     * @returns {string[]} listOfUsers
+     * 
+     */
     guild() {
 
         //initialize guild
