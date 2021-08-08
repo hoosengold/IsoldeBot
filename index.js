@@ -1,4 +1,8 @@
 const Discord = require('discord.js');
+
+const myIntents = new Discord.Intents(261926415446)
+myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES)
+
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
         status: 'online',
@@ -6,7 +10,8 @@ const client = new Discord.Client({ //initialize client for the bot;
             name: '*help',
             type: 'PLAYING'
         }
-    }
+    },
+    intents: myIntents
 });
 
 const prefix = "*", //prefix for all commands
@@ -17,11 +22,6 @@ const disbut = require("discord-buttons");
 disbut(client);
 
 const events = require('./util/quiz/events/event')
-
-//initializeInteractions = require('./slash_commands/initial'),
-//slash = require('./slash_commands/testcommand.js');
-//webHookHelper = require('discord-interactions'),
-//{ DiscordInteractions, ApplicationCommandOptionType } = require('slash-commands'),
 
 client.commands = new Discord.Collection(); //make new collection for the commands
 client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
@@ -56,7 +56,7 @@ client.on("guildMemberAdd", (member) => {
     console.log(`New member detected.`)
     const channel = member.guild.channels.cache.find(ch => ch.name === 'general')
     if (!channel) return;
-    channel.send(`Welcome to the Stream Fam, ${member}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+    channel.send(`Welcome to the Stream Fam, ${member.toString()}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
 })
 
 client.on('clickButton', async function (button) {
