@@ -140,7 +140,7 @@ module.exports = {
 
                             embed.addField(`Most correct answers: \*${correctCount}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)
 
-                            message.channel.send({ embed: embed })
+                            message.channel.send({ embeds: [embed] })
                             message.delete()
 
                             listOfUsers = []

@@ -104,7 +104,7 @@ module.exports = {
                 '🇹']
 
             //messages the poll and then reacts to it with the reactions[]
-            const msg = message.channel.send({ embed: embed })
+            const msg = message.channel.send({ embeds: [embed] })
                 .then(function (message) {
                     for (let l = 0; l < j; l++) {
                         message.react(reactions[l])

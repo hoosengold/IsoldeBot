@@ -88,7 +88,7 @@ module.exports = {
                     value: 'Returns a guide how to report a bug.',
                     inline: true
                 },
-                
+
             ],
             //thumbnail: {
             //url: '',
@@ -99,9 +99,9 @@ module.exports = {
             }
         }
 
-        message.channel.send({ embed: helpEmbed, files: [profilePic] })
+        message.channel.send({ embeds: [helpEmbed], files: [profilePic] })
         //delete the call message
         message.delete()
-        .catch(err => console.error(err))
+            .catch(err => console.error(err))
     }
 }

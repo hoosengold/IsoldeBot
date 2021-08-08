@@ -74,9 +74,9 @@ module.exports = {
             timestamp: new Date()
         }
 
-        message.channel.send({ embed: embed })
+        message.channel.send({ embeds: [embed] })
         //delete the call message
         message.delete()
-        .catch(err => console.error(err))
+            .catch(err => console.error(err))
     }
 }

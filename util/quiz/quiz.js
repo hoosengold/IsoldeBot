@@ -108,7 +108,7 @@ module.exports = {
                 }
 
                 await db.query('insert into quiz(counter, question, options) values ($1, $2, $3)', [quizCounter, quizArray[0], quizOptions])
-                await message.channel.send({ embed: embed, buttons: row })
+                await message.channel.send({ embeds: [embed], buttons: row })
 
             } finally {
                 console.log("Quiz executed succesfully.")
