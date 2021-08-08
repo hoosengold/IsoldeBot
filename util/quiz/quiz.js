@@ -6,7 +6,6 @@ module.exports = {
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     execute(message, args) {
         const Discord = require('discord.js');
-        const buttons = require('discord-buttons');
         const emojiArray = require('../poll/pollutil/emojiArray');
         const db = require('../../connections/database')
 

@@ -3,7 +3,6 @@ module.exports = {
     description: 'Event handler for the quiz',
     execute(button) {
         const Discord = require('discord.js');
-        const disbut = require('discord-buttons');
         const db = require('../../../connections/database');
         const crypto = require('crypto');
         require('dotenv').config()
