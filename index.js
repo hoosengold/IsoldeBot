@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
-const myIntents = new Discord.Intents(261926415446)
-myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES)
+const myIntents = new Discord.Intents(1327)
+//myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
 
 const client = new Discord.Client({ //initialize client for the bot;
     presence: {
@@ -17,9 +17,6 @@ const client = new Discord.Client({ //initialize client for the bot;
 const prefix = "*", //prefix for all commands
     automod = require('./moderation/automod.js'),
     fs = require('fs');
-
-const disbut = require("discord-buttons");
-disbut(client);
 
 const events = require('./util/quiz/events/event')
 
@@ -241,24 +238,24 @@ const index = {
         return listOfUsers;
     },
 
-/**
- * 
- * Fetches a member from a guild with a known ID.
- * 
- * @function getMember
- * @param {*} id The ID of the member that needs to be fetched
- * @returns {undefined | Discord.member} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
- * 
- */
+    /**
+     * 
+     * Fetches a member from a guild with a known ID.
+     * 
+     * @function getMember
+     * @param {*} id The ID of the member that needs to be fetched
+     * @returns {undefined | Discord.member} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
+     * 
+     */
 
-    getMember(id){
+    getMember(id) {
         //initialize guild
         const guild = client.guilds.cache.get(process.env.guild_id) // deploy
 
         //initialize member
         const member = guild.members.cache.get(id) //convert User to GuildMember
 
-        if(!member) { 
+        if (!member) {
             console.log(`Couldn't find a member in this guild with this ID.`)
             return undefined
         }
