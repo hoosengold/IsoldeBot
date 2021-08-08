@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js')
 
-const myIntents = new Discord.Intents(1327)
-//myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
+//const myIntents = new Discord.Intents(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
+//1327 myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
 
-const client = new Discord.Client({ //initialize client for the bot;
+const client = new Client({ //initialize client for the bot;
     presence: {
         status: 'online',
         activity: {
@@ -11,7 +11,10 @@ const client = new Discord.Client({ //initialize client for the bot;
             type: 'PLAYING'
         }
     },
-    intents: myIntents
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES
+    ]
 });
 
 const prefix = "*", //prefix for all commands
@@ -20,8 +23,8 @@ const prefix = "*", //prefix for all commands
 
 const events = require('./util/quiz/events/event')
 
-client.commands = new Discord.Collection(); //make new collection for the commands
-client.cooldowns = new Discord.Collection(); //make new collection for the cooldowns
+client.commands = new Collection(); //make new collection for the commands
+client.cooldowns = new Collection(); //make new collection for the cooldowns
 
 const commandFolders = fs.readdirSync('./util') //find the command files
 
@@ -34,13 +37,9 @@ for (const folder of commandFolders) {
     }
 }
 
-
 //Login with the bot
 require('dotenv').config();
 client.login(process.env.DISCORD_TOKEN);
-
-//initialize interactions
-//initializeInteractions()
 
 //Print Ready in the console when the bot is ready
 client.once("ready", () => {
@@ -56,10 +55,10 @@ client.on("guildMemberAdd", (member) => {
     channel.send(`Welcome to the Stream Fam, ${member.toString()}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
 })
 
-client.on('clickButton', async function (button) {
+/*client.on('clickButton', async function (button) {
     console.log(`clickButton event triggered`)
     events.execute(button)
-})
+})*/
 
 
 const db = require('./connections/database')
@@ -72,108 +71,112 @@ pool.on('error', (err, client) => {
 })
 
 //listen for messages, main function of the bot
-client.on('message', async function (message) {
-    try {
-        //checks if the author of the message is a bot, if it is, then it does not respond
-        if (message.author.bot) return;
-
-        //initialize regex to detect url's
-        const urlRegexMain = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?/gmi); //Subst: /^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi
-        const urlRegexAlphanumeric = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?/gmi);
-        const urlRegexIPv4 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))/img);
-        const urlRegexIPv6 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{4}:){1,7}[\da-fA-F]{4})/gmi); //Subst: /(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})/
-
-        //ban discord invite links
-        const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
-
-        //check for discord invite links
-        if (message.content.match(inviteRegex)) {
-            if (roles.isAdmin()) {
-                console.log(`Invite link not deleted: posted by admin`)
-                return;
-            } else {
-                await message.delete()
-                console.log(`Discord invite link deleted`)
-                await message.reply(`**No Discord Invite links allowed!**`)
-                return;
-            }
-        }
-        //check for shortened links
-        else if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
-            await message.delete()
-            console.log(`Shortened link deleted.`)
-            await message.reply(`**No shortened links allowed!**`)
-        }
-        //check for non discord invite links and not hidden links
-        else if (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)) {
-            //url = message.content.match()
-            console.log(message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6))
-            //initialize a variable to store the possible url and remove all blank spaces
-            const url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
-            console.log(`url: ${url}`)
-            await automod(url)
-            console.log(`URL detected! Redirecting for automod...`)
-        }
-
-        //check for youtube links
-        if (message.content.includes('youtube.com/' || 'youtu.be/') && !message.content.startsWith(prefix)) {
-            await message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
-        }
-
-        if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
-
+client.on('messageCreate', (message) => {
+    ; async () => {
         try {
-            //takes the message body, removes the prefix *, splits the message body and makes everything lower case
-            const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word after the command
-                commandName = args.shift().toLowerCase(); //returns the command
 
-            console.log(`command: ${commandName}`)
-            console.log(`args: ${args}`)
+            console.log(`messageCreate event reached.`)
+            //checks if the author of the message is a bot, if it is, then it does not respond
+            if (message.author.bot) return;
 
-            const command = await client.commands.get(commandName)
-                || await client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+            //initialize regex to detect url's
+            const urlRegexMain = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?/gmi); //Subst: /^(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/gmi
+            const urlRegexAlphanumeric = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?([\w\d\-]+\.)+\w{2,}(\/.+)?/gmi);
+            const urlRegexIPv4 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))/img);
+            const urlRegexIPv6 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{4}:){1,7}[\da-fA-F]{4})/gmi); //Subst: /(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})/
 
-            if (!command) return; //check is the command exists
+            //ban discord invite links
+            const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
-            //cooldown for the specific command for the specific user
-            const { cooldowns } = client
-
-            //check if the cooldown collection already has a cooldown for the command
-            if (!cooldowns.has(command.name)) {
-                await cooldowns.set(command.name, new Discord.Collection())
+            //check for discord invite links
+            if (message.content.match(inviteRegex)) {
+                if (roles.isAdmin()) {
+                    console.log(`Invite link not deleted: posted by admin`)
+                    return;
+                } else {
+                    await message.delete()
+                    console.log(`Discord invite link deleted`)
+                    await message.reply(`**No Discord Invite links allowed!**`)
+                    return;
+                }
+            }
+            //check for shortened links
+            else if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
+                await message.delete()
+                console.log(`Shortened link deleted.`)
+                await message.reply(`**No shortened links allowed!**`)
+            }
+            //check for non discord invite links and not hidden links
+            else if (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)) {
+                //url = message.content.match()
+                console.log(message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6))
+                //initialize a variable to store the possible url and remove all blank spaces
+                const url = (message.content.match(urlRegexMain) || message.content.match(urlRegexAlphanumeric) || message.content.match(urlRegexIPv4) || message.content.match(urlRegexIPv6)).toString().replace(/\s/g, '')
+                console.log(`url: ${url}`)
+                await automod(url)
+                console.log(`URL detected! Redirecting for automod...`)
             }
 
-            const now = Date.now(),
-                timestamps = await cooldowns.get(command.name),
-                cooldownAmount = (command.cooldown || 5) * 1000;
+            //check for youtube links
+            if (message.content.includes('youtube.com/' || 'youtu.be/') && !message.content.startsWith(prefix)) {
+                await message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
+            }
 
-            //execute the command
+            if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
+
             try {
-                //get the timestamp and calculate the remaining time if the user already used the command in this session
-                if (timestamps.has(message.author.id)) {
-                    const expirationDate = await timestamps.get(message.author.id) + cooldownAmount;
-                    if (now < expirationDate) { //checks if there is still cooldown
-                        const timeLeft = (expirationDate - now) / 1000
-                        return await message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
-                    }
+                //takes the message body, removes the prefix *, splits the message body and makes everything lower case
+                const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word after the command
+                    commandName = args.shift().toLowerCase(); //returns the command
+
+                console.log(`command: ${commandName}`)
+                console.log(`args: ${args}`)
+
+                const command = await client.commands.get(commandName)
+                    || await client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+                if (!command) return; //check is the command exists
+
+                //cooldown for the specific command for the specific user
+                const { cooldowns } = client
+
+                //check if the cooldown collection already has a cooldown for the command
+                if (!cooldowns.has(command.name)) {
+                    await cooldowns.set(command.name, new Collection())
                 }
-                //clear the entry on the collection after the cooldown
-                await timestamps.set(message.author.id, now)
-                setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+
+                const now = Date.now(),
+                    timestamps = await cooldowns.get(command.name),
+                    cooldownAmount = (command.cooldown || 5) * 1000;
+
                 //execute the command
-                await command.execute(message, args)
+                try {
+                    //get the timestamp and calculate the remaining time if the user already used the command in this session
+                    if (timestamps.has(message.author.id)) {
+                        const expirationDate = await timestamps.get(message.author.id) + cooldownAmount;
+                        if (now < expirationDate) { //checks if there is still cooldown
+                            const timeLeft = (expirationDate - now) / 1000
+                            return await message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
+                        }
+                    }
+                    //clear the entry on the collection after the cooldown
+                    await timestamps.set(message.author.id, now)
+                    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
+                    //execute the command
+                    await command.execute(message, args)
+                } catch (error) {
+                    console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
+                    console.error(error)
+                    await message.reply(`Something went wrong while trying to execute the command!`)
+                }
             } catch (error) {
-                console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
+                console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)
                 console.error(error)
-                await message.reply(`Something went wrong while trying to execute the command!`)
             }
         } catch (error) {
-            console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)
+            console.log(`PROBLEM WHILE CHECKING URL`)
             console.error(error)
         }
-    } catch (error) {
-        console.log(`PROBLEM WHILE CHECKING URL`)
-        console.error(error)
     }
 });
 
