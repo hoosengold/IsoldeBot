@@ -1,4 +1,3 @@
-const { getUser } = require('../../index');
 
 const evalMapResults = new Map();
 
