@@ -21,7 +21,7 @@ module.exports = {
 
                     if (index.isAdmin()) {
                         if (args.length === 0) {//if args[] is empty, fetch all users
-                            let listOfUsers = index.guild()
+                            let listOfUsers = index.fetchMembers()
                             const evalMap = new Map();
 
                             for (let i = 0; i < listOfUsers.length; i++) {
