@@ -185,6 +185,7 @@ client.on('messageCreate', async function (message) {
  * @property {function} guild Fetches the ID's of all members in a guild.
  * @property {function} getMember Fetches a member from a guild with a known ID.
  * @property {function} member Returns a GuildMember.
+ * @property {function} guild Retunrs a Guild.
  * 
  */
 
@@ -275,6 +276,21 @@ const index = {
 
         return member
     },
+
+    /**
+     * 
+     * Retunrs a Guild
+     * 
+     * @function guild
+     * @returns {Guild} Guild
+     * 
+     */
+
+    guild(){
+        const guild = client.guilds.cache.get(process.env.guild_id)
+
+        return guild
+    }
 }
 
 module.exports = index
