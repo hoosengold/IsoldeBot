@@ -185,7 +185,7 @@ client.on('messageCreate', async function (message) {
  * @property {function} guild Fetches the ID's of all members in a guild.
  * @property {function} getMember Fetches a member from a guild with a known ID.
  * @property {function} member Returns a GuildMember.
- * @property {function} guild Retunrs a Guild.
+ * @property {function} guild Returns a Guild.
  * 
  */
 
@@ -218,13 +218,9 @@ const index = {
      * 
      */
     fetchMembers() {
-
         //initialize guild
-        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-
-        //initialize member
-        const member = guild.member(client.user) //convert User to GuildMember
-
+        const guild = index.guild()
+        
         let totalUsers = 0;
         let listOfUsers = [];
         guild.members.cache.forEach(member => {
@@ -268,11 +264,9 @@ const index = {
      */
 
     member(){
-        //initialize guild
-        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-
-        //initialize member
-        const member = guild.members.cache.get(id) //convert User to GuildMember
+        
+        const guild = index.guild()
+        const member = guild.members.cache.get(client.user) //convert User to GuildMember
 
         return member
     },
@@ -287,6 +281,7 @@ const index = {
      */
 
     guild(){
+
         const guild = client.guilds.cache.get(process.env.guild_id)
 
         return guild
