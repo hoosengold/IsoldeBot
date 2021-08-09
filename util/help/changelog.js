@@ -15,25 +15,17 @@ module.exports = {
             description: '\u200b',
             //thumbnail: 'attachment://',
             fields: [
-                /*{
-                    name: '**1.** *Cleaner chats!* :purple_heart: ',
-                    value: 'From now on all messages, that call a command, will be deleted in order to keep the chats clean. :grin: \n This does not affect the following commands: \`*addMusic\`, \`*countdown\` and \`*poll\`.'
-                },
                 {
-                    name: '\u200b',
-                    value: '\u200b'
-                },*/
-                {
-                    name: '**1.** *Quizzes are here!* :question: ',
-                    value: ``
+                    name: '**1.** Quizzes are here! :question: ',
+                    value: `dada`
                 },
                 {
                     name: '\u200b',
                     value: '\u200b'
                 },
                 {
-                    name: '**2.** ',
-                    value: ``
+                    name: '**2.** Removed all music related commands.',
+                    value: `The Friend does not support the \`*addMusic\` and \`*getMusic\` commands. Instead you can use the neat \*Rythm\* bot! :grin:`
                 },
                 {
                     name: '\u200b',
@@ -53,13 +45,16 @@ module.exports = {
                 },
             ],
             footer: {
-                text: ``,
+                text: `dada`,
             },
             timestamp: new Date(),
         }
         message.channel.send({ embeds: [embed] })
         //delete the call message
-        message.delete()
+        setTimeout(() => {
+            message.delete()
             .catch(err => console.error(err))
+        }, 5000);
+        
     }
 }
