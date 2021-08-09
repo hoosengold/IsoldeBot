@@ -1,8 +1,6 @@
 const Discord = require('discord.js'),
     countdownTimer = require('../countdown/countdownTimer.js'),
     poll = require('../poll/poll.js'),
-    musicGet = require('../music/musicGet.js'),
-    musicAdd = require('../music/musicAdd.js'),
     welcome = require('../wholesome/welcome.js'),
     help = require('./help.js'),
     lore = require('./lore.js'),
@@ -30,14 +28,6 @@ module.exports = {
                 {
                     name: '\`*poll\`',
                     value: `Aliases: ${poll.aliases}`,
-                },
-                {
-                    name: '\`*getMusic\`',
-                    value: `Aliases: ${musicGet.aliases}`,
-                },
-                {
-                    name: '\`*addMusic\`',
-                    value: `Aliases: ${musicAdd.aliases}`,
                 },
                 {
                     name: '\`*help\`',

@@ -24,16 +24,16 @@ module.exports = {
                     value: '\u200b'
                 },*/
                 {
-                    name: '**1.** *Making polls is easier than ever!* :bar_chart: ',
-                    value: 'The \`*poll\` command has a new and easier syntax! There is no more need to type parentheses around the question and the options anymore :grin:. Just write your question adn type **\`?\`**. And that\'s all! It\'s the same for the option - type one option, end it with **\`!\`** and start with the next one! Type \`*help\` for more info and for an example. :purple_heart:'
+                    name: '**1.** *Quizzes are here!* :question: ',
+                    value: ``
                 },
                 {
                     name: '\u200b',
                     value: '\u200b'
                 },
                 {
-                    name: '**2.** *Make The Friend say everything! :sunglasses:*',
-                    value: 'BEHOLD the most __**useful**__ command of all time - \`*say\`. With it you can make The Friend say **everything** *. \n\n * *Terms and conditions apply. We, The Friend Inc. and its creator(s), are not responsible for your actions. Everything, that The Friend says, is completely wrong and we do not support it, unless it praises The Friend and his magnificence, majesty and superiority among other bots since that is a **fact** and facts cannot be wrong.*'
+                    name: '**2.** ',
+                    value: ``
                 },
                 {
                     name: '\u200b',
@@ -53,7 +53,7 @@ module.exports = {
                 },
             ],
             footer: {
-                text: 'Last Update: 25. June 2021',
+                text: ``,
             },
             timestamp: new Date(),
         }
