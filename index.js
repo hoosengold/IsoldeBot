@@ -218,7 +218,7 @@ const index = {
      * @returns {string[]} listOfUsers
      * 
      */
-    guild() {
+    fetchMembers() {
 
         //initialize guild
         const guild = client.guilds.cache.get(process.env.guild_id) // deploy
