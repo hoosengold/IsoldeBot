@@ -1,4 +1,4 @@
-const { Client, Intents, Collection, Permissions, Options } = require('discord.js')
+const { Client, Intents, Collection, Permissions, Options, GuildMember } = require('discord.js')
 
 //const myIntents = new Discord.Intents(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
 //1327 myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
@@ -183,7 +183,8 @@ client.on('messageCreate', async function (message) {
  * @module index
  * @property {function} isAdmin Checks if a member is an admin.
  * @property {function} guild Fetches the ID's of all members in a guild.
- * @property {function} getMember Fetches a member from a guild with a known ID. 
+ * @property {function} getMember Fetches a member from a guild with a known ID.
+ * @property {function} member Returns a GuildMember.
  * 
  */
 
@@ -197,11 +198,8 @@ const index = {
      * 
      */
     isAdmin() {
-        //initialize guild
-        const guild = client.guilds.cache.get(process.env.guild_id)
-
         //initialize member
-        const member = guild.members.cache.get(client.user) //convert User to GuildMember
+        const member = index.member()
 
         if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
             return true;
@@ -248,11 +246,8 @@ const index = {
      */
 
     getMember(id) {
-        //initialize guild
-        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
-
         //initialize member
-        const member = guild.members.cache.get(id) //convert User to GuildMember
+        const member = index.member()
 
         if (!member) {
             console.log(`Couldn't find a member in this guild with this ID.`)
@@ -260,7 +255,26 @@ const index = {
         }
 
         return member
-    }
+    },
+
+    /**
+     * 
+     * Get a GuildMember.
+     * 
+     * @function member
+     * @returns {GuildMember} GuildMember
+     * 
+     */
+
+    member(){
+        //initialize guild
+        const guild = client.guilds.cache.get(process.env.guild_id) // deploy
+
+        //initialize member
+        const member = guild.members.cache.get(id) //convert User to GuildMember
+
+        return member
+    },
 }
 
 module.exports = index
