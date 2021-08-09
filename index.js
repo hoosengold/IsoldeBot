@@ -1,7 +1,18 @@
-const { Client, Intents, Collection, Permissions, Options, GuildMember } = require('discord.js')
+const { Client, Intents, Collection, Permissions, Options, GuildMember, Guild } = require('discord.js')
 
-//const myIntents = new Discord.Intents(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
-//1327 myIntents.add(Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_PRESENCES, Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_BANS, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_WEBHOOKS, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS)
+/*
+Possible Intents:
+
+Intents.FLAGS.GUILD_MEMBERS
+Intents.FLAGS.GUILD_PRESENCES 
+Intents.FLAGS.GUILDS
+Intents.FLAGS.GUILD_BANS 
+Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS
+Intents.FLAGS.GUILD_WEBHOOKS
+Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+
+Bitfield (all Intents): 1327
+*/
 
 const client = new Client({ //initialize client for the bot;
     presence: {
@@ -82,7 +93,7 @@ client.on('messageCreate', async function (message) {
         const urlRegexIPv4 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2}))\.){3}(((25[0-5])|(2[0-4]\d)|(1\d{2})|(\d{1,2})))/img);
         const urlRegexIPv6 = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{4}:){1,7}[\da-fA-F]{4})/gmi); //Subst: /(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(([\da-fA-F]{0,4}:){1,7}[\da-fA-F]{0,4})/
 
-        //ban discord invite links
+        //regex for discord invite links
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
         //check for discord invite links
@@ -181,7 +192,7 @@ client.on('messageCreate', async function (message) {
  * Additional methods that need the discord client.
  * 
  * @module index
- * @property {function} isAdmin Checks if a member is an admin.
+ * @property {function} `isAdmin` Checks if a member is an admin.
  * @property {function} guild Fetches the ID's of all members in a guild.
  * @property {function} getMember Fetches a member from a guild with a known ID.
  * @property {function} member Returns a GuildMember.
@@ -220,7 +231,7 @@ const index = {
     fetchMembers() {
         //initialize guild
         const guild = index.guild()
-        
+
         let totalUsers = 0;
         let listOfUsers = [];
         guild.members.cache.forEach(member => {
@@ -238,7 +249,7 @@ const index = {
      * 
      * @function getMember
      * @param {*} id The ID of the member that needs to be fetched
-     * @returns {undefined | Discord.member} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
+     * @returns {undefined | GuildMember} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
      * 
      */
 
@@ -251,7 +262,7 @@ const index = {
             return undefined
         }
 
-        return member
+        return member;
     },
 
     /**
@@ -263,12 +274,12 @@ const index = {
      * 
      */
 
-    member(){
-        
+    member() {
+
         const guild = index.guild()
         const member = guild.members.cache.get(client.user) //convert User to GuildMember
 
-        return member
+        return member;
     },
 
     /**
@@ -280,11 +291,11 @@ const index = {
      * 
      */
 
-    guild(){
+    guild() {
 
         const guild = client.guilds.cache.get(process.env.guild_id)
 
-        return guild
+        return guild;
     }
 }
 
