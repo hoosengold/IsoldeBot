@@ -248,13 +248,13 @@ const index = {
      * 
      * Fetches a member from a guild with a known ID.
      * 
-     * @function getMember
+     * @function member
      * @param {*} id The ID of the member that needs to be fetched
      * @returns {undefined | GuildMember} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
      * 
      */
 
-    getMember(id) {
+    member(id) {
 
         const guild = index.guild()
 
@@ -264,31 +264,12 @@ const index = {
             console.log(`Couldn't find a member in this guild with this ID.`)
             return undefined
         }
-
-        return member;
+        return member
     },
 
     /**
      * 
-     * Get a GuildMember.
-     * 
-     * @function member
-     * @returns {GuildMember} GuildMember
-     * 
-     */
-
-    member(id) {
-
-        const guild = index.guild()
-        if (guild.members.cache.has(id)) {
-            const member = guild.members.cache.get(id) //convert User to GuildMember
-            return member
-        } else { return }
-    },
-
-    /**
-     * 
-     * Retunrs a Guild
+     * Returns the Guild
      * 
      * @function guild
      * @returns {Guild} Guild
