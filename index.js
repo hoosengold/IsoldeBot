@@ -97,9 +97,12 @@ client.on('messageCreate', async function (message) {
         //regex for discord invite links
         const inviteRegex = new RegExp(/(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gmi)
 
+        //get the ID of the member, that sent the message
+        const memberId = message.member.id
+
         //check for discord invite links
         if (message.content.match(inviteRegex)) {
-            if (index.isAdmin()) {
+            if (index.isAdmin(memberId)) {
                 console.log(`Invite link not deleted: posted by admin`)
                 return;
             } else {
@@ -207,12 +210,13 @@ const index = {
      * Checks if a member is an admin. 
      * 
      * @function isAdmin
+     * @param {*} id The ID of the member, that sent the message; needed to be parsed to member().
      * @returns {boolean} `true` if the member is an admin.
      * 
      */
-    isAdmin() {
+    isAdmin(id) {
         //initialize member
-        const member = index.member()
+        const member = index.member(id)
 
         if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
             return true;
