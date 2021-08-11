@@ -24,7 +24,8 @@ const client = new Client({ //initialize client for the bot;
     },
     intents: [
         Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MEMBERS
     ]
 });
 
@@ -254,8 +255,10 @@ const index = {
      */
 
     getMember(id) {
-        //initialize member
-        const member = index.member()
+
+        const guild = index.guild()
+
+        const member = guild.members.cache.get(id)
 
         if (!member) {
             console.log(`Couldn't find a member in this guild with this ID.`)
@@ -274,12 +277,13 @@ const index = {
      * 
      */
 
-    member() {
+    member(id) {
 
         const guild = index.guild()
-        const member = guild.members.cache.get(client.user) //convert User to GuildMember
-
-        return member;
+        if (guild.members.cache.has(id)) {
+            const member = guild.members.cache.get(id) //convert User to GuildMember
+            return member
+        } else { return }
     },
 
     /**
