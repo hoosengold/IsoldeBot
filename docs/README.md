@@ -4,14 +4,14 @@ IsoldeBot
 <br>
 </h1>
 <h4 align="center">
-Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
+Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 </h3>
 
 <p>
 <h5>Table of Contents:</h5>
 <ol>
 <li> <a href="#overview">Overview</a> </li>
-<li> <a href="#features">Features</a> </li>
+<li> <a href="#commands">Commands</a> </li>
 <li> <a href="#how-to-use-the-bot">How To Use The Bot</a> </li>
 <li> <a href="#roadmap">Roadmap</a> </li>
 <li> <a href="#credits">Credits</a> </li>
@@ -21,17 +21,61 @@ Polls, Countdowns, Welcome Greetings, Integration with PostgreSQL
 # Overview
 IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
-# Features
-<em>IsoldeBot</em> has the following features:
-<ol>
-<li><code>*poll</code> command for creating polls with <strong>up to 20 options.</strong> Then the bot reacts automatically to the embeded message. The users can then use the reactions to vote.</li>
-<li><code>*countdown</code> command. For now, only hours can be added, but there is no upper limit (as far as the testing concludes). Every embeded message has a timestamp. It can be used as a reference together with the <code>*countdown</code> command.</li>
-<li><em>Tight integration with PostgreSQL databases.</em> New tables can be added without any hassle.</li>
-<li>Greeting Messages for new guild members.</li>
-<li>Command handling with <strong>Collections</strong> - no <code>if-else</code> or <code>switch-case</code> blocks! That way the performance of the bot is a lot better and messages sent by it are almost instant (depending on the quality of the internet connection).</li>
-<li><em>Aliases</em> for all commands means that the users don't have to memorise the specific command names - they can use the names that they find the best.</li>
-<li><em>Adding new commands</em> is extremely easy.</li>
-</ol>
+# Commands
+<em>IsoldeBot</em> has the following commands:
+
+| **Command** | **Description** | **Syntax** |**Notes** |
+|-------------|-----------------|------------|---------------|
+| `command` | description | `syntax` | `notes` |
+
+<table>
+    <thead>
+        <tr>
+            <th>Commands</th>
+            <th>Description</th>
+            <th>Syntax</th>
+            <th>Parameters</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>poll</td>
+            <td>Makes a poll with reactions.</td>
+            <td>*poll question? option1! option2! ... option20!</td>
+            <td>
+                <ul>
+                    <li>Questions/options can be fairly long, still have to stay below ca. 80 characters;</li>
+                    <li>Max. 20 options;</li>
+                    <li>Everyone can post polls.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table> 
 
 # How To Use The Bot
 <br>
@@ -40,20 +84,16 @@ IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for s
 <li>Node.js</li>
 <li>Code editor</li>
 <li>Git</li>
-<li>All dependency packages used in the project (all can be installed through <code>npm</code>):</li>
+<li>All dependency packages used in the project:</li>
 <ul>
 <li>discord.js</li>
 <li>dotenv</li>
-<li>fs</li>
 <li>pg</li>
 
 
-<em>The following packages will be used in future releases:</em>
+<em>The following packages DO NOT affect the functionality of IsoldeBot:</em>
 
-<li>slash-commands</li>
-<li>discord-interactions</li>
-<li>tweetnacl</li>
-<li>axios</li>
+<li></li>
 </ul>
 </ol>
 <h4>Setup:</h4>
@@ -67,12 +107,11 @@ IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for s
 <li>Install the dependency packages. </a></li>
 <ul>
 <li><em>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</em></li>
+<li>You can use <code>npm list</code> to list all installed dependencies. If a dependency did not get installed by running <code>npm install</code>, you can use <code>npm install &ltmodule_name&gt. </code></li>
 </ul>
 <li>Make a <code> .env </code>file in the root folder for all environment variables like the Discord bot token. </li>
 <ul>
-<li><em>Note: Additionally a <code>config.json</code> file can be created in order to save the environment variables for a testing bot. That way you don't have to change the variables when you want to test the bot. Just don't forget to comment the lines, that you don't need, before deploying the bot.</em></li>
-</ul>
-<li>Put the environment variables in the <code>.env/cofig.json</code> file. You can use the following template:</li>
+<li>Put the environment variables in the <code>.env</code> file. You can use the following template:</li>
 
 ```
 DISCORD_TOKEN= //login token of the bot
@@ -124,8 +163,8 @@ module.exports = {
 IsoldeBot has been built with the help of:
 
 <ul>
-    <li><a href="https://discordjs.guide/">Discord.js Guide</a> for the Command Handler</li>
-    <li><a href="https://stackoverflow.com/questions/8667070/javascript-regular-expression-to-validate-url">URL Regex</a></li>
+    <li><a href="https://discordjs.guide/">Discord.js Guide</a>;</li>
+    <li><a href="https://stackoverflow.com/questions/8667070/javascript-regular-expression-to-validate-url">URL Regex</a>;</li>
     <li>Used Docs:</li>
     <ul>
         <li><a href="https://developer.mozilla.org/en-US/docs/Web/javascript">JavaScript MDN Web Docs</a></li>
