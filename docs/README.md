@@ -57,7 +57,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
                     <li>Sends a message when 1 hour/30 minutes are left and when the timer hits 0.</li>
                 </ul>
             </td>
-            <td><code>everyone</code></td>
+            <td><code>moderators</code></td>
         </tr>
         <tr>
             <td><code>say</code></td>
@@ -137,11 +137,10 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td>
                 <ul>
                     <li>Max. 5 options;</li>
-                    <li>The question and the options can consist of more than 1 word;</li>
-                    <li>Everyone can post quizzes.</li>
+                    <li>The question and the options can consist of more than 1 word.</li>
                 </ul>
             </td>
-            <td><code>everyone</code></td>
+            <td><code>moderators</code></td>
         </tr>
         <tr>
             <td><code>hug</code></td>

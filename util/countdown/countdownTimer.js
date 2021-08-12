@@ -6,6 +6,16 @@ module.exports = {
   args: true,
   execute(message, args) {
     const Discord = require("discord.js");
+    const index = require('../../index')
+
+    //check for mods
+    if(!index.isAdmin(message.author.id)){
+      setTimeout(() => {
+        message.delete()
+      }, 1500);
+      return message.reply({content: `You don't have the right permsissions to use this command.`, allowedMentions: { repliedUser: true }})
+    }
+    
     //check for args
     if (args[0] == null) {
       return message.reply('Please specify hours for the countdown.')

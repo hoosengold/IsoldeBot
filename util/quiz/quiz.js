@@ -8,6 +8,15 @@ module.exports = {
         const Discord = require('discord.js');
         const emojiArray = require('../poll/pollutil/emojiArray');
         const db = require('../../connections/database')
+        const index = require('../../index')
+
+        //check for mods
+        if (!index.isAdmin(message.author.id)) {
+            setTimeout(() => {
+                message.delete()
+            }, 1500);
+            return message.reply({ content: `You don't have the right permsissions to use this command.`, allowedMentions: { repliedUser: true } })
+        }
 
         const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*\d*(\ )*)*\?/gm),
             optionsRegEx = new RegExp(/(?:((?:(\ ))*[a-zA-Z]*(?:(\ ))*\d*(\ )*))*\!/i);
