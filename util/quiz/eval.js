@@ -19,7 +19,7 @@ module.exports = {
             ; (async () => {
                 try {
 
-                    if (index.isAdmin()) {
+                    if (index.isAdmin(message.member.id)) {
                         if (args.length === 0) {//if args[] is empty, fetch all users
                             let listOfUsers = index.fetchMembers()
                             const evalMap = new Map();
@@ -93,7 +93,7 @@ module.exports = {
 
                             //add field for every participant
                             for (const entries of evalMapResults) {
-                                const member = index.getMember(entries[0])
+                                const member = index.member(entries[0])
                                 embed.addField(member.user.username, `Correct answers: ${entries[1]}`)
                             }
 
@@ -106,14 +106,14 @@ module.exports = {
                                 var currentEntryId = entries[0]
                                 var currentEntryCount = entries[1]
                                 if (mostCorrectAnswers.length == 0) {
-                                    const member = index.getMember(entries[0])
+                                    const member = index.member(entries[0])
                                     mostCorrectAnswers.push(member.user.username, currentEntryCount)
                                 } else if (currentEntryCount > lastEntryCount) {
-                                    const member = index.getMember(currentEntryId)
+                                    const member = index.member(currentEntryId)
                                     mostCorrectAnswers = []
                                     mostCorrectAnswers.push(member.user.username, currentEntryCount)
                                 } else if (currentEntryCount = lastEntryCount) {
-                                    const member = index.getMember(currentEntryId)
+                                    const member = index.member(currentEntryId)
                                     mostCorrectAnswers.push(member.user.username)
                                 }
 
@@ -146,7 +146,7 @@ module.exports = {
                             evalMap.clear()
                             evalMapResults.clear()
 
-                        } else { //if users is tagged, fetch only their results
+                        } else { //if user is tagged, fetch only their result
                             return;
                         }
 
