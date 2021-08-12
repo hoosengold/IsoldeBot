@@ -36,14 +36,6 @@ module.exports = {
                     value: '\u200b'
                 },
                 {
-                    name: '** \*addMusic \`youtube_link\`**',
-                    value: 'Example: \`\*addMusic https://www.youtube.com/...\` \n Also: \u2003 \`\*addMusic www.youtube.com/...\` \n Adds the song suggestion to a pool with other songs. \n *Note:* Only YouTube links are allowed.'
-                },
-                {
-                    name: '\u200b',
-                    value: '\u200b'
-                },
-                {
                     name: '** \*hug**',
                     value: 'Example: \`\*hug @someone\` \n Returns a hug. \n *Note:* The command can be used with or without tagging someone. More than 1 person can be tagged. It returns a different message for 0 tagged and 1 or more tagged.'
                 },
@@ -59,11 +51,7 @@ module.exports = {
                     name: '\u200b',
                     value: '\u200b'
                 },
-                {
-                    name: '** \*getMusic**',
-                    value: 'Returns a random song from the already suggested songs.',
-                    inline: true
-                },
+
                 {
                     name: '** \*updates** ',
                     value: 'Returns a list with the most recent changes to the bot.',
@@ -75,13 +63,13 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: '\u200b',
-                    value: '\u200b'
-                },
-                {
                     name: '** \*commands**',
                     value: 'Returns a list with commands and their aliases.',
                     inline: true
+                },
+                {
+                    name: '\u200b',
+                    value: '\u200b'
                 },
                 {
                     name: '** \*bug**',
@@ -95,7 +83,7 @@ module.exports = {
             //},
             timestamp: new Date(),
             footer: {
-                text: 'Last Update: 25. June 2021'
+                text: ''
             }
         }
 
