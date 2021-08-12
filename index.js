@@ -197,9 +197,8 @@ client.on('messageCreate', async function (message) {
  * 
  * @module index
  * @property {function} `isAdmin` Checks if a member is an admin.
- * @property {function} guild Fetches the ID's of all members in a guild.
- * @property {function} getMember Fetches a member from a guild with a known ID.
- * @property {function} member Returns a GuildMember.
+ * @property {function} fetchMembers Fetches the ID's of all members in a guild.
+ * @property {function} member Returns a GuildMember, that sent the message.
  * @property {function} guild Returns a Guild.
  * 
  */
@@ -228,7 +227,7 @@ const index = {
      * 
      * Fetches the ID's of all members in a guild.
      * 
-     * @function guild
+     * @function fetchMembers
      * @property {string[]} listOfUsers String array with the user ID's.
      * @returns {string[]} listOfUsers
      * 
