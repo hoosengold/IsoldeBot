@@ -19,14 +19,10 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 </p>
 
 # Overview
-IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
+<em>IsoldeBot</em> is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Commands
 <em>IsoldeBot</em> has the following commands:
-
-| **Command** | **Description** | **Syntax** |**Notes** |
-|-------------|-----------------|------------|---------------|
-| `command` | description | `syntax` | `notes` |
 
 <table>
     <thead>
@@ -34,14 +30,14 @@ IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for s
             <th>Commands</th>
             <th>Description</th>
             <th>Syntax</th>
-            <th>Parameters</th>
+            <th>Notes</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>poll</td>
+            <td><code>poll</code></td>
             <td>Makes a poll with reactions.</td>
-            <td>*poll question? option1! option2! ... option20!</td>
+            <td><code>*poll &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption20&gt!</code></td>
             <td>
                 <ul>
                     <li>Questions/options can be fairly long, still have to stay below ca. 80 characters;</li>
@@ -51,28 +47,103 @@ IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for s
             </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><code>countdown</code></td>
+            <td>Creates a countdown for a specific amount of hours.</td>
+            <td><code>*countdown &lthours&gt</code></td>
+            <td>
+                <ul>
+                    <li>No upper limit;</li>
+                    <li>Sends a message when 1 hour/30 minutes are left and when the timer hits 0.</li>
+                </ul>
+            </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><code>say</code></td>
+            <td>Makes the bot say something.</td>
+            <td><code>*say &ltthings_to_say&gt</code></td>
+            <td>
+                <ul>
+                    <li>The parameter can be up to <em>1024</em> characters.</li>
+                </ul>
+            </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><code>aliases</code></td>
+            <td>Returns a lsit with the names of all commands and their aliases.</td>
+            <td><code>*aliases</code></td>
+            <td>
+            </td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><code>updates</code></td>
+            <td>Returns an embed message with the most recent changes to the bot.</td>
+            <td><code>*updates</code></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>help</code></td>
+            <td>Returns an embed message with all commands, their short description and an example on how to use them.</td>
+            <td><code>*help</code></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>lore</code></td>
+            <td>Returns an embed message with the story behind the name of the bot in the guild, for which the bot was made. </td>
+            <td><code>*lore</code></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>bug</code></td>
+            <td>Returns an embed message with information on how to report a bug or an issue in the bot.</td>
+            <td><code>*bug</code></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>answer</code></td>
+            <td>Takes an answer for one of the quiz questions.</td>
+            <td><code>*answer &ltnumber_of_question&gt &ltletter_of_correct_answer&gt</code></td>
+            <td>
+                <ul>
+                    <li>Capital and non-capital letters are accepted;</li>
+                    <li>It is not recommended to do use the command in a channel, where everyone can see it.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>evalquiz</code></td>
+            <td>Returns an embed message with the count of correct answers of every participant in the quizzes and notes down the member with the most correct answers.</td>
+            <td><code>*evalquiz</code></td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td><code>quiz</code></td>
+            <td>Returns a poll-like embed message, but it uses buttons instead of reactions.</td>
+            <td><code>*quiz &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption5&gt!</code></td>
+            <td>
+                <ul>
+                    <li>Max. 5 options;</li>
+                    <li>The question and the options can consist of more than 1 word;</li>
+                    <li>Everyone can post quizzes.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><code>hug</code></td>
+            <td>
+                <ul>
+                    <li>If no parameters are passed, it returns a "hug" to the user that sent the message;</li>
+                    <li>If 1 or more tagged members are passed, it returns a "hug" to the tagged members.</li>
+                </ul>
+            </td>
+            <td><code>*hug &lttagged_member?&gt</code>
+            </td>
+            <td>
+            </td>
         </tr>
     </tbody>
 </table> 
@@ -91,9 +162,9 @@ IsoldeBot is a Multipurpose Discord Bot based on discord.js. It is perfect for s
 <li>pg</li>
 
 
-<em>The following packages DO NOT affect the functionality of IsoldeBot:</em>
+<em>The following packages DO NOT affect the functionality of <em>IsoldeBot</em>:</em>
 
-<li></li>
+<li>jsdoc</li>
 </ul>
 </ol>
 <h4>Setup:</h4>
@@ -153,14 +224,15 @@ module.exports = {
 
 # Roadmap
 <ul>
-<li>Implement slash commands,</li>
-<li>Add automod features like scanning links and files for potential threats,</li>
+<li>Implement slash commands;</li>
+<li>Implement automod;</li>
+<li>Implement "on demand" commands/features;</li>
 <li>General bug fixes and performance improvements;</li>
 </ul>
 
 # Credits
 
-IsoldeBot has been built with the help of:
+<em>IsoldeBot</em> has been built with the help of:
 
 <ul>
     <li><a href="https://discordjs.guide/">Discord.js Guide</a>;</li>
