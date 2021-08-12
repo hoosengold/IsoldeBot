@@ -31,6 +31,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <th>Description</th>
             <th>Syntax</th>
             <th>Notes</th>
+            <th>Permissions</th>
         </tr>
     </thead>
     <tbody>
@@ -41,10 +42,10 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td>
                 <ul>
                     <li>Questions/options can be fairly long, still have to stay below ca. 80 characters;</li>
-                    <li>Max. 20 options;</li>
-                    <li>Everyone can post polls.</li>
+                    <li>Max. 20 options.</li>
                 </ul>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>countdown</code></td>
@@ -56,6 +57,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
                     <li>Sends a message when 1 hour/30 minutes are left and when the timer hits 0.</li>
                 </ul>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>say</code></td>
@@ -66,6 +68,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
                     <li>The parameter can be up to <em>1024</em> characters.</li>
                 </ul>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>aliases</code></td>
@@ -73,6 +76,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*aliases</code></td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>updates</code></td>
@@ -80,6 +84,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*updates</code></td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>help</code></td>
@@ -87,6 +92,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*help</code></td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>lore</code></td>
@@ -94,6 +100,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*lore</code></td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>bug</code></td>
@@ -101,6 +108,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*bug</code></td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>answer</code></td>
@@ -112,6 +120,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
                     <li>It is not recommended to do use the command in a channel, where everyone can see it.</li>
                 </ul>
             </td>
+            <td><code>moderator</code></td>
         </tr>
         <tr>
             <td><code>evalquiz</code></td>
@@ -119,6 +128,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>*evalquiz</code></td>
             <td>
             </td>
+            <td><code>moderator</code></td>
         </tr>
         <tr>
             <td><code>quiz</code></td>
@@ -131,6 +141,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
                     <li>Everyone can post quizzes.</li>
                 </ul>
             </td>
+            <td><code>everyone</code></td>
         </tr>
         <tr>
             <td><code>hug</code></td>
@@ -144,6 +155,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             </td>
             <td>
             </td>
+            <td><code>everyone</code></td>
         </tr>
     </tbody>
 </table> 
@@ -177,7 +189,7 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 </ul>
 <li>Install the dependency packages. </a></li>
 <ul>
-<li><em>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will installed in that folder afterwards.</em></li>
+<li><em>You can install the packages by running <code>npm install</code>. Make sure that you are in the root folder. This will create a <code>node_modules</code> folder the first time you run the command. All dependencies will be installed in that folder afterwards.</em></li>
 <li>You can use <code>npm list</code> to list all installed dependencies. If a dependency did not get installed by running <code>npm install</code>, you can use <code>npm install &ltmodule_name&gt. </code></li>
 </ul>
 <li>Make a <code> .env </code>file in the root folder for all environment variables like the Discord bot token. </li>
