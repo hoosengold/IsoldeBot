@@ -15,7 +15,7 @@ module.exports = {
             setTimeout(() => {
                 message.delete()
             }, 1500);
-            return message.reply({ content: `You don't have the right permsissions to use this command.`, allowedMentions: { repliedUser: true } })
+            return message.reply({ content: `You don't have the right permsissions to use the \`quiz\` command.`, allowedMentions: { repliedUser: true } })
         }
 
         const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*\d*(\ )*)*\?/gm),
@@ -62,12 +62,12 @@ module.exports = {
 
                 //checks if the command has title
                 if (!questionRegEx.test(quizArray[0])) {
-                    return await message.reply('No quiz title/question specified.')
+                    return await message.reply({ content: 'No quiz title/question specified.', allowedMentions: { repliedUser: true } })
                 }
 
                 //checks if the command has options and if they are more than 6
                 if (!optionsRegEx.test(quizArray[1])) {
-                    return await message.reply('No quiz options specified.')
+                    return await message.reply({ content: 'No quiz options specified.', allowedMentions: { repliedUser: true } })
                 } else if (quizArray.length > 6) {
                     return await message.channel.send(`Max. 5 options!`)
                 }
@@ -93,19 +93,19 @@ module.exports = {
 
                 let btnOptions = ['A', 'B', 'C', 'D', 'E']
 
-                let row = []
-
                 //get the row count
                 var rs = await db.query("select * from quiz")
                 var quizCounter = rs.rows.length;
 
-                for (let m = 1; m < quizArray.length; m++) {
-                    let btn = new buttons.MessageButton()
-                        .setStyle('blurple')
-                        .setID(`option${m}question${quizCounter}`)
-                        .setLabel(`Option ${btnOptions[m - 1]}`)
+                let btn = new Discord.MessageActionRow()
 
-                    row.push(btn)
+                for (let m = 1; m < quizArray.length; m++) {
+                    btn.addComponents(
+                        new Discord.MessageButton()
+                            .setStyle('PRIMARY')
+                            .setCustomId(`option${m}question${quizCounter}`)
+                            .setLabel(`Option ${btnOptions[m - 1]}`)
+                    )
                 }
 
                 //embed format and content
@@ -116,7 +116,7 @@ module.exports = {
                 }
 
                 await db.query('insert into quiz(counter, question, options) values ($1, $2, $3)', [quizCounter, quizArray[0], quizOptions])
-                await message.channel.send({ embeds: [embed], buttons: row })
+                await message.channel.send({ embeds: [embed], components: [btn] })
 
             } finally {
                 console.log("Quiz executed succesfully.")
