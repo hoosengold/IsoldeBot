@@ -8,9 +8,11 @@ module.exports = {
         const Discord = require('discord.js')
 
         if (args[0] == null) {
-            message.reply(`Brace yourself. A biiiiig hug is coming! :orange_heart:`)
-            message.delete()
-                .catch(err => console.error(err))
+            message.reply({ content: `Brace yourself. A biiiiig hug is coming! :orange_heart:`, allowedMentions: { repliedUser: true } })
+            setTimeout(() => {
+                message.delete()
+                    .catch(err => console.error(err))
+            }, 1500);
         } else {
             message.channel.send(`${args} Someone is sending you biiiig hugs! :yellow_heart:`)
             //delete the call message

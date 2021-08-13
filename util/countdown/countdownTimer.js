@@ -9,16 +9,16 @@ module.exports = {
     const index = require('../../index')
 
     //check for mods
-    if(!index.isAdmin(message.author.id)){
+    if (!index.isAdmin(message.author.id)) {
       setTimeout(() => {
         message.delete()
       }, 1500);
-      return message.reply({content: `You don't have the right permsissions to use this command.`, allowedMentions: { repliedUser: true }})
+      return message.reply({ content: `You don't have the right permsissions to use the \`countdown\` command.`, allowedMentions: { repliedUser: true } })
     }
-    
+
     //check for args
     if (args[0] == null) {
-      return message.reply('Please specify hours for the countdown.')
+      return message.reply({ content: 'Please specify hours for the countdown.', allowedMentions: { repliedUser: true } })
         .catch(err => console.log(err))
     }
 
@@ -27,12 +27,12 @@ module.exports = {
 
     //check is hoursLeft is a number
     if (isNaN(hoursLeft)) {
-      return message.reply('Only numbers are accepted. No strings allowed.')
+      return message.reply({ content: 'Only numbers are accepted. No strings allowed.', allowedMentions: { repliedUser: true } })
         .catch(err => console.log(err))
     }
 
     if (hoursLeft > 24) {
-      return message.reply(`The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`)
+      return message.reply({ content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!` })
     }
 
     //Get the date when the countdown should end
@@ -41,10 +41,10 @@ module.exports = {
 
     //Message when the countdown ends
     if (hoursLeft == 1) {
-      message.reply('The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*');
+      message.reply({ content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*', allowedMentions: { repliedUser: true } });
       console.log('Countdown date messaged.');
     } else {
-      message.reply('The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*');
+      message.reply({ content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*', allowedMentions: { repliedUser: true } });
       console.log('Countdown date messaged.');
     }
 

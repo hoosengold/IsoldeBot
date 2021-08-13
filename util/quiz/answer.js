@@ -13,14 +13,20 @@ module.exports = {
 
         if (!index.isAdmin()) {
             console.log(`Permission to use a command denied`)
-            return message.reply(`You don't have permissions to use this command!`)
+            setTimeout(() => {
+                message.delete()
+            }, 1000);
+            return message.reply({ content: `You don't have permissions to use this command!`, allowedMentions: { repliedUser: true } })
         }
 
         ; (async () => {
             try {
 
                 if (args.length > 2) {
-                    return message.reply('Incorect syntax. Please use "*answer <number_of_question> <correct_answer>" \n Example: *answer 1 a')
+                    setTimeout(() => {
+                        message.delete()
+                    }, 1000);
+                    return message.reply({ content: 'Incorect syntax. Please use "*answer <number_of_question> <correct_answer>" \n Example: *answer 1 a', allowedMentions: { repliedUser: true } })
                 }
 
                 let question = args[0]
@@ -51,7 +57,7 @@ module.exports = {
                 }
 
                 await db.query('update public.quiz set answers=$1 where counter=$2', [answerID, question])
-                await message.reply(`Answer ${answer} to question ${question} added successfully.`)
+                await message.reply({ content: `Answer ${answer} to question ${question} added successfully.`, allowedMentions: { repliedUser: true } })
 
             } finally {
                 console.log("Answer successfuly executed.")

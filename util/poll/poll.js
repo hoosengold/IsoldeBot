@@ -52,14 +52,14 @@ module.exports = {
 
             //checks if the command has title
             if (!questionRegEx.test(pollsArray[0])) {
-                return message.reply('No poll title specified. Type `*help` for more info.')
+                return message.reply({ content: 'No poll title specified. Type `*help` for more info.', allowedMentions: { repliedUser: true } })
             }
 
             //checks if the command has options and if they are more than 20
             if (!optionsRegEx.test(pollsArray[1])) {
-                return message.reply('No poll options specified. Type `*help` for more info.')
+                return message.reply({ content: 'No poll options specified. Type `*help` for more info.', allowedMentions: { repliedUser: true } })
             } else if (pollsArray.length > 21) {
-                return message.reply('Max. 20 poll options allowed.')
+                return message.reply({ content: 'Max. 20 poll options allowed.', allowedMentions: { repliedUser: true } })
             }
 
             //creates a string for the options
