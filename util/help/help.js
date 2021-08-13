@@ -6,6 +6,7 @@ module.exports = {
     args: false,
     execute(message) {
         const Discord = require("discord.js");
+        const fs = require('fs')
         const profilePic = new Discord.MessageAttachment('./images/git_profile-pic.png');
 
         const helpEmbed = {
@@ -83,7 +84,7 @@ module.exports = {
             //},
             timestamp: new Date(),
             footer: {
-                text: ''
+                text: `Last updated: ` + fs.statSync('util/help/help.js').mtime.toUTCString()
             }
         }
 

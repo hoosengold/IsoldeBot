@@ -6,6 +6,7 @@ module.exports = {
     args: false,
     execute(message) {
         const Discord = require("discord.js");
+        const fs = require('fs')
 
         //const image = new Discord.MessageAttachment('./images/');
 
@@ -45,16 +46,13 @@ module.exports = {
                 },
             ],
             footer: {
-                text: `dada`,
+                text: `Last updated: ` + fs.statSync('util/help/help.js').mtime.toUTCString(),
             },
             timestamp: new Date(),
         }
         message.channel.send({ embeds: [embed] })
         //delete the call message
-        setTimeout(() => {
-            message.delete()
+        message.delete()
             .catch(err => console.error(err))
-        }, 5000);
-        
     }
 }

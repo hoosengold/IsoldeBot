@@ -6,7 +6,9 @@ const Discord = require('discord.js'),
     lore = require('./lore.js'),
     changelog = require('./changelog.js'),
     reportbug = require('./reportbug'),
-    say = require('../funny/say.js')
+    say = require('../funny/say.js'),
+    fs = require('fs');
+
 
 module.exports = {
     name: 'aliases',
@@ -59,7 +61,7 @@ module.exports = {
                 }
             ],
             footer: {
-                text: '*Note*: \'undefined\' = no aliases \n Last Update: 25. June 2021'
+                text: `*Note*: \'undefined\' = no aliases \n` + `Last updated: ` + fs.statSync('util/help/help.js').mtime.toUTCString()
             },
             timestamp: new Date()
         }
