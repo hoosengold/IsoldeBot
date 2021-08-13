@@ -1,4 +1,4 @@
-const { Client, Intents, Collection, Permissions, Options, GuildMember, Guild } = require('discord.js')
+const { Client, Intents, Collection, Permissions, GuildMember, Guild } = require('discord.js')
 
 /*
 Possible Intents:
@@ -72,8 +72,19 @@ client.on("guildMemberAdd", (member) => {
     events.execute(button)
 })*/
 
+client.on('interactionCreate', interaction => {
+    if (interaction.isButton()) {
+        events.execute(interaction)
+    } else if (interaction.isCommand()) {
+        return;
+    } else {
+        console.log(`No button/command detected in interaction event, exiting event...`)
+        return;
+    }
+});
 
-const db = require('./connections/database')
+
+const db = require('./connections/database');
 let pool = db.pool
 
 //listen for an error from an idle pool client
@@ -129,11 +140,6 @@ client.on('messageCreate', async function (message) {
             console.log(`URL detected! Redirecting for automod...`)
         }
 
-        //check for youtube links
-        if (message.content.includes('youtube.com/' || 'youtu.be/') && !message.content.startsWith(prefix)) {
-            await message.reply(`You can also use \`*addMusic\` to suggest music to others. The link is kept secure and it won't be lost among the other messages. And a lucky Stream Fam can get a chance to listen to your suggestion when they type \`*getMusic\` :purple_heart:`)
-        }
-
         if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return; //checks if the message starts or ends with *
 
         try {
@@ -168,7 +174,10 @@ client.on('messageCreate', async function (message) {
                     const expirationDate = await timestamps.get(message.author.id) + cooldownAmount;
                     if (now < expirationDate) { //checks if there is still cooldown
                         const timeLeft = (expirationDate - now) / 1000
-                        return await message.reply(`Please wait ${timeLeft.toFixed(1)} second(s) before using the ${command.name} command again.`)
+                        setTimeout(() => {
+                            message.delete()
+                        }, 1000);
+                        return await message.reply({ content: `Please wait ${timeLeft.toFixed(1)} seconds before using the ${command.name} command again.`, allowedMentions: { repliedUser: true } })
                     }
                 }
                 //clear the entry on the collection after the cooldown
@@ -179,7 +188,10 @@ client.on('messageCreate', async function (message) {
             } catch (error) {
                 console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
                 console.error(error)
-                await message.reply(`Something went wrong while trying to execute the command!`)
+                setTimeout(() => {
+                    message.delete()
+                }, 1000);
+                await message.reply({ content: `Something went wrong while trying to execute the command!`, allowedMentions: { repliedUser: true } })
             }
         } catch (error) {
             console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)
