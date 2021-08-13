@@ -68,11 +68,10 @@ module.exports = {
                             })
                                 .then(async result => {
                                     for (const key of evalMap.keys()) { //every key in the map
-                                        if (evalMap.get(key) == null) {
-                                            return
-                                        } else {
+                                        var value = evalMap.get(key)
+                                        if (value != null) {
                                             let valuesArray = new Array()
-                                            valuesArray = evalMap.get(key)
+                                            valuesArray = value
                                             valuesArray.toString()
                                             var correctAnswersCounter = 0
                                             for (let i = 1; i < result.rows.length; i++) { //every element in the result array
@@ -101,7 +100,7 @@ module.exports = {
                             var lastEntryCount
                             let mostCorrectAnswers = []
 
-                            //find the participant with the most correct answers
+                            //find the participant(s) with the most correct answers
                             for (const entries of evalMapResults) {
                                 var currentEntryId = entries[0]
                                 var currentEntryCount = entries[1]
