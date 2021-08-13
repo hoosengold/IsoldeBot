@@ -1,19 +1,19 @@
 module.exports = {
     name: 'event',
     description: 'Event handler for the quiz',
-    execute(button) {
+    execute(interaction) {
         const Discord = require('discord.js');
         const db = require('../../../connections/database');
         const crypto = require('crypto');
         require('dotenv').config()
 
-        let buttonID = button.id
+        let buttonID = interaction.component.customId
         let questionID = buttonID.split('question')[1]
         let questionColumn = 'question' + questionID
 
             ; (async () => {
                 try {
-                    var userID = await button.clicker.id
+                    var userID = await interaction.member.id
                     const secret = process.env.secret
                     const hasher = crypto.createHmac('sha256', secret)
                     var hashedID = hasher.update(userID).digest('hex')
@@ -48,7 +48,7 @@ module.exports = {
                         })
                         .catch(console.error())
                 } finally {
-                    await button.reply.send('Answer submitted successfully!', true)
+                    await interaction.reply({ content: 'Answer submitted successfully!', ephemeral: true })
                     console.log(`Button event executed successfully.`)
                 }
             })().catch(err => {
