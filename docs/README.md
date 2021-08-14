@@ -217,7 +217,7 @@ database=
 </ol>
 <h4>Adding new commands:</h4>
 <ol>
-<li>Make a new folder in <code>util/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (the command hadling will not work properly, if the command file is not in a subfolder of <code>util/</code>)</li>
+<li>Make a new folder in <code>commands/</code> and create a new <code>.js</code> file in it or put the new <code>.js</code> file in a folder that already exists (the command hadling will not work properly, if the command file is not in a subfolder of <code>commands/</code>)</li>
 <li>Write your new command in the file. Here is a template you can use:</li>
 
 ```
