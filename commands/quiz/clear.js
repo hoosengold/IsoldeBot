@@ -1,8 +1,10 @@
 module.exports = {
 	name: 'clear',
-	description: 'Clears the quiz table.',
+	description: 'Delete the quiz entries from the table in the database.',
 	aliases: ['clearquiz', 'quizclear', 'resetquiz', 'quizreset'],
 	cooldown: 10,
+	permissions: 'moderators',
+	syntax: '*clear',
 	args: false,
 	execute(message) {
 		const Discord = require('discord.js'),

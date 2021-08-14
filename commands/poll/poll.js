@@ -1,8 +1,10 @@
 module.exports = {
 	name: 'poll',
-	description: 'Provide a poll with up to 20 options and reactions for answers.',
-	//aliases: [],
+	description: 'Makes a poll with reactions.',
+	aliases: ['makepoll'],
 	cooldown: 5,
+	permissions: 'everyone',
+	syntax: '*poll <question>? <option1>! <option2>! ... <option20>!',
 	args: true,
 	execute(message, args) {
 		try {

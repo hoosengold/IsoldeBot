@@ -1,12 +1,14 @@
 module.exports = {
 	name: 'updates',
-	description: 'Provide a changelog for the most recent changes.',
+	description: 'Returns an embed message with the most recent changes to the bot.',
 	aliases: ['changes', 'changelog', 'update'],
 	cooldown: 5,
+	permissions: 'everyone',
+	syntax: '*updates',
 	args: false,
 	execute(message) {
-		const Discord = require('discord.js');
-		const fs = require('fs');
+		const Discord = require('discord.js')
+		const fs = require('fs')
 
 		//const image = new Discord.MessageAttachment('./images/');
 
@@ -33,7 +35,15 @@ module.exports = {
 					value: '\u200b',
 				},
 				{
-					name: '**3.** *Various performance and stability fixes.*',
+					name: '**3.** Security',
+					value: `sec update`,
+				},
+				{
+					name: '\u200b',
+					value: '\u200b',
+				},
+				{
+					name: '**4.** *Various performance and stability fixes.*',
 					value:
 						"This is just the *boring* part of the changelog where I say that the bot is **2000%** faster and that **ALL** bug are __fixed__. Yeah... Um, it's totally true. :clown:",
 				},
@@ -51,9 +61,9 @@ module.exports = {
 				text: `Last updated: ` + fs.statSync('commands/help/help.js').mtime.toUTCString(),
 			},
 			timestamp: new Date(),
-		};
-		message.channel.send({ embeds: [embed] });
+		}
+		message.channel.send({ embeds: [embed] })
 		//delete the call message
-		message.delete().catch((err) => console.error(err));
+		message.delete().catch((err) => console.error(err))
 	},
-};
+}

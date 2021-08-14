@@ -1,8 +1,10 @@
 module.exports = {
 	name: 'quiz', //name of the command
-	description: 'Initialize a quiz', //short description of the command
+	description: 'Returns a poll-like embed message, but it uses buttons instead of reactions.', //short description of the command
 	//aliases: [], //aliases for the command
 	cooldown: 5, //cooldown for the command in seconds, the default cooldown is 5 seconds
+	permissions: 'moderators',
+	syntax: '*quiz <question>? <option1>! <option2>! ... <option5>!',
 	args: true, //does the command have arguments, type false if it doesn't and remove args in execute
 	execute(message, args) {
 		const Discord = require('discord.js')
