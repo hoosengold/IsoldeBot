@@ -19,9 +19,11 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 </p>
 
 # Overview
+
 <em>IsoldeBot</em> is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Commands
+
 <em>IsoldeBot</em> has the following commands:
 
 <table>
@@ -157,9 +159,10 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
             <td><code>everyone</code></td>
         </tr>
     </tbody>
-</table> 
+</table>
 
 # How To Use The Bot
+
 <br>
 <h4>Prerequisites:</h4>
 <ol>
@@ -171,7 +174,6 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 <li>discord.js</li>
 <li>dotenv</li>
 <li>pg</li>
-
 
 <em>The following packages DO NOT affect the functionality of <em>IsoldeBot</em>:</em>
 
@@ -234,6 +236,7 @@ module.exports = {
 </ol>
 
 # Roadmap
+
 <ul>
 <li>Implement slash commands;</li>
 <li>Implement automod;</li>
