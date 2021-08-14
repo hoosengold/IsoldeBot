@@ -27,9 +27,8 @@ module.exports = {
 				const command = require(`../../commands/${folder}/${file}`)
 				helpEmbed.addField(
 					`\`\*${command.name}\``,
-					`\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${command.permissions}** \n __Syntax:__ \`${command.syntax}\` \u200b`
+					`\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${command.permissions}** \n __Syntax:__ \`${command.syntax}\` \n\n \u200b`
 				)
-				helpEmbed.addField('\u200b', '\u200b')
 			}
 		}
 
