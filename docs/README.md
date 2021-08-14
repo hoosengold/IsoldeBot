@@ -20,7 +20,9 @@ Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
 
 # Overview
 
-<em>IsoldeBot</em> is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed without compromising the integrity of the bot but bugs are to be expected in that case.
+<em>IsoldeBot</em> is a Multipurpose Discord Bot based on discord.js. It is perfect for small Discord Servers that need an all-in-one solution. It is
+currently in use - meaning that this repository is being maintained actively. This is NOT meant to be a modular bot. Some components can be removed
+without compromising the integrity of the bot but bugs are to be expected in that case.
 
 # Commands
 
