@@ -30,18 +30,18 @@ const prefix = '*', //prefix for all commands
 	automod = require('./moderation/automod.js'),
 	fs = require('fs');
 
-const events = require('./util/quiz/events/event');
+const events = require('./commands/quiz/events/event');
 
 client.commands = new Collection(); //make new collection for the commands
 client.cooldowns = new Collection(); //make new collection for the cooldowns
 
-const commandFolders = fs.readdirSync('./util'); //find the command files
+const commandFolders = fs.readdirSync('./commands'); //find the command files
 
 //set a new item in the Collection with the key as the command name and the value as the exported module
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./util/${folder}`).filter((file) => file.endsWith('.js')); //filter the command files
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith('.js')); //filter the command files
 	for (const file of commandFiles) {
-		const command = require(`./util/${folder}/${file}`);
+		const command = require(`./commands/${folder}/${file}`);
 		client.commands.set(command.name, command);
 	}
 }
