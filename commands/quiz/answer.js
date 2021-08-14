@@ -11,7 +11,7 @@ module.exports = {
 		require('dotenv').config();
 		const index = require('../../index');
 
-		if (!index.isAdmin()) {
+		if (!index.isAdmin(message.member.id)) {
 			console.log(`Permission to use a command denied`);
 			setTimeout(() => {
 				message.delete();
