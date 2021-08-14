@@ -115,6 +115,3 @@ frontend/template.html
 #ignore jsdoc output files
 jsdocs/
 .jsdoc.config.json
-
-#ignore all music related commands/files
-util/music/
