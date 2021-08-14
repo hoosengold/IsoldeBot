@@ -5,35 +5,35 @@ module.exports = {
 	cooldown: 5, //cooldown for the command in seconds, the default cooldown is 5 seconds
 	args: true, //does the command have arguments, type false if it doesn't and remove args in execute
 	execute(message, args) {
-		const Discord = require('discord.js');
-		const emojiArray = require('../poll/pollutil/emojiArray');
-		const db = require('../../utils/database/database');
-		const index = require('../../index');
+		const Discord = require('discord.js')
+		const emojiArray = require('../../utils/emojiArray')
+		const db = require('../../utils/database/database')
+		const index = require('../../index')
 
 		//check for mods
 		if (!index.isAdmin(message.author.id)) {
 			setTimeout(() => {
-				message.delete();
-			}, 1500);
+				message.delete()
+			}, 1500)
 			return message.reply({
 				content: `You don't have the right permsissions to use the \`quiz\` command.`,
 				allowedMentions: { repliedUser: true },
-			});
+			})
 		}
 
 		const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*\d*(\ )*)*\?/gm),
-			optionsRegEx = new RegExp(/(?:((?:(\ ))*[a-zA-Z]*(?:(\ ))*\d*(\ )*))*\!/i);
+			optionsRegEx = new RegExp(/(?:((?:(\ ))*[a-zA-Z]*(?:(\ ))*\d*(\ )*))*\!/i)
 
-		(async () => {
+		;(async () => {
 			try {
 				for (let index = 0; index < args.length; index++) {
-					console.log(`${args[index]}: ${optionsRegEx.test(args[index])}`);
+					console.log(`${args[index]}: ${optionsRegEx.test(args[index])}`)
 				}
 
 				//initialize array for the question and options
-				let i = 0;
-				let j = 0;
-				let quizArray = [];
+				let i = 0
+				let j = 0
+				let quizArray = []
 
 				//checks if the array element in args ends with ? or !;
 				//if the element does not have?/!, add it to the current quizArray element
@@ -41,34 +41,34 @@ module.exports = {
 				for (i; i < args.length; i++) {
 					if (questionRegEx.test(args[i])) {
 						if (quizArray[j] == undefined) {
-							quizArray[j] = args[i];
+							quizArray[j] = args[i]
 						} else {
-							quizArray[j] = quizArray[j] + ' ' + args[i];
+							quizArray[j] = quizArray[j] + ' ' + args[i]
 						}
-						j++;
+						j++
 					} else if (optionsRegEx.test(args[i])) {
 						if (quizArray[j] == undefined) {
-							quizArray[j] = args[i];
+							quizArray[j] = args[i]
 						} else {
-							quizArray[j] = quizArray[j] + ' ' + args[i];
+							quizArray[j] = quizArray[j] + ' ' + args[i]
 						}
-						j++;
+						j++
 					} else {
 						if (quizArray[j] == undefined) {
-							quizArray[j] = args[i];
+							quizArray[j] = args[i]
 						} else {
-							quizArray[j] = quizArray[j] + ' ' + args[i];
+							quizArray[j] = quizArray[j] + ' ' + args[i]
 						}
 					}
 				}
-				console.log(`quizArray: ${quizArray}`);
+				console.log(`quizArray: ${quizArray}`)
 
 				//checks if the command has title
 				if (!questionRegEx.test(quizArray[0])) {
 					return await message.reply({
 						content: 'No quiz title/question specified.',
 						allowedMentions: { repliedUser: true },
-					});
+					})
 				}
 
 				//checks if the command has options and if they are more than 6
@@ -76,37 +76,37 @@ module.exports = {
 					return await message.reply({
 						content: 'No quiz options specified.',
 						allowedMentions: { repliedUser: true },
-					});
+					})
 				} else if (quizArray.length > 6) {
-					return await message.channel.send(`Max. 5 options!`);
+					return await message.channel.send(`Max. 5 options!`)
 				}
 
 				//creates a string for the options
-				let quizMessage = '';
+				let quizMessage = ''
 				for (let k = 1; k < quizArray.length; k++) {
 					if (quizMessage === '') {
-						quizMessage = `${emojiArray()[k - 1]} ${quizArray[k]} \n\n `;
+						quizMessage = `${emojiArray()[k - 1]} ${quizArray[k]} \n\n `
 					} else {
-						quizMessage = `${quizMessage} ${emojiArray()[k - 1]} ${quizArray[k]} \n\n `;
+						quizMessage = `${quizMessage} ${emojiArray()[k - 1]} ${quizArray[k]} \n\n `
 					}
 				}
 
-				let quizOptions = '';
+				let quizOptions = ''
 				for (let k = 1; k < quizArray.length; k++) {
 					if (quizOptions === '') {
-						quizOptions = `${quizArray[k]}  `;
+						quizOptions = `${quizArray[k]}  `
 					} else {
-						quizOptions = `${quizOptions} ${quizArray[k]}   `;
+						quizOptions = `${quizOptions} ${quizArray[k]}   `
 					}
 				}
 
-				let btnOptions = ['A', 'B', 'C', 'D', 'E'];
+				let btnOptions = ['A', 'B', 'C', 'D', 'E']
 
 				//get the row count
-				var rs = await db.query('select * from quiz');
-				var quizCounter = rs.rows.length;
+				var rs = await db.query('select * from quiz')
+				var quizCounter = rs.rows.length
 
-				let btn = new Discord.MessageActionRow();
+				let btn = new Discord.MessageActionRow()
 
 				for (let m = 1; m < quizArray.length; m++) {
 					btn.addComponents(
@@ -114,7 +114,7 @@ module.exports = {
 							.setStyle('PRIMARY')
 							.setCustomId(`option${m}question${quizCounter}`)
 							.setLabel(`Option ${btnOptions[m - 1]}`)
-					);
+					)
 				}
 
 				//embed format and content
@@ -122,15 +122,15 @@ module.exports = {
 					color: 'RANDOM',
 					title: `Question ${quizCounter}: ${quizArray[0]}`,
 					description: `${quizMessage} \n\n`,
-				};
+				}
 
-				await db.query('insert into quiz(counter, question, options) values ($1, $2, $3)', [quizCounter, quizArray[0], quizOptions]);
-				await message.channel.send({ embeds: [embed], components: [btn] });
+				await db.query('insert into quiz(counter, question, options) values ($1, $2, $3)', [quizCounter, quizArray[0], quizOptions])
+				await message.channel.send({ embeds: [embed], components: [btn] })
 			} finally {
-				console.log('Quiz executed succesfully.');
+				console.log('Quiz executed succesfully.')
 			}
 		})().catch((err) => {
-			console.log(err.stack);
-		});
+			console.log(err.stack)
+		})
 	},
-};
+}
