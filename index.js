@@ -80,7 +80,7 @@ client.on('interactionCreate', (interaction) => {
 	}
 });
 
-const db = require('./connections/database');
+const db = require('./utils/database/database');
 let pool = db.pool;
 
 //listen for an error from an idle pool client
