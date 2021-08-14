@@ -75,12 +75,12 @@ without compromising the integrity of the bot but bugs are to be expected in tha
             <td><code>everyone</code></td>
         </tr>
         <tr>
-            <td><code>aliases</code></td>
-            <td>Returns a lsit with the names of all commands and their aliases.</td>
-            <td><code>*aliases</code></td>
+            <td><code>clear</code></td>
+            <td>Delete the quiz entries from the table in the database.</td>
+            <td><code>*clear</code></td>
             <td>
             </td>
-            <td><code>everyone</code></td>
+            <td><code>moderators</code></td>
         </tr>
         <tr>
             <td><code>updates</code></td>
@@ -226,6 +226,8 @@ module.exports = {
     description: '', //short description of the command
     aliases: ['', '', ...], //aliases for the command
     cooldown: 2, //cooldown for the command in seconds, the default cooldown is 5 seconds
+    permissions: '', //permissions needed to use the command
+    syntax: '', //syntax of the command
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     execute(message, args) {
     //put your code here, you can list dependencies here or before module.exports
