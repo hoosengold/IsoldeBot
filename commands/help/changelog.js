@@ -19,24 +19,25 @@ module.exports = {
 			//thumbnail: 'attachment://',
 			fields: [
 				{
-					name: '**1.** Quizzes are here! :question: ',
-					value: `dada`,
+					name: '**1.** The Friend is now up to date with the latest release of Discord.js - V13!',
+					value:
+						'There are a lot of new cool things! You can check the release of notes of Discord.js [here](https://discordjs.guide/whats-new.html)! :grin:',
 				},
 				{
 					name: '\u200b',
 					value: '\u200b',
 				},
 				{
-					name: '**2.** Removed all music related commands.',
-					value: `The Friend does not support the \`*addMusic\` and \`*getMusic\` commands. Instead you can use the neat \*Rythm\* bot! :grin:`,
+					name: '**2.** Quizzes are here! :question: ',
+					value: `The Friend now supports quizzes! Check out \`*help\` for more info about the commands! :grin:`,
 				},
 				{
 					name: '\u200b',
 					value: '\u200b',
 				},
 				{
-					name: '**3.** Security',
-					value: `sec update`,
+					name: '**3.** Removed all music related commands.',
+					value: `The Friend does not support the \`*addMusic\` and \`*getMusic\` commands anymore. Instead you can use the neat \*Rythm\* bot! :grin:`,
 				},
 				{
 					name: '\u200b',
