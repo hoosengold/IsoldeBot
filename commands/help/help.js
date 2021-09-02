@@ -32,6 +32,11 @@ module.exports = {
 			}
 		}
 
+		helpEmbed.addField(
+			`For more information about the commands:`,
+			`Please refer to [the official GitHub repository](https://github.com/hoosengold/IsoldeBot/tree/main#commands).`
+		)
+
 		message.channel.send({ embeds: [helpEmbed], files: [profilePic] })
 		//delete the call message
 		message.delete().catch((err) => console.error(err))
