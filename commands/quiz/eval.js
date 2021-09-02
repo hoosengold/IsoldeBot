@@ -89,6 +89,7 @@ module.exports = {
 									}
 								}
 							})
+							.catch(console.error())
 
 						const embed = new Discord.MessageEmbed()
 							.setColor('RANDOM')

@@ -95,11 +95,14 @@ module.exports = {
 			const reactions = ['🇦', '🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹']
 
 			//messages the poll and then reacts to it with the reactions[]
-			const msg = message.channel.send({ embeds: [embed] }).then(function (message) {
-				for (let l = 0; l < j; l++) {
-					message.react(reactions[l])
-				}
-			})
+			const msg = message.channel
+				.send({ embeds: [embed] })
+				.then(function (message) {
+					for (let l = 0; l < j; l++) {
+						message.react(reactions[l])
+					}
+				})
+				.catch(console.error())
 		} catch (error) {
 			console.error(error)
 		}

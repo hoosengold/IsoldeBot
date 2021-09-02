@@ -26,13 +26,15 @@ module.exports = {
 			try {
 				db.query({
 					text: 'select counter from public.quiz',
-				}).then((result) => {
-					for (let i = 0; i < result.rowCount; i++) {
-						if (i != 0) {
-							db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
-						}
-					}
 				})
+					.then((result) => {
+						for (let i = 0; i < result.rowCount; i++) {
+							if (i != 0) {
+								db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
+							}
+						}
+					})
+					.catch(console.error())
 			} finally {
 				setTimeout(() => {
 					message.delete()
