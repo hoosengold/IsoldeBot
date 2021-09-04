@@ -11,10 +11,12 @@ module.exports = {
 		const Discord = require('discord.js')
 
 		if (args[0] == null) {
-			message.reply({
-				content: `Brace yourself. A biiiiig hug is coming! :orange_heart:`,
-				allowedMentions: { repliedUser: true },
-			})
+			message
+				.reply({
+					content: `Brace yourself. A biiiiig hug is coming! :orange_heart:`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 			setTimeout(() => {
 				message.delete().catch((err) => console.error(err))
 			}, 1500)

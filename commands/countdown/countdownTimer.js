@@ -15,10 +15,12 @@ module.exports = {
 			setTimeout(() => {
 				message.delete()
 			}, 1500)
-			return message.reply({
-				content: `You don't have the right permsissions to use the \`countdown\` command.`,
-				allowedMentions: { repliedUser: true },
-			})
+			return message
+				.reply({
+					content: `You don't have the right permsissions to use the \`countdown\` command.`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 		}
 
 		//check for args
@@ -45,9 +47,11 @@ module.exports = {
 		}
 
 		if (hoursLeft > 24) {
-			return message.reply({
-				content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`,
-			})
+			return message
+				.reply({
+					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`,
+				})
+				.catch(console.error())
 		}
 
 		//Get the date when the countdown should end
@@ -56,16 +60,20 @@ module.exports = {
 
 		//Message when the countdown ends
 		if (hoursLeft == 1) {
-			message.reply({
-				content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*',
-				allowedMentions: { repliedUser: true },
-			})
+			message
+				.reply({
+					content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*',
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 			console.log('Countdown date messaged.')
 		} else {
-			message.reply({
-				content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*',
-				allowedMentions: { repliedUser: true },
-			})
+			message
+				.reply({
+					content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*',
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 			console.log('Countdown date messaged.')
 		}
 

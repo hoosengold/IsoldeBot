@@ -16,10 +16,12 @@ module.exports = {
 			setTimeout(() => {
 				message.delete()
 			}, 1500)
-			return message.reply({
-				content: `You don't have the right permsissions to use the \`quiz\` command.`,
-				allowedMentions: { repliedUser: true },
-			})
+			return message
+				.reply({
+					content: `You don't have the right permsissions to use the \`quiz\` command.`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 		}
 
 		;(async () => {
@@ -39,7 +41,7 @@ module.exports = {
 				setTimeout(() => {
 					message.delete()
 				}, 1000)
-				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } })
+				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } }).catch(console.error())
 			}
 		})().catch((err) => console.log(err))
 	},

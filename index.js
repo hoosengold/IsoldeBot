@@ -200,10 +200,12 @@ client.on('messageCreate', async function (message) {
 						setTimeout(() => {
 							message.delete()
 						}, 1000)
-						return await message.reply({
-							content: `Please wait ${timeLeft.toFixed(1)} seconds before using the ${command.name} command again.`,
-							allowedMentions: { repliedUser: true },
-						})
+						return await message
+							.reply({
+								content: `Please wait ${timeLeft.toFixed(1)} seconds before using the ${command.name} command again.`,
+								allowedMentions: { repliedUser: true },
+							})
+							.catch(console.error())
 					}
 				}
 				//clear the entry on the collection after the cooldown
@@ -217,10 +219,12 @@ client.on('messageCreate', async function (message) {
 				setTimeout(() => {
 					message.delete()
 				}, 1000)
-				await message.reply({
-					content: `Something went wrong while trying to execute the command!`,
-					allowedMentions: { repliedUser: true },
-				})
+				await message
+					.reply({
+						content: `Something went wrong while trying to execute the command!`,
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			}
 		} catch (error) {
 			console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)

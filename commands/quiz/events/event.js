@@ -53,10 +53,12 @@ module.exports = {
 					})
 					.catch(console.error())
 			} finally {
-				await interaction.reply({
-					content: 'Answer submitted successfully!',
-					ephemeral: true,
-				})
+				await interaction
+					.reply({
+						content: 'Answer submitted successfully!',
+						ephemeral: true,
+					})
+					.catch(console.error())
 				console.log(`Button event executed successfully.`)
 			}
 		})().catch((err) => {
