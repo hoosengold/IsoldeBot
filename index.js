@@ -14,8 +14,8 @@ Intents.FLAGS.GUILD_MESSAGE_REACTIONS
 Bitfield (all Intents): 1327
 */
 
-process.on('unhandledRejection', (reason, promise) => {
-	console.log('Unhandled rejection at ', promise, `reason: ${reason}`)
+process.on('uncaughtException', (err) => {
+	console.log(`Uncaught Exception: ${err.message}`)
 	process.exit(1)
 })
 
