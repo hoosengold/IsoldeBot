@@ -15,7 +15,7 @@ module.exports = {
 		//check for mods
 		if (!index.isAdmin(message.author.id)) {
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1500)
 			return message
 				.reply({

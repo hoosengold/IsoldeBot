@@ -16,7 +16,7 @@ module.exports = {
 		if (!index.isAdmin(message.member.id)) {
 			console.log(`Permission to use a command denied`)
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1000)
 			return message
 				.reply({
@@ -30,7 +30,7 @@ module.exports = {
 			try {
 				if (args.length > 2) {
 					setTimeout(() => {
-						message.delete()
+						message.delete().catch(console.error())
 					}, 1000)
 					return message
 						.reply({

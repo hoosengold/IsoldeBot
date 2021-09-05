@@ -14,7 +14,7 @@ module.exports = {
 		//check for mods
 		if (!index.isAdmin(message.author.id)) {
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1500)
 			return message
 				.reply({
@@ -39,7 +39,7 @@ module.exports = {
 					.catch(console.error())
 			} finally {
 				setTimeout(() => {
-					message.delete()
+					message.delete().catch(console.error())
 				}, 1000)
 				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } }).catch(console.error())
 			}

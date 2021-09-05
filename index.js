@@ -119,7 +119,7 @@ client.on('messageCreate', async function (message) {
 				console.log(`Invite link not deleted: posted by admin`)
 				return
 			} else {
-				await message.delete()
+				await message.delete().catch(console.error())
 				console.log(`Discord invite link deleted`)
 				await message.channel.send(`**No Discord Invite links allowed!**`)
 				return
@@ -129,7 +129,7 @@ client.on('messageCreate', async function (message) {
 		else if (
 			message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')
 		) {
-			await message.delete()
+			await message.delete().catch(console.error())
 			console.log(`Shortened link deleted.`)
 			await message.channel.send({
 				content: `${message.author}**No shortened links allowed!**`,
@@ -198,7 +198,7 @@ client.on('messageCreate', async function (message) {
 						//checks if there is still cooldown
 						const timeLeft = (expirationDate - now) / 1000
 						setTimeout(() => {
-							message.delete()
+							message.delete().catch(console.error())
 						}, 1000)
 						return await message
 							.reply({
@@ -217,7 +217,7 @@ client.on('messageCreate', async function (message) {
 				console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
 				console.error(error)
 				setTimeout(() => {
-					message.delete()
+					message.delete().catch(console.error())
 				}, 1000)
 				await message
 					.reply({
