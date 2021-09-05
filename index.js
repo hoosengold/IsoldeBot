@@ -15,7 +15,7 @@ Bitfield (all Intents): 1327
 */
 
 process.on('unhandledRejection', (reason, promise) => {
-	console.log('Unhandled rejection at ', promise, `reason: ${err.message}`)
+	console.log('Unhandled rejection at ', promise, `reason: ${reason}`)
 	process.exit(1)
 })
 
