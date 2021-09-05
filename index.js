@@ -53,7 +53,7 @@ for (const folder of commandFolders) {
 
 //Login with the bot
 require('dotenv').config()
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.DISCORD_TOKEN).catch((err) => console.error(err))
 
 //Print Ready in the console when the bot is ready
 client.once('ready', () => {
