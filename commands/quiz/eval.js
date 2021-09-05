@@ -89,6 +89,7 @@ module.exports = {
 									}
 								}
 							})
+							.catch(console.error())
 
 						const embed = new Discord.MessageEmbed()
 							.setColor('RANDOM')
@@ -146,7 +147,7 @@ module.exports = {
 						embed.addField(`Most correct answers: \*${correctCount}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)
 
 						message.channel.send({ embeds: [embed] })
-						message.delete()
+						message.delete().catch(console.error())
 
 						listOfUsers = []
 						evalMap.clear()

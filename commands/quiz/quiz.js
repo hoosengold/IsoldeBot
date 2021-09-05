@@ -15,12 +15,14 @@ module.exports = {
 		//check for mods
 		if (!index.isAdmin(message.author.id)) {
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1500)
-			return message.reply({
-				content: `You don't have the right permsissions to use the \`quiz\` command.`,
-				allowedMentions: { repliedUser: true },
-			})
+			return message
+				.reply({
+					content: `You don't have the right permsissions to use the \`quiz\` command.`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 		}
 
 		const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*\d*(\ )*)*\?/gm),
@@ -67,18 +69,22 @@ module.exports = {
 
 				//checks if the command has title
 				if (!questionRegEx.test(quizArray[0])) {
-					return await message.reply({
-						content: 'No quiz title/question specified.',
-						allowedMentions: { repliedUser: true },
-					})
+					return await message
+						.reply({
+							content: 'No quiz title/question specified.',
+							allowedMentions: { repliedUser: true },
+						})
+						.catch(console.error())
 				}
 
 				//checks if the command has options and if they are more than 6
 				if (!optionsRegEx.test(quizArray[1])) {
-					return await message.reply({
-						content: 'No quiz options specified.',
-						allowedMentions: { repliedUser: true },
-					})
+					return await message
+						.reply({
+							content: 'No quiz options specified.',
+							allowedMentions: { repliedUser: true },
+						})
+						.catch(console.error())
 				} else if (quizArray.length > 6) {
 					return await message.channel.send(`Max. 5 options!`)
 				}

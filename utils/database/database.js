@@ -1,5 +1,5 @@
-var pg = require('pg');
-require('dotenv').config();
+var pg = require('pg')
+require('dotenv').config()
 
 /**
  *
@@ -28,9 +28,9 @@ const config = {
 	ssl: { rejectUnauthorized: false },
 	max: 10,
 	idleTimeoutMillis: 30000,
-};
+}
 
-var pool = new pg.Pool(config);
+var pool = new pg.Pool(config)
 
 /**
  *
@@ -59,11 +59,11 @@ module.exports = {
 	 */
 
 	async query(text, params) {
-		const start = Date.now();
-		const res = await pool.query(text, params);
-		const duration = Date.now() - start;
-		console.log(`query executed`, { text, duration, rows: res.rowCount });
-		return res;
+		const start = Date.now()
+		const res = await pool.query(text, params).catch(console.error())
+		const duration = Date.now() - start
+		console.log(`query executed`, { text, duration, rows: res.rowCount })
+		return res
 	},
 
 	/**
@@ -77,28 +77,32 @@ module.exports = {
 	 */
 
 	async getClient() {
-		const client = await pool.connect();
-		const query = client.query;
-		const release = client.release;
+		try {
+			const client = await pool.connect()
+			const query = client.query
+			const release = client.release
 
-		client.query = (...args) => {
-			client.lastQuery = args;
-			return query.apply(client, args);
-		};
+			client.query = (...args) => {
+				client.lastQuery = args
+				return query.apply(client, args)
+			}
 
-		const timeout = setTimeout(() => {
-			console.error('A client has been checked out for more than 5 seconds!');
-			console.error(`The last executed query on this client was: ${client.lastQuery}`);
-		}, 5000);
+			const timeout = setTimeout(() => {
+				console.error('A client has been checked out for more than 5 seconds!')
+				console.error(`The last executed query on this client was: ${client.lastQuery}`)
+			}, 5000)
 
-		client.release = () => {
-			clearTimeout(timeout);
-			client.query = query;
-			client.release = release;
-			return release.apply(client);
-		};
-		return client;
+			client.release = () => {
+				clearTimeout(timeout)
+				client.query = query
+				client.release = release
+				return release.apply(client)
+			}
+			return client
+		} catch {
+			console.error()
+		}
 	},
 
 	pool: pool,
-};
+}

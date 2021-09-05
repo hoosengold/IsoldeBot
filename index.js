@@ -14,6 +14,11 @@ Intents.FLAGS.GUILD_MESSAGE_REACTIONS
 Bitfield (all Intents): 1327
 */
 
+process.on('uncaughtException', (err) => {
+	console.log(`Uncaught Exception: ${err.message}`)
+	process.exit(1)
+})
+
 const client = new Client({
 	//initialize client for the bot;
 	presence: {
@@ -48,7 +53,7 @@ for (const folder of commandFolders) {
 
 //Login with the bot
 require('dotenv').config()
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.DISCORD_TOKEN).catch((err) => console.error(err))
 
 //Print Ready in the console when the bot is ready
 client.once('ready', () => {
@@ -119,7 +124,7 @@ client.on('messageCreate', async function (message) {
 				console.log(`Invite link not deleted: posted by admin`)
 				return
 			} else {
-				await message.delete()
+				await message.delete().catch(console.error())
 				console.log(`Discord invite link deleted`)
 				await message.channel.send(`**No Discord Invite links allowed!**`)
 				return
@@ -129,7 +134,7 @@ client.on('messageCreate', async function (message) {
 		else if (
 			message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')
 		) {
-			await message.delete()
+			await message.delete().catch(console.error())
 			console.log(`Shortened link deleted.`)
 			await message.channel.send({
 				content: `${message.author}**No shortened links allowed!**`,
@@ -198,12 +203,14 @@ client.on('messageCreate', async function (message) {
 						//checks if there is still cooldown
 						const timeLeft = (expirationDate - now) / 1000
 						setTimeout(() => {
-							message.delete()
+							message.delete().catch(console.error())
 						}, 1000)
-						return await message.reply({
-							content: `Please wait ${timeLeft.toFixed(1)} seconds before using the ${command.name} command again.`,
-							allowedMentions: { repliedUser: true },
-						})
+						return await message
+							.reply({
+								content: `Please wait ${timeLeft.toFixed(1)} seconds before using the ${command.name} command again.`,
+								allowedMentions: { repliedUser: true },
+							})
+							.catch(console.error())
 					}
 				}
 				//clear the entry on the collection after the cooldown
@@ -215,12 +222,14 @@ client.on('messageCreate', async function (message) {
 				console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
 				console.error(error)
 				setTimeout(() => {
-					message.delete()
+					message.delete().catch(console.error())
 				}, 1000)
-				await message.reply({
-					content: `Something went wrong while trying to execute the command!`,
-					allowedMentions: { repliedUser: true },
-				})
+				await message
+					.reply({
+						content: `Something went wrong while trying to execute the command!`,
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			}
 		} catch (error) {
 			console.log(`PROBLEM WHILE SETTING UP THE COOLDOWN`)

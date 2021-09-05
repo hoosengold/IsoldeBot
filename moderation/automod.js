@@ -1,9 +1,13 @@
-const Discord = require("discord.js"),
-  //config = require('../config.json'),
-  roles = require("../index.js");
+const Discord = require('discord.js'),
+	//config = require('../config.json'),
+	roles = require('../index.js')
 
 async function automod(url) {
-  console.log(`Test passed! url: ${url}`);
+	try {
+		console.log(`Test passed! url: ${url}`)
+	} catch {
+		console.error()
+	}
 }
 
-module.exports = automod;
+module.exports = automod

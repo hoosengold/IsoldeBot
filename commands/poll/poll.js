@@ -54,23 +54,29 @@ module.exports = {
 
 			//checks if the command has title
 			if (!questionRegEx.test(pollsArray[0])) {
-				return message.reply({
-					content: 'No poll title specified. Type `*help` for more info.',
-					allowedMentions: { repliedUser: true },
-				})
+				return message
+					.reply({
+						content: 'No poll title specified. Type `*help` for more info.',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			}
 
 			//checks if the command has options and if they are more than 20
 			if (!optionsRegEx.test(pollsArray[1])) {
-				return message.reply({
-					content: 'No poll options specified. Type `*help` for more info.',
-					allowedMentions: { repliedUser: true },
-				})
+				return message
+					.reply({
+						content: 'No poll options specified. Type `*help` for more info.',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			} else if (pollsArray.length > 21) {
-				return message.reply({
-					content: 'Max. 20 poll options allowed.',
-					allowedMentions: { repliedUser: true },
-				})
+				return message
+					.reply({
+						content: 'Max. 20 poll options allowed.',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			}
 
 			//creates a string for the options
@@ -95,11 +101,14 @@ module.exports = {
 			const reactions = ['🇦', '🇦', '🇧', '🇨', '🇩', '🇪', '🇫', '🇬', '🇭', '🇮', '🇯', '🇰', '🇱', '🇲', '🇳', '🇴', '🇵', '🇶', '🇷', '🇸', '🇹']
 
 			//messages the poll and then reacts to it with the reactions[]
-			const msg = message.channel.send({ embeds: [embed] }).then(function (message) {
-				for (let l = 0; l < j; l++) {
-					message.react(reactions[l])
-				}
-			})
+			const msg = message.channel
+				.send({ embeds: [embed] })
+				.then(function (message) {
+					for (let l = 0; l < j; l++) {
+						message.react(reactions[l])
+					}
+				})
+				.catch(console.error())
 		} catch (error) {
 			console.error(error)
 		}

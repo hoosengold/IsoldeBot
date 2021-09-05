@@ -16,24 +16,28 @@ module.exports = {
 		if (!index.isAdmin(message.member.id)) {
 			console.log(`Permission to use a command denied`)
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1000)
-			return message.reply({
-				content: `You don't have permissions to use this command!`,
-				allowedMentions: { repliedUser: true },
-			})
+			return message
+				.reply({
+					content: `You don't have permissions to use this command!`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 		}
 
 		;(async () => {
 			try {
 				if (args.length > 2) {
 					setTimeout(() => {
-						message.delete()
+						message.delete().catch(console.error())
 					}, 1000)
-					return message.reply({
-						content: 'Incorect syntax. Please use "*answer <number_of_question> <correct_answer>" \n Example: *answer 1 a',
-						allowedMentions: { repliedUser: true },
-					})
+					return message
+						.reply({
+							content: 'Incorect syntax. Please use "*answer <number_of_question> <correct_answer>" \n Example: *answer 1 a',
+							allowedMentions: { repliedUser: true },
+						})
+						.catch(console.error())
 				}
 
 				let question = args[0]
@@ -64,10 +68,12 @@ module.exports = {
 				}
 
 				await db.query('update public.quiz set answers=$1 where counter=$2', [answerID, question])
-				await message.reply({
-					content: `Answer ${answer} to question ${question} added successfully.`,
-					allowedMentions: { repliedUser: true },
-				})
+				await message
+					.reply({
+						content: `Answer ${answer} to question ${question} added successfully.`,
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
 			} finally {
 				console.log('Answer successfuly executed.')
 			}

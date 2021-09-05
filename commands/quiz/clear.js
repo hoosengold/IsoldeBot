@@ -14,30 +14,34 @@ module.exports = {
 		//check for mods
 		if (!index.isAdmin(message.author.id)) {
 			setTimeout(() => {
-				message.delete()
+				message.delete().catch(console.error())
 			}, 1500)
-			return message.reply({
-				content: `You don't have the right permsissions to use the \`quiz\` command.`,
-				allowedMentions: { repliedUser: true },
-			})
+			return message
+				.reply({
+					content: `You don't have the right permsissions to use the \`quiz\` command.`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
 		}
 
 		;(async () => {
 			try {
 				db.query({
 					text: 'select counter from public.quiz',
-				}).then((result) => {
-					for (let i = 0; i < result.rowCount; i++) {
-						if (i != 0) {
-							db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
-						}
-					}
 				})
+					.then((result) => {
+						for (let i = 0; i < result.rowCount; i++) {
+							if (i != 0) {
+								db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
+							}
+						}
+					})
+					.catch(console.error())
 			} finally {
 				setTimeout(() => {
-					message.delete()
+					message.delete().catch(console.error())
 				}, 1000)
-				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } })
+				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } }).catch(console.error())
 			}
 		})().catch((err) => console.log(err))
 	},
