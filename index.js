@@ -14,6 +14,11 @@ Intents.FLAGS.GUILD_MESSAGE_REACTIONS
 Bitfield (all Intents): 1327
 */
 
+process.on('unhandledRejection', (reason, promise) => {
+	console.log('Unhandled rejection at ', promise, `reason: ${err.message}`)
+	process.exit(1)
+})
+
 const client = new Client({
 	//initialize client for the bot;
 	presence: {
