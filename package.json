@@ -1,27 +1,30 @@
 {
-  "dependencies": {
-    "discord.js": "^13.0.1",
-    "dotenv": "^10.0.0",
-    "jsdoc": "^3.6.7",
-    "pg": "^8.6.0"
-  },
-  "name": "ai_furnee-discord-bot",
-  "description": "Multipurpose discord bot",
-  "version": "1.0.0",
-  "main": "bot.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "docs": "./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.config.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hoosengold/ai_furnee-discord-bot.git"
-  },
-  "author": "hoosengold",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hoosengold/ai_furnee-discord-bot/issues"
-  },
-  "homepage": "https://github.com/hoosengold/ai_furnee-discord-bot#readme"
+	"dependencies": {
+		"discord.js": "^13.0.1",
+		"dotenv": "^10.0.0",
+		"jsdoc": "^3.6.7",
+		"pg": "^8.6.0"
+	},
+	"engines": {
+		"node": ">=16.6"
+	},
+	"name": "ai_furnee-discord-bot",
+	"description": "Multipurpose discord bot",
+	"version": "1.0.0",
+	"main": "bot.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js",
+		"docs": "./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.config.json"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hoosengold/ai_furnee-discord-bot.git"
+	},
+	"author": "hoosengold",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hoosengold/ai_furnee-discord-bot/issues"
+	},
+	"homepage": "https://github.com/hoosengold/ai_furnee-discord-bot#readme"
 }
