@@ -51,7 +51,7 @@ module.exports = {
 				})
 				.catch((err) => console.log(err))
 		}
-
+		/**
 		if (hoursLeft > 24) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
@@ -61,7 +61,7 @@ module.exports = {
 					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`,
 				})
 				.catch(console.error())
-		}
+		}*/
 
 		//Get the date when the countdown should end
 		var countdownDate = new Date()
