@@ -54,10 +54,11 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>countdown</code></td>
             <td>Creates a countdown for a specific amount of hours.</td>
-            <td><code>*countdown &lthours&gt</code></td>
+            <td><code>*countdown &lthours&gt &ltmessage&gt</code></td>
             <td>
                 <ul>
-                    <li>No upper limit;</li>
+                    <li>24h limit;</li>
+                    <li>A custom message can be displayed when the time's up;</li>
                     <li>Sends a message when 1 hour/30 minutes are left and when the timer hits 0.</li>
                 </ul>
             </td>

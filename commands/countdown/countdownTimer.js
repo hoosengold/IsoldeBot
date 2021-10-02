@@ -4,7 +4,7 @@ module.exports = {
 	aliases: ['timer', 'countdowntimer', 'timercountdown'],
 	cooldown: 5,
 	permissions: 'moderators',
-	syntax: '*countdown <hours>',
+	syntax: '*countdown <hours> <message>',
 	args: true,
 	execute(message, args) {
 		const Discord = require('discord.js')
@@ -25,9 +25,12 @@ module.exports = {
 
 		//check for args
 		if (args[0] == null) {
+			setTimeout(() => {
+				message.delete().catch(console.error())
+			}, 1500)
 			return message
 				.reply({
-					content: 'Please specify hours for the countdown.',
+					content: `Please specify the duration of the countdown. Type \`*help\` if you want to see more details about he command. \n Your message was: __${message}__`,
 					allowedMentions: { repliedUser: true },
 				})
 				.catch((err) => console.log(err))
@@ -38,15 +41,21 @@ module.exports = {
 
 		//check is hoursLeft is a number
 		if (isNaN(hoursLeft)) {
+			setTimeout(() => {
+				message.delete().catch(console.error())
+			}, 1500)
 			return message
 				.reply({
-					content: 'Only numbers are accepted. No strings allowed.',
+					content: `Please use numbers in order to specify the duration of the countdown. Type \`*help\` if you want to see more details about he command. \n Your message was: __${message}__`,
 					allowedMentions: { repliedUser: true },
 				})
 				.catch((err) => console.log(err))
 		}
 
 		if (hoursLeft > 24) {
+			setTimeout(() => {
+				message.delete().catch(console.error())
+			}, 1500)
 			return message
 				.reply({
 					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`,
@@ -77,11 +86,21 @@ module.exports = {
 			console.log('Countdown date messaged.')
 		}
 
+		var msg = ''
+
+		for (let i = 1; i < args.length; i++) {
+			if (msg == '') {
+				msg = args[i] + ' '
+			} else {
+				msg = msg + args[i] + ' '
+			}
+		}
+
 		var messageCountHour = 0
 		var messageCountMinute = 0
 
 		// Update the count down every 1 second
-		var x = setInterval(function () {
+		var x = setInterval(() => {
 			// Get today's date and time
 			var now = new Date()
 
@@ -106,7 +125,11 @@ module.exports = {
 			// If the countdown is finished, send message
 			if (distance <= 0) {
 				clearInterval(x)
-				message.channel.send("Time's up!")
+				if (msg == '') {
+					message.channel.send(`@everyone Time's up!`)
+				} else {
+					message.channel.send(`@everyone ${msg}`)
+				}
 				console.log('Message sent: time expired.')
 			}
 		}, 1000)
