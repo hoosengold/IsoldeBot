@@ -54,7 +54,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>countdown</code></td>
             <td>Creates a countdown for a specific amount of hours.</td>
-            <td><code>*countdown &lthours&gt &ltmessage&gt</code></td>
+            <td><code>*countdown &lthours&gt &ltmessage?&gt</code></td>
             <td>
                 <ul>
                     <li>24h limit;</li>
