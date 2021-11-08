@@ -96,8 +96,8 @@ pool.on('error', (err, client) => {
 
 //listen for messages, main function of the bot
 client.on('messageCreate', async function (message) {
-	const guild = index.guild(message)
-	await index.main(message, guild)
+	guildId = message.guild.id
+	await index.main(message)
 })
 
 /**
@@ -189,8 +189,8 @@ const index = {
 	 *
 	 */
 
-	guild(message) {
-		const guild = message.guild
+	guild() {
+		const guild = client.guilds.cache.get(guildId)
 		return guild
 	},
 
@@ -205,7 +205,7 @@ const index = {
 	 *
 	 */
 
-	async main(message, guild) {
+	async main(message) {
 		try {
 			//checks if the author of the message is a bot, if it is, then it does not respond
 			if (message.author.bot) return
@@ -329,7 +329,7 @@ const index = {
 					await timestamps.set(message.author.id, now)
 					setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
 					//execute the command
-					await command.execute(message, args, guild)
+					await command.execute(message, args)
 				} catch (error) {
 					console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
 					console.error(error)
