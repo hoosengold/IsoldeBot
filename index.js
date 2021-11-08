@@ -200,8 +200,6 @@ const index = {
 	 *
 	 * @function main
 	 * @param {Message} message Message parameter, that is parsed from the event listener
-	 * @param {Guild} guild Guild ID that is parsed from guild()
-	 *
 	 *
 	 */
 
@@ -260,12 +258,13 @@ const index = {
 				message.content.match(urlRegexIPv6)
 			) {
 				//url = message.content.match()
-				console.log(
+				/*console.log(
 					message.content.match(urlRegexMain) ||
 						message.content.match(urlRegexAlphanumeric) ||
 						message.content.match(urlRegexIPv4) ||
 						message.content.match(urlRegexIPv6)
-				)
+				)*/
+
 				//initialize a variable to store the possible url and remove all blank spaces
 				const url = (
 					message.content.match(urlRegexMain) ||

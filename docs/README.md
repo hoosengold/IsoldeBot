@@ -177,10 +177,6 @@ without compromising the integrity of the bot but bugs are to be expected in tha
 <li>discord.js</li>
 <li>dotenv</li>
 <li>pg</li>
-
-<em>The following packages DO NOT affect the functionality of <em>IsoldeBot</em>:</em>
-
-<li>jsdoc</li>
 </ul>
 </ol>
 <h4>Setup:</h4>
