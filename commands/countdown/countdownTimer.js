@@ -7,6 +7,7 @@ module.exports = {
 	syntax: '*countdown <hours> <message>',
 	args: true,
 	execute(message, args) {
+		//TODO add minutes
 		const Discord = require('discord.js')
 		const index = require('../../index')
 
