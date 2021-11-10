@@ -1,4 +1,4 @@
-const { Client, Intents, Collection, Permissions, GuildMember, Guild, Message } = require('discord.js')
+const { Client, Intents, Collection, Permissions, GuildMember, Guild } = require('discord.js')
 
 /*
 Possible Intents:
@@ -64,9 +64,18 @@ client.once('ready', () => {
 //listen for joining users
 client.on('guildMemberAdd', (member) => {
 	console.log(`New member detected.`)
-	const channel = member.guild.channels.cache.find((ch) => ch.name === 'general')
-	if (!channel) return
-	channel.send(`Welcome to the Stream Fam, ${member.toString()}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+	const channel = member.guild.channels.cache.find(
+		(ch) => ch.name === 'welcome' || ch.name === 'welcome-and-rules' || ch.name === 'welcome-and-goodbye'
+	)
+	if (!channel) {
+		channel = member.guild.channels.cache.find((ch) => ch.name === 'general')
+		if (!channel) {
+			return
+		}
+	}
+	if (channel.isText) {
+		channel.send(`Welcome, ${member.toString()}! Don't forget to claim your welcome \`*hug\`! :purple_heart:`)
+	}
 })
 
 /*client.on('clickButton', async function (button) {
@@ -118,6 +127,7 @@ client.on('messageCreate', async function (message) {
 		)
 
 		//get the ID of the member, that sent the message
+		//TODO can be global variable = enforce the same variable/style in every style + optimisation?
 		const memberId = message.member.id
 
 		//check for discord invite links
@@ -142,7 +152,7 @@ client.on('messageCreate', async function (message) {
 				content: `${message.author}**No shortened links allowed!**`,
 			})
 		}
-		//check for non discord invite links and not hidden links
+		//check for non discord invite links and not shortened links
 		else if (
 			message.content.match(urlRegexMain) ||
 			message.content.match(urlRegexAlphanumeric) ||
@@ -170,7 +180,9 @@ client.on('messageCreate', async function (message) {
 			await automod(url)
 		}
 
-		if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return //checks if the message starts or ends with *
+		//checks if the message starts or ends with *
+		//FIXME *message part 1* message part 2 = not a command
+		if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return
 
 		try {
 			//takes the message body, removes the prefix *, splits the message body and makes everything lower case
@@ -327,7 +339,6 @@ const index = {
 	 * Returns the Guild
 	 *
 	 * @function guild
-	 * @param {Message} message Message parameter, that is parsed from the event listener
 	 * @returns {Guild} Guild
 	 *
 	 */
