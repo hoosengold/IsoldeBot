@@ -52,27 +52,38 @@ module.exports = {
 			}
 			console.log(`pollsArray: ${pollsArray}`)
 
-			//TODO delete initial message and add it to the reply
 			//checks if the command has title
 			if (!questionRegEx.test(pollsArray[0])) {
+				const messageBody = message.content
+				setTimeout(() => {
+					message.delete().catch(console.error())
+				}, 1500)
 				return message
 					.reply({
-						content: 'No poll title specified. Type `*help` for more info.',
+						content: 'No poll title specified. Type `*help` for more info. Your message was: `' + messageBody + '`',
 						allowedMentions: { repliedUser: true },
 					})
 					.catch(console.error())
 			} else if (!optionsRegEx.test(pollsArray[1])) {
 				//checks if the command has options and if they are more than 20
+				const messageBody = message.content
+				setTimeout(() => {
+					message.delete().catch(console.error())
+				}, 1500)
 				return message
 					.reply({
-						content: 'No poll options specified. Type `*help` for more info.',
+						content: 'No poll options specified. Type `*help` for more info. Your message was: `' + messageBody + '`',
 						allowedMentions: { repliedUser: true },
 					})
 					.catch(console.error())
 			} else if (pollsArray.length > 21) {
+				const messageBody = message.content
+				setTimeout(() => {
+					message.delete().catch(console.error())
+				}, 1500)
 				return message
 					.reply({
-						content: 'Max. 20 poll options allowed.',
+						content: 'Max. 20 poll options allowed. Your message was: `' + messageBody + '`',
 						allowedMentions: { repliedUser: true },
 					})
 					.catch(console.error())
@@ -108,6 +119,10 @@ module.exports = {
 					}
 				})
 				.catch(console.error())
+
+			setTimeout(() => {
+				message.delete().catch(console.error())
+			}, 1500)
 		} catch (error) {
 			console.error(error)
 		}
