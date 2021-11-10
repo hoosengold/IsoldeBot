@@ -180,9 +180,11 @@ client.on('messageCreate', async function (message) {
 			await automod(url)
 		}
 
-		//checks if the message starts or ends with *
-		//FIXME *message part 1* message part 2 = not a command
-		if (!message.content.startsWith(prefix) || message.content.endsWith(prefix)) return
+		//checks if the message is a possible command that follows the command syntax
+		const messageRegEx = new RegExp(/(\w)+\s*\*\s*(\w)*/gm)
+		if (!message.content.startsWith(prefix) || message.content.match(messageRegEx) || message.content == '*') {
+			return
+		}
 
 		try {
 			//takes the message body, removes the prefix *, splits the message body and makes everything lower case
