@@ -37,7 +37,7 @@ module.exports = {
 		}
 
 		//Parse the amount of hours into variable
-		hoursLeft = parseInt(args[0])
+		const hoursLeft = parseInt(args[0])
 
 		//check is hoursLeft is a number
 		if (isNaN(hoursLeft)) {
@@ -51,6 +51,8 @@ module.exports = {
 				})
 				.catch((err) => console.log(err))
 		}
+
+		//TODO limit the countdown command
 		/**
 		if (hoursLeft > 24) {
 			setTimeout(() => {

@@ -19,6 +19,7 @@ module.exports = {
 		require('dotenv').config()
 		;(async () => {
 			try {
+				//TODO send a message that it may take some time to process the command and that for now only admins can use it
 				if (index.isAdmin(message.member.id)) {
 					if (args.length === 0) {
 						//if args[] is empty, fetch all users
@@ -108,6 +109,7 @@ module.exports = {
 						var lastEntryCount
 						let mostCorrectAnswers = []
 
+						//FIXME optimize for loop
 						//find the participant(s) with the most correct answers
 						for (const entries of evalMapResults) {
 							var currentEntryId = entries[0]
@@ -153,11 +155,11 @@ module.exports = {
 						evalMap.clear()
 						evalMapResults.clear()
 					} else {
-						//if user is tagged, fetch only their result
+						//TODO if user is tagged, fetch only their result
 						return
 					}
 				} else {
-					//fetch results only for the user
+					//TODO fetch results only for the user
 					return
 				}
 			} finally {

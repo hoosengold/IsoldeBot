@@ -3,6 +3,7 @@ const Discord = require('discord.js'),
 	roles = require('../index.js')
 
 async function automod(url) {
+	//TODO implement
 	try {
 		console.log(`Test passed! url: ${url}`)
 	} catch {

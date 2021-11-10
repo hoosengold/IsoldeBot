@@ -21,6 +21,7 @@ module.exports = {
 
 		const commandFolders = fs.readdirSync('commands')
 
+		//FIXME fix max amount of emebed fields (2 or more embeds)
 		for (const folder of commandFolders) {
 			const commandFiles = fs.readdirSync(`commands/${folder}`).filter((file) => file.endsWith('.js')) //filter the command files
 			for (const file of commandFiles) {

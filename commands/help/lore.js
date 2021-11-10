@@ -9,6 +9,8 @@ module.exports = {
 	execute(message) {
 		const Discord = require('discord.js')
 
+		//TODO it has to be available only in 1 guild
+		//TODO dynamic lore for every guild???
 		const embed = {
 			title: '** `Super Secret` ** *(not really)*',
 			description:
