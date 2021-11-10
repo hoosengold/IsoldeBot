@@ -16,8 +16,8 @@ module.exports = {
 			const questionRegEx = new RegExp(/((\ )*[a-zA-Z]*(\ )*\d*(\ )*)*\?/gm),
 				optionsRegEx = new RegExp(/(?:((?:(\ ))*[a-zA-Z]*(?:(\ ))*\d*(\ )*))*\!/i)
 
-			for (let index = 0; index < args.length; index++) {
-				console.log(`${args[index]}: ${optionsRegEx.test(args[index])}`)
+			for (let i = 0; i < args.length; i++) {
+				console.log(`${args[i]}: ${optionsRegEx.test(args[i])}`)
 			}
 			//initialize array for the question and options
 			let i = 0
@@ -52,6 +52,7 @@ module.exports = {
 			}
 			console.log(`pollsArray: ${pollsArray}`)
 
+			//TODO delete initial message and add it to the reply
 			//checks if the command has title
 			if (!questionRegEx.test(pollsArray[0])) {
 				return message
@@ -60,10 +61,8 @@ module.exports = {
 						allowedMentions: { repliedUser: true },
 					})
 					.catch(console.error())
-			}
-
-			//checks if the command has options and if they are more than 20
-			if (!optionsRegEx.test(pollsArray[1])) {
+			} else if (!optionsRegEx.test(pollsArray[1])) {
+				//checks if the command has options and if they are more than 20
 				return message
 					.reply({
 						content: 'No poll options specified. Type `*help` for more info.',

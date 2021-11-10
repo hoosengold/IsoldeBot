@@ -19,7 +19,7 @@ module.exports = {
 			if (i == 0) {
 				messageContent = tmp
 			} else {
-				messageContent = messageContent + ' ' + tmp
+				messageContent = `${messageContent} ${tmp}` //converts the string to a template string
 			}
 		}
 		const embed = {
