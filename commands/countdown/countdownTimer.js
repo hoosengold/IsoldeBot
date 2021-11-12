@@ -63,20 +63,16 @@ module.exports = {
 					allowedMentions: { repliedUser: true },
 				})
 				.catch((err) => console.log(err))
-		}
-
-		//TODO limit the countdown command
-		/**
-		if (hoursLeft > 24) {
+		} else if (hoursLeft > 24) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
 			}, 1500)
 			return message
 				.reply({
-					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience! \n `Please set hours to **0** if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__``,
+					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience! \n Please set hours to **0** if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__`,
 				})
 				.catch(console.error())
-		}*/
+		}
 
 		//Get the date when the countdown should end
 		var countdownDate = new Date()
