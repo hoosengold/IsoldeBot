@@ -99,54 +99,35 @@ module.exports = {
 								'A list with all users who participated in the quiz. Keep in mind that a participant is someone who answered to **at least 1** question. :purple_heart:'
 							)
 
+						//FIXME max 25 fields per embed message
 						//add field for every participant
 						for (const entries of evalMapResults) {
 							const member = index.member(entries[0])
 							embed.addField(member.user.username, `Correct answers: ${entries[1]}`)
 						}
 
-						var lastEntryId
-						var lastEntryCount
+						//find the participant(s) with the most correct answers, save the usernames in array
+						var maxElement = 0
 						let mostCorrectAnswers = []
 
-						//FIXME optimize for loop
-						//find the participant(s) with the most correct answers
 						for (const entries of evalMapResults) {
-							var currentEntryId = entries[0]
-							var currentEntryCount = entries[1]
-							if (mostCorrectAnswers.length == 0) {
-								const member = index.member(entries[0])
-								mostCorrectAnswers.push(member.user.username, currentEntryCount)
-							} else if (currentEntryCount > lastEntryCount) {
-								const member = index.member(currentEntryId)
-								mostCorrectAnswers = []
-								mostCorrectAnswers.push(member.user.username, currentEntryCount)
-							} else if ((currentEntryCount = lastEntryCount)) {
+							const currentEntryId = entries[0]
+							const currentEntryCount = entries[1]
+
+							if (currentEntryCount >= maxElement) {
+								if (currentEntryCount != maxElement) {
+									mostCorrectAnswers = []
+								}
 								const member = index.member(currentEntryId)
 								mostCorrectAnswers.push(member.user.username)
-							}
-
-							lastEntryId = currentEntryId
-							lastEntryCount = currentEntryCount
-						}
-
-						var correctCount
-						var correctUsers = ''
-						for (let i = 0; i < mostCorrectAnswers.length; i++) {
-							if (i == 1) {
-								correctCount = mostCorrectAnswers[i]
-							} else if (i == mostCorrectAnswers.length - 1 && correctUsers.includes(',')) {
-								correctUsers = correctUsers + ' and ' + mostCorrectAnswers[i]
-							} else {
-								if (correctUsers == '') {
-									correctUsers = mostCorrectAnswers[i]
-								} else {
-									correctUsers = correctUsers + ' , ' + mostCorrectAnswers[i]
-								}
+								maxElement = currentEntryCount
 							}
 						}
 
-						embed.addField(`Most correct answers: \*${correctCount}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)
+						const correctUsers = mostCorrectAnswers.toString()
+
+						//TODO if mostCorrectAnswers.lenght > 25
+						embed.addField(`Most correct answers: \*${maxElement}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)
 
 						message.channel.send({ embeds: [embed] })
 						message.delete().catch(console.error())
