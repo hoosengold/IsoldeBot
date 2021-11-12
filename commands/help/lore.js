@@ -3,14 +3,28 @@ module.exports = {
 	description: 'Returns an embed message with the story behind the name of the bot in the guild, for which the bot was made.',
 	aliases: ['story', 'friend', 'thefriend', 'origin', 'originstory', 'trivia'],
 	cooldown: 5,
-	permissions: 'everyone',
+	permissions: 'everyone in AI Stream Fam',
 	syntax: '*lore',
 	args: false,
 	execute(message) {
-		const Discord = require('discord.js')
+		const Discord = require('discord.js'),
+			index = require('../../index.js')
 
-		//TODO it has to be available only in 1 guild
+		require('dotenv').config()
+
 		//TODO dynamic lore for every guild???
+		const guild = index.guild()
+		if (guild.id != process.env.aiStreamFam) {
+			setTimeout(() => {
+				message.delete().catch(console.error())
+			}, 1000)
+			return message
+				.reply({
+					content: `You can't use this command in this server. :purple_heart:`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch(console.error())
+		}
 		const embed = {
 			title: '** `Super Secret` ** *(not really)*',
 			description:
