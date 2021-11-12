@@ -1,13 +1,12 @@
 module.exports = {
 	name: 'countdown',
-	description: 'Creates a countdown for a specific amount of hours.',
+	description: 'Creates a countdown for a specific amount of hours and/or minutes.',
 	aliases: ['timer', 'countdowntimer', 'timercountdown'],
 	cooldown: 5,
 	permissions: 'moderators',
-	syntax: '*countdown <hours> <message>',
+	syntax: '*countdown <hours> <minutes?> <message?>',
 	args: true,
 	execute(message, args) {
-		//TODO add minutes
 		const Discord = require('discord.js')
 		const index = require('../../index')
 
@@ -25,7 +24,7 @@ module.exports = {
 		}
 
 		//check for args
-		if (args[0] == null) {
+		if (args[0] == null || isNaN(args[0])) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
 			}, 1500)
@@ -35,19 +34,32 @@ module.exports = {
 					allowedMentions: { repliedUser: true },
 				})
 				.catch((err) => console.log(err))
-		}
-
-		//Parse the amount of hours into variable
-		const hoursLeft = parseInt(args[0])
-
-		//check is hoursLeft is a number
-		if (isNaN(hoursLeft)) {
+		} else if (args[0] == 0 && (isNaN(args[1]) || args[1] == 0)) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
 			}, 1500)
 			return message
 				.reply({
-					content: `Please use numbers in order to specify the duration of the countdown. Type \`*help\` if you want to see more details about he command. \n Your message was: __${message}__`,
+					content: `You have to specify the amount of minutes if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__`,
+					allowedMentions: { repliedUser: true },
+				})
+				.catch((err) => console.log(err))
+		}
+
+		//Parse the amount of hours/minutes into variable
+		var minutes, hoursLeft
+		if (!isNaN(args[1])) {
+			minutes = parseInt(args[1])
+			hoursLeft = parseInt(args[0]) + Math.floor(minutes / 60)
+			minutes = minutes % 60
+		} else {
+			hoursLeft = parseInt(args[0])
+		}
+
+		if (minutes < 0 || hoursLeft < 0) {
+			return message
+				.reply({
+					content: `Please use only positive numbers. \n Your message was: __${message}__`,
 					allowedMentions: { repliedUser: true },
 				})
 				.catch((err) => console.log(err))
@@ -61,7 +73,7 @@ module.exports = {
 			}, 1500)
 			return message
 				.reply({
-					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience!`,
+					content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience! \n `Please set hours to **0** if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__``,
 				})
 				.catch(console.error())
 		}*/
@@ -69,24 +81,53 @@ module.exports = {
 		//Get the date when the countdown should end
 		var countdownDate = new Date()
 		countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft)
+		countdownDate.setUTCMinutes(countdownDate.getUTCMinutes() + minutes)
 
 		//Message when the countdown ends
-		if (hoursLeft == 1) {
+		if (hoursLeft == 0) {
 			message
 				.reply({
-					content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*',
+					content: 'The Countdown will end after **' + minutes + ' minutes** on *' + countdownDate + '*',
 					allowedMentions: { repliedUser: true },
 				})
 				.catch(console.error())
 			console.log('Countdown date messaged.')
+		} else if (hoursLeft == 1) {
+			if (isNaN(minutes)) {
+				message
+					.reply({
+						content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
+				console.log('Countdown date messaged.')
+			} else {
+				message
+					.reply({
+						content: 'The Countdown will end after **' + hoursLeft + ' hour and ' + minutes + ' minutes** on *' + countdownDate + '*',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
+				console.log('Countdown date messaged.')
+			}
 		} else {
-			message
-				.reply({
-					content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*',
-					allowedMentions: { repliedUser: true },
-				})
-				.catch(console.error())
-			console.log('Countdown date messaged.')
+			if (isNaN(minutes)) {
+				message
+					.reply({
+						content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
+				console.log('Countdown date messaged.')
+			} else {
+				message
+					.reply({
+						content: 'The Countdown will end after **' + hoursLeft + ' hours and ' + minutes + ' minutes** on *' + countdownDate + '*',
+						allowedMentions: { repliedUser: true },
+					})
+					.catch(console.error())
+				console.log('Countdown date messaged.')
+			}
 		}
 
 		var msg = ''
@@ -102,7 +143,7 @@ module.exports = {
 		var messageCountHour = 0
 		var messageCountMinute = 0
 
-		// Update the count down every 1 second
+		// Update the countdown every 1 second
 		var x = setInterval(() => {
 			// Get today's date and time
 			var now = new Date()
