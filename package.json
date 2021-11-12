@@ -7,10 +7,10 @@
 	"engines": {
 		"node": ">=16.6"
 	},
-	"name": "ai_furnee-discord-bot",
+	"name": "isolde-bot",
 	"description": "Multipurpose discord bot",
 	"version": "1.0.0",
-	"main": "bot.js",
+	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node index.js",
@@ -18,14 +18,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hoosengold/ai_furnee-discord-bot.git"
+		"url": "git+https://github.com/hoosengold/IsoldeBot.git"
 	},
 	"author": "hoosengold",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hoosengold/ai_furnee-discord-bot/issues"
+		"url": "https://github.com/hoosengold/IsoldeBot/issues"
 	},
-	"homepage": "https://github.com/hoosengold/ai_furnee-discord-bot#readme",
+	"homepage": "https://github.com/hoosengold/IsoldeBot",
 	"devDependencies": {
 		"jsdoc": "^3.6.7"
 	}
