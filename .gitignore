@@ -115,3 +115,4 @@ frontend/template.html
 #ignore jsdoc output files
 jsdocs/
 .jsdoc.config.json
+test/
