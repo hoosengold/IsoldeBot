@@ -1,5 +1,8 @@
 const { Client, Intents, Collection, Permissions, GuildMember, Guild } = require('discord.js')
 
+//FIXME tests
+//FIXME fix dynamic dynamic requre (__dirname)
+
 /*
 Possible Intents:
 
