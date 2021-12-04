@@ -10,11 +10,11 @@ module.exports = {
 		const Discord = require('discord.js')
 		const emojiArray = require('../../utils/emojiArray')
 		const db = require('../../utils/database/database')
-		const index = require('../../index')
+		const utils = require('../../utils/utils')
 
 		//FIXME dynamic databases (not only for 1 guild)
 		//check for mods
-		if (!index.isAdmin(message.author.id)) {
+		if (!utils.isAdmin(message.author.id)) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
 			}, 1500)

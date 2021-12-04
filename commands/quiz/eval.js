@@ -15,15 +15,15 @@ module.exports = {
 		const Discord = require('discord.js'),
 			db = require('../../utils/database/database'),
 			crypto = require('crypto'),
-			index = require('../../index')
+			utils = require('../../utils/utils')
 		require('dotenv').config()
 		;(async () => {
 			try {
 				//TODO send a message that it may take some time to process the command and that for now only admins can use it
-				if (index.isAdmin(message.member.id)) {
+				if (utils.isAdmin(message.member.id)) {
 					if (args.length === 0) {
 						//if args[] is empty, fetch all users
-						let listOfUsers = index.fetchMembers()
+						let listOfUsers = utils.fetchMembers()
 						const evalMap = new Map()
 
 						for (let i = 0; i < listOfUsers.length; i++) {
@@ -102,7 +102,7 @@ module.exports = {
 						//FIXME max 25 fields per embed message
 						//add field for every participant
 						for (const entries of evalMapResults) {
-							const member = index.member(entries[0])
+							const member = utils.member(entries[0])
 							embed.addField(member.user.username, `Correct answers: ${entries[1]}`)
 						}
 
@@ -118,7 +118,7 @@ module.exports = {
 								if (currentEntryCount != maxElement) {
 									mostCorrectAnswers = []
 								}
-								const member = index.member(currentEntryId)
+								const member = utils.member(currentEntryId)
 								mostCorrectAnswers.push(member.user.username)
 								maxElement = currentEntryCount
 							}

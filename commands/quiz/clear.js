@@ -1,48 +1,48 @@
 module.exports = {
-	name: 'clear',
-	description: 'Delete the quiz entries from the table in the database.',
-	aliases: ['clearquiz', 'quizclear', 'resetquiz', 'quizreset'],
-	cooldown: 10,
-	permissions: 'moderators',
-	syntax: '*clear',
-	args: false,
-	execute(message) {
-		const Discord = require('discord.js'),
-			db = require('../../utils/database/database'),
-			index = require('../../index')
+    name: 'clear',
+    description: 'Delete the quiz entries from the table in the database.',
+    aliases: ['clearquiz', 'quizclear', 'resetquiz', 'quizreset'],
+    cooldown: 10,
+    permissions: 'moderators',
+    syntax: '*clear',
+    args: false,
+    execute(message) {
+        const Discord = require('discord.js'),
+            db = require('../../utils/database/database'),
+            utils = require('../../utils/utils')
 
-		//check for mods
-		if (!index.isAdmin(message.author.id)) {
-			setTimeout(() => {
-				message.delete().catch(console.error())
-			}, 1500)
-			return message
-				.reply({
-					content: `You don't have the right permsissions to use the \`quiz\` command.`,
-					allowedMentions: { repliedUser: true },
-				})
-				.catch(console.error())
-		}
+        //check for mods
+        if (!utils.isAdmin(message.author.id)) {
+            setTimeout(() => {
+                message.delete().catch(console.error())
+            }, 1500)
+            return message
+                .reply({
+                    content: `You don't have the right permsissions to use the \`quiz\` command.`,
+                    allowedMentions: { repliedUser: true },
+                })
+                .catch(console.error())
+        }
 
-		;(async () => {
-			try {
-				db.query({
-					text: 'select counter from public.quiz',
-				})
-					.then((result) => {
-						for (let i = 0; i < result.rowCount; i++) {
-							if (i != 0) {
-								db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
-							}
-						}
-					})
-					.catch(console.error())
-			} finally {
-				setTimeout(() => {
-					message.delete().catch(console.error())
-				}, 1000)
-				message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } }).catch(console.error())
-			}
-		})().catch((err) => console.log(err))
-	},
+        ;(async () => {
+            try {
+                db.query({
+                    text: 'select counter from public.quiz',
+                })
+                    .then((result) => {
+                        for (let i = 0; i < result.rowCount; i++) {
+                            if (i != 0) {
+                                db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
+                            }
+                        }
+                    })
+                    .catch(console.error())
+            } finally {
+                setTimeout(() => {
+                    message.delete().catch(console.error())
+                }, 1000)
+                message.reply({ content: 'All questions successfully deleted.', allowedMentions: { repliedUser: true } }).catch(console.error())
+            }
+        })().catch((err) => console.log(err))
+    },
 }

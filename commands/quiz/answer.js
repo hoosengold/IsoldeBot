@@ -11,9 +11,9 @@ module.exports = {
 		const Discord = require('discord.js')
 		const db = require('../../utils/database/database')
 		require('dotenv').config()
-		const index = require('../../index')
+		const utils = require('../../utils/utils')
 
-		if (!index.isAdmin(message.member.id)) {
+		if (!utils.isAdmin(message.member.id)) {
 			console.log(`Permission to use a command denied`)
 			setTimeout(() => {
 				message.delete().catch(console.error())

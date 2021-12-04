@@ -8,12 +8,12 @@ module.exports = {
 	args: false,
 	execute(message) {
 		const Discord = require('discord.js'),
-			index = require('../../index.js')
+			utils = require('../../utils/utils')
 
 		require('dotenv').config()
 
 		//TODO dynamic lore for every guild???
-		const guild = index.guild()
+		const guild = utils.guild()
 		if (guild.id != process.env.aiStreamFam) {
 			setTimeout(() => {
 				message.delete().catch(console.error())
