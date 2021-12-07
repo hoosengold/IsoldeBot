@@ -1,5 +1,5 @@
-const { Permissions, GuildMember, Guild } = require('discord.js'),
-    guildId = require('../index')
+const { Permissions, GuildMember, Guild } = require('discord.js')
+const index = require('../index')
 
 /**
  *
@@ -7,54 +7,25 @@ const { Permissions, GuildMember, Guild } = require('discord.js'),
  *
  * @module utils
  * @property {function} `isAdmin` Checks if a member is an admin.
- * @property {function} fetchMembers Fetches the ID's of all members in a guild.
- * @property {function} member Returns a GuildMember, that sent the message.
- * @property {function} guild Returns a Guild.
+ * @property {function} `fetchMembers` Fetches the ID's of all members in a guild.
+ * @property {function} `member` Returns a GuildMember, that sent the message.
+ * @property {function} `guild` Returns a Guild.
  *
  */
 
-module.exports = {
+const utils = {
     /**
      *
-     * Checks if a member is an admin.
+     * Returns the Guild
      *
-     * @function isAdmin
-     * @param {*} id The ID of the member, that sent the message; needed to be parsed to member().
-     * @returns {boolean} `true` if the member is an admin.
-     *
-     */
-    isAdmin(id) {
-        //initialize member
-        const member = member(id)
-
-        if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
-            return true
-        } else {
-            return false
-        }
-    },
-    /**
-     *
-     * Fetches the ID's of all members in a guild.
-     *
-     * @function fetchMembers
-     * @property {string[]} listOfUsers String array with the user ID's.
-     * @returns {string[]} listOfUsers
+     * @function guild
+     * @returns {Guild} Guild
      *
      */
-    fetchMembers() {
-        //initialize guild
-        const guild = guild()
-
-        let totalUsers = 0
-        let listOfUsers = []
-        guild.members.cache.forEach((member) => {
-            totalUsers++
-            listOfUsers.push(member.id.toString())
-        })
-
-        console.log(`Total fetched users: ${totalUsers}`)
-        return listOfUsers
+    guild: function () {
+        const guild = index.client.guilds.cache.get(index.guildId)
+        console.log('guild detected')
+        return guild
     },
 
     /**
@@ -66,9 +37,8 @@ module.exports = {
      * @returns {undefined | GuildMember} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
      *
      */
-
-    member(id) {
-        const guild = guild()
+    member: function (id) {
+        const guild = utils.guild()
 
         const member = guild.members.cache.get(id)
 
@@ -81,15 +51,47 @@ module.exports = {
 
     /**
      *
-     * Returns the Guild
+     * Checks if a member is an admin.
      *
-     * @function guild
-     * @returns {Guild} Guild
+     * @function isAdmin
+     * @param {*} id The ID of the member, that sent the message; needed to be parsed to member().
+     * @returns {boolean} `true` if the member is an admin.
      *
      */
+    isAdmin: function (id) {
+        //initialize member
+        const member = utils.member(id)
 
-    guild() {
-        const guild = client.guilds.cache.get(guildId)
-        return guild
+        if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
+            return true
+        } else {
+            return false
+        }
+    },
+
+    /**
+     *
+     * Fetches the ID's of all members in a guild.
+     *
+     * @function fetchMembers
+     * @property {string[]} listOfUsers String array with the user ID's.
+     * @returns {string[]} listOfUsers
+     *
+     */
+    fetchMembers: function () {
+        //initialize guild
+        const guild = utils.guild()
+
+        let totalUsers = 0
+        let listOfUsers = []
+        guild.members.cache.forEach((member) => {
+            totalUsers++
+            listOfUsers.push(member.id.toString())
+        })
+
+        console.log(`Total fetched users: ${totalUsers}`)
+        return listOfUsers
     },
 }
+
+module.exports = utils
