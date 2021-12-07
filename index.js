@@ -35,6 +35,8 @@ const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
 })
 
+exports.client = client
+
 const prefix = '*', //prefix for all commands
     automod = require('./moderation/automod.js'),
     fs = require('fs')
@@ -107,7 +109,11 @@ pool.on('error', (err, client) => {
 
 //listen for messages, main function of the bot
 client.on('messageCreate', async function (message) {
-    guildId = message.guild.id
+    /**
+     * @param guildId ID of the guild where the message was sent
+     */
+    const guildId = message.guild.id
+    exports.guildId = guildId
 
     try {
         //checks if the author of the message is a bot, if it is, then it does not respond
