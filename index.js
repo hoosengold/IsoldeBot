@@ -110,15 +110,23 @@ pool.on('error', (err, client) => {
 //listen for messages, main function of the bot
 client.on('messageCreate', async function (message) {
     /**
-     * @param guildId ID of the guild where the message was sent
+     *
+     * @module ID ID's of the current guild and the current member
+     * @property {variable} `guild` ID of the guild, where the message was sent
+     * @property {variable} `member` ID of the member, that sent the message
+     *
      */
-    const guildId = message.guild.id
-    exports.guildId = guildId
+    const ID = {
+        guild: message.guild.id,
+        member: message.member.id,
+    }
+    module.exports = ID
 
     try {
         //checks if the author of the message is a bot, if it is, then it does not respond
         if (message.author.bot) return
 
+        //TODO put in another file
         //initialize regex to detect url's
         const urlRegexMain = new RegExp(
             /(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:(?:(\ )*)\.(?:(\ )*)(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?/gim
@@ -134,13 +142,10 @@ client.on('messageCreate', async function (message) {
             /(?:(?:(?:https|ftp|http|mailto|file|data|irc?):)?\/\/)?((?:discord(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*gg(\ )*)(\/)*(\ )*)|(discordapp(?:(\ )*(\/)*(\ )*)*?(\.)*(\ )*com)/gim
         )
 
-        //get the ID of the member, that sent the message
-        //TODO can be global variable = enforce the same variable/style in every style + optimisation?
-        const memberId = message.member.id
-
         //check for discord invite links
+        //TODO reimplement url checking (remove some returns, think of exploits)
         if (message.content.match(inviteRegex)) {
-            if (utils.isAdmin(memberId)) {
+            if (utils.isAdmin(ID.member)) {
                 console.log(`Invite link not deleted: posted by admin`)
                 return
             } else {
