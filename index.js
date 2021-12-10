@@ -120,7 +120,8 @@ client.on('messageCreate', async function (message) {
         guild: message.guild.id,
         member: message.member.id,
     }
-    module.exports = ID
+
+    exports.ID = ID
 
     try {
         //checks if the author of the message is a bot, if it is, then it does not respond

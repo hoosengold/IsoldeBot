@@ -1,5 +1,5 @@
 const { Permissions, GuildMember, Guild } = require('discord.js')
-const ID = require('../index')
+const index = require('../index')
 
 /**
  *
@@ -23,7 +23,7 @@ const utils = {
      *
      */
     guild: function () {
-        return index.client.guilds.cache.get(ID.guild) && console.log('guild detected')
+        return index.client.guilds.cache.get(index.ID.guild)
     },
 
     /**
@@ -58,9 +58,9 @@ const utils = {
      *
      * Fetches the ID's of all members in a guild.
      *
-     * @function fetchMembers
-     * @property {string[]} listOfUsers String array with the user ID's.
-     * @returns {string[]} listOfUsers
+     * @function `fetchMembers`
+     * @property {string[]} `listOfUsers` String array with the user ID's.
+     * @returns {string[]} `listOfUsers`
      *
      */
     fetchMembers: function () {
