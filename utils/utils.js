@@ -1,5 +1,5 @@
 const { Permissions, GuildMember, Guild } = require('discord.js')
-const index = require('../index')
+const ID = require('../index')
 
 /**
  *
@@ -23,9 +23,7 @@ const utils = {
      *
      */
     guild: function () {
-        const guild = index.client.guilds.cache.get(index.guildId)
-        console.log('guild detected')
-        return guild
+        return index.client.guilds.cache.get(ID.guild) && console.log('guild detected')
     },
 
     /**
@@ -38,15 +36,8 @@ const utils = {
      *
      */
     member: function (id) {
-        const guild = utils.guild()
-
-        const member = guild.members.cache.get(id)
-
-        if (!member) {
-            console.log(`Couldn't find a member in this guild with this ID.`)
-            return undefined
-        }
-        return member
+        const member = utils.guild().members.cache.get(id)
+        return member ? member : console.log(`Couldn't find a member in this guild with this ID.`) && undefined
     },
 
     /**
@@ -59,14 +50,8 @@ const utils = {
      *
      */
     isAdmin: function (id) {
-        //initialize member
         const member = utils.member(id)
-
-        if (member.permissions.has(Permissions.FLAGS.KICK_MEMBERS)) {
-            return true
-        } else {
-            return false
-        }
+        return member.permissions.has(Permissions.FLAGS.KICK_MEMBERS) ? true : false
     },
 
     /**
