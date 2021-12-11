@@ -116,3 +116,6 @@ frontend/template.html
 jsdocs/
 .jsdoc.config.json
 test/
+
+# Templates
+.templates/
