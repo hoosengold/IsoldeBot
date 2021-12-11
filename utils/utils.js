@@ -1,5 +1,8 @@
-const { Permissions, GuildMember, Guild } = require('discord.js')
-const index = require('../index')
+const { Permissions, GuildMember, Guild } = require('discord.js'),
+    index = require('../index'),
+    messageCreate = require('../events/messageCreate')
+
+const client = index.client
 
 /**
  *
@@ -23,7 +26,7 @@ const utils = {
      *
      */
     guild: function () {
-        return index.client.guilds.cache.get(index.ID.guild)
+        return client.guilds.cache.get(messageCreate.ID.guild)
     },
 
     /**
