@@ -34,7 +34,7 @@ const utils = {
      * Fetches a member from a guild with a known ID.
      *
      * @function member
-     * @param {*} id The ID of the member that needs to be fetched
+     * @param {String} id The ID of the member that needs to be fetched
      * @returns {undefined | GuildMember} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
      *
      */
@@ -48,7 +48,7 @@ const utils = {
      * Checks if a member is an admin.
      *
      * @function isAdmin
-     * @param {*} id The ID of the member, that sent the message; needed to be parsed to member().
+     * @param {String} id The ID of the member, that sent the message; needed to be parsed to member().
      * @returns {boolean} `true` if the member is an admin.
      *
      */

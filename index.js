@@ -3,6 +3,7 @@ const { Client, Intents, Collection } = require('discord.js'),
     db = require('./utils/database/database')
 
 //FIXME fix dynamic dynamic requre (__dirname)
+//TODO initial setup (custom notif roles, streamers to follow/going live) -> to be loaded at the start of the application + command for owner/dev just in case
 
 /*
 Possible Intents:

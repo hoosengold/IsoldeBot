@@ -1,14 +1,14 @@
-const Discord = require('discord.js'),
-	//config = require('../config.json'),
-	roles = require('../index.js')
-
+/**
+ *
+ * @param {string} url Matched URL
+ */
 async function automod(url) {
-	//TODO implement
-	try {
-		console.log(`Test passed! url: ${url}`)
-	} catch {
-		console.error()
-	}
+    //TODO implement
+    try {
+        console.log('Automod success!')
+    } catch {
+        console.error()
+    }
 }
 
 module.exports = automod
