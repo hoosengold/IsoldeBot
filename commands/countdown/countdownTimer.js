@@ -1,6 +1,7 @@
 module.exports = {
     name: 'countdown',
-    description: 'Creates a countdown for a specific amount of hours and/or minutes.',
+    description:
+        'Creates a countdown for a specific amount of hours and/or minutes. Returns the countdown date for 4 different timezones (GMT, EST, CET, JST)',
     aliases: ['timer', 'countdowntimer', 'timercountdown'],
     cooldown: 5,
     permissions: 'moderators',
@@ -54,6 +55,7 @@ module.exports = {
             minutes = minutes % 60
         } else {
             hoursLeft = parseInt(args[0])
+            minutes = 0
         }
 
         if (minutes < 0 || hoursLeft < 0) {
@@ -78,47 +80,56 @@ module.exports = {
         var countdownDate = new Date()
         countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft)
         countdownDate.setUTCMinutes(countdownDate.getUTCMinutes() + minutes)
+        countdownDate.setUTCSeconds(0)
+        var dateEST = new Date(countdownDate)
+        var dateCET = new Date(countdownDate)
+        var dateJST = new Date(countdownDate)
+
+        let str = `\>\>\> ${countdownDate.toDateString()} __*${countdownDate.toLocaleTimeString('en-GB', { timeZone: 'GMT' })}*__ **GMT**
+${dateEST.toDateString()} __*${dateEST.toLocaleTimeString('en-US', { timeZone: 'EST' })}*__ **EST**
+${dateCET.toDateString()} __*${dateCET.toLocaleTimeString('de-DE', { timeZone: 'CET' })}*__ **CET**
+${dateJST.toDateString()} __*${dateJST.toLocaleTimeString('ja-JP-u-ca-japanese', { timeZone: 'JST' })}*__ **JST**`
 
         //Message when the countdown ends
         if (hoursLeft == 0) {
-            message
-                .reply({
-                    content: 'The Countdown will end after **' + minutes + ' minutes** on *' + countdownDate + '*',
+            message.channel
+                .send({
+                    content: `The Countdown will end after **${minutes} minutes** on:\n${str}`,
                     allowedMentions: { repliedUser: true },
                 })
                 .catch(console.error())
             console.log('Countdown date messaged.')
         } else if (hoursLeft == 1) {
-            if (isNaN(minutes)) {
-                message
-                    .reply({
-                        content: 'The Countdown will end after **' + hoursLeft + ' hour** on *' + countdownDate + '*',
+            if (minutes == 0) {
+                message.channel
+                    .send({
+                        content: `The Countdown will end after **${hoursLeft} hour** on:\n${str}`,
                         allowedMentions: { repliedUser: true },
                     })
                     .catch(console.error())
                 console.log('Countdown date messaged.')
             } else {
-                message
-                    .reply({
-                        content: 'The Countdown will end after **' + hoursLeft + ' hour and ' + minutes + ' minutes** on *' + countdownDate + '*',
+                message.channel
+                    .send({
+                        content: `The Countdown will end after **${hoursLeft} hour and ${minutes} minutes** on:\n${str}`,
                         allowedMentions: { repliedUser: true },
                     })
                     .catch(console.error())
                 console.log('Countdown date messaged.')
             }
         } else {
-            if (isNaN(minutes)) {
-                message
-                    .reply({
-                        content: 'The Countdown will end after **' + hoursLeft + ' hours** on *' + countdownDate + '*',
+            if (minutes == 0) {
+                message.channel
+                    .send({
+                        content: `The Countdown will end after **${hoursLeft} hours** on:\n${str}`,
                         allowedMentions: { repliedUser: true },
                     })
                     .catch(console.error())
                 console.log('Countdown date messaged.')
             } else {
-                message
-                    .reply({
-                        content: 'The Countdown will end after **' + hoursLeft + ' hours and ' + minutes + ' minutes** on *' + countdownDate + '*',
+                message.channel
+                    .send({
+                        content: `The Countdown will end after **${hoursLeft} hours and ${minutes} minutes** on:\n${str}`,
                         allowedMentions: { repliedUser: true },
                     })
                     .catch(console.error())
