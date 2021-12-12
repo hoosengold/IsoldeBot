@@ -140,12 +140,17 @@ ${dateJST.toDateString()} __*${dateJST.toLocaleTimeString('ja-JP-u-ca-japanese',
         var msg = ''
 
         for (let i = 1; i < args.length; i++) {
+            if (!isNaN(args[i]) && i == 1) {
+                continue
+            }
             if (msg == '') {
                 msg = args[i] + ' '
             } else {
                 msg = msg + args[i] + ' '
             }
         }
+
+        console.log(msg)
 
         var messageCountHour = 0
         var messageCountMinute = 0
