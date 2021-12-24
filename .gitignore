@@ -119,3 +119,9 @@ test/
 
 # Templates
 .templates/
+
+#Graphs
+graphs/
+
+#Typescript compiled files
+./typescript/dist/
