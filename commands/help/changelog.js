@@ -13,7 +13,7 @@ module.exports = {
         //const image = new Discord.MessageAttachment('./images/');
 
         const embed = {
-            title: 'The Friend Updates',
+            title: 'IsoldeBot Updates',
             color: 'RANDOM',
             description: '\u200b',
             //thumbnail: 'attachment://',
@@ -36,7 +36,7 @@ module.exports = {
                 },
                 {
                     name: 'BUGS!!! (╯°□°）╯︵ ┻━┻',
-                    value: 'If you encountered a bug or have an idea how to improve The Friend, just open an [issue](https://github.com/hoosengold/IsoldeBot/issues) on Github and help us improve. :purple_heart:',
+                    value: 'If you encountered a bug or have an idea how to improve IsoldeBot, just open an [issue](https://github.com/hoosengold/IsoldeBot/issues) on Github and help us improve. :purple_heart:',
                 },
             ],
             footer: {

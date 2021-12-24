@@ -13,7 +13,7 @@ module.exports = {
             title: 'Report a bug',
             color: 'RANDOM',
             description:
-                'If you encountered a bug or have an idea how to improve The Friend, just open an [issue](https://github.com/hoosengold/IsoldeBot/issues) on Github and help us improve. :purple_heart:',
+                'If you encountered a bug or have an idea how to improve IsoldeBot, just open an [issue](https://github.com/hoosengold/IsoldeBot/issues) on Github and help us improve. :purple_heart:',
         }
         message.channel.send({ embeds: [embed] })
         //delete the call message
