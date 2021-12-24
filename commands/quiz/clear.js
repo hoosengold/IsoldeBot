@@ -6,13 +6,12 @@ module.exports = {
     permissions: 'moderators',
     syntax: '*clear',
     args: false,
-    execute(message) {
+    execute(message, utilObject) {
         const Discord = require('discord.js'),
-            db = require('../../utils/database/database'),
-            utils = require('../../utils/utils')
+            db = require('../../utils/database/database')
 
         //check for mods
-        if (!utils.isAdmin(message.author.id)) {
+        if (!utilObject.isAdmin()) {
             setTimeout(() => {
                 message.delete().catch(console.error())
             }, 1500)

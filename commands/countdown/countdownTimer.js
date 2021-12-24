@@ -1,3 +1,6 @@
+const { Message } = require('discord.js'),
+    { Util } = require('../../typescript/dist/Util')
+
 module.exports = {
     name: 'countdown',
     description:
@@ -7,12 +10,16 @@ module.exports = {
     permissions: 'moderators',
     syntax: '*countdown <hours> <minutes?> <message?>',
     args: true,
-    execute(message, args) {
-        const Discord = require('discord.js')
-        const utils = require('../../utils/utils')
-
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     * @returns
+     */
+    execute(message, args, utilObject) {
         //check for mods
-        if (!utils.isAdmin(message.author.id)) {
+        if (!utilObject.isAdmin()) {
             setTimeout(() => {
                 message.delete().catch(console.error())
             }, 1500)
