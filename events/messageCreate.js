@@ -1,6 +1,7 @@
 const index = require('../index'),
-    matchUrl = require('../utils/matchURL'),
-    { Collection, Message } = require('discord.js')
+    url = require('../utils/regexURL'),
+    { Collection, Message } = require('discord.js'),
+    { Util } = require('../typescript/dist/Util')
 
 const client = index.client
 
@@ -16,25 +17,13 @@ module.exports = {
      * @returns
      */
     async execute(message) {
-        /**
-         *
-         * @module ID ID's of the current guild and the current member
-         * @property {String} guild ID of the guild, where the message was sent
-         * @property {String} member ID of the member, that sent the message
-         *
-         */
-        const ID = {
-            guild: message.guild.id,
-            member: message.member.id,
-        }
-
-        exports.ID = ID
+        let utilObject = new Util(message.member.id, message.guild.id, index.client)
 
         try {
             //checks if the author of the message is a bot, if it is, then it does not respond
             if (message.author.bot) return
 
-            if (matchUrl(message)) {
+            if (await matchUrl(message, utilObject)) {
                 return message.delete()
             }
 
@@ -92,7 +81,7 @@ module.exports = {
                     await timestamps.set(message.author.id, now)
                     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount)
                     //execute the command
-                    await command.execute(message, args)
+                    await command.execute(message, args, utilObject)
                 } catch (error) {
                     console.log(`PROBLEM WHILE EXECUTING THE COMMAND`)
                     console.error(error)
@@ -115,4 +104,83 @@ module.exports = {
             console.error(error)
         }
     },
+}
+
+/**
+ * Checks if the message contains a link. If the link is a discord invite, that is not posted by a moderator, a shortened link or a possibly
+ * malicious link, the function returns `true`
+ * @async
+ * @param {Message} message
+ * @param {Util} utilObject
+ * @returns {boolean}
+ */
+
+async function matchUrl(message, utilObject) {
+    if (checkInvite(message, utilObject)) {
+        console.log(`Discord invite link deleted`)
+        message.channel.send(`**Only moderators can post Discord invite links!**`)
+        return true
+    }
+
+    if (checkShort(message)) {
+        console.log(`Shortened link deleted.`)
+        message.channel.send(`**No shortened links allowed!**`)
+        return true
+    }
+
+    if (await checkUrl(message)) {
+        console.log(`Possibly malicious link detected and deleted.`)
+        return true
+    }
+
+    return false
+}
+
+/**
+ *
+ * @description Checks if the message with the invite link has to be deleted
+ * @param {Message} message Message object
+ * @returns `true` when the message has to be deleted
+ */
+function checkInvite(message, utilObject) {
+    if (message.content.match(url.invite)) {
+        if (utilObject.isAdmin()) {
+            console.log('Invite link posted by an admin')
+            return false
+        } else {
+            return true
+        }
+    } else {
+        return false
+    }
+}
+
+/**
+ *
+ * @param {Message} message Message object
+ */
+function checkShort(message) {
+    if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
+        return true
+    } else {
+        return false
+    }
+}
+
+/**
+ *
+ * @param {Message} message Message object
+ */
+//TODO implement url checking
+async function checkUrl(message) {
+    let urlString =
+        message.content.match(url.main) || message.content.match(url.alphanumeric) || message.content.match(url.iPv4) || message.content.match(url.iPv6)
+
+    if (urlString) {
+        //remove all blank spaces
+        urlString = urlString.toString().replace(/ /g, '')
+        urlString = urlString.toString().replace(/,/g, '')
+        console.log(`Test passed! url: ${urlString}`)
+        return false
+    }
 }
