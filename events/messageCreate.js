@@ -24,6 +24,8 @@ module.exports = {
             prefix = '*'
         }
 
+        utilObject.setPrefix(prefix)
+
         try {
             //checks if the author of the message is a bot, if it is, then it does not respond
             if (message.author.bot) return

@@ -18,6 +18,7 @@ export class Util {
     private memberId: string
     private guildId: string
     private client: Client
+    private prefix: string
 
     /**
      *
@@ -53,6 +54,22 @@ export class Util {
      */
     setClient(client: Client) {
         this.client = client
+    }
+
+    /**
+     *
+     * @param prefix
+     */
+    setPrefix(prefix: string): void {
+        this.prefix = prefix
+    }
+
+    /**
+     *
+     * @returns {string} prefix
+     */
+    getPrefix(): string {
+        return this.prefix
     }
 
     /**
