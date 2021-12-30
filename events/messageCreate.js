@@ -1,11 +1,10 @@
 const index = require('../index'),
     url = require('../utils/regexURL'),
     { Collection, Message } = require('discord.js'),
-    { Util } = require('../typescript/dist/Util')
+    { Util } = require('../typescript/dist/typescript/src/Util')
 
 const client = index.client
 
-const prefix = '*' //prefix for all commands
 client.cooldowns = new Collection() //make new collection for the cooldowns
 
 module.exports = {
@@ -14,10 +13,16 @@ module.exports = {
     /**
      *
      * @param {Message} message
-     * @returns
      */
     async execute(message) {
         let utilObject = new Util(message.member.id, message.guild.id, index.client)
+        let prefix
+        //prefix for the commands for the specific guild
+        if (index.prefixes.has(utilObject.getGuildId())) {
+            prefix = index.prefixes.get(utilObject.getGuildId())
+        } else {
+            prefix = '*'
+        }
 
         try {
             //checks if the author of the message is a bot, if it is, then it does not respond
@@ -38,13 +43,13 @@ module.exports = {
                 const args = message.content.slice(prefix.length).split(/ +/), //returns args[] where [0] is the first word after the command
                     commandName = args.shift().toLowerCase() //returns the command
 
-                console.log(`command: ${commandName}`)
-                console.log(`args: ${args}`)
-
                 const command =
                     (await client.commands.get(commandName)) || (await client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName)))
 
                 if (!command) return //check is the command exists
+
+                console.log(`command: ${commandName}`)
+                console.log(`args: ${args}`)
 
                 //cooldown for the specific command for the specific user
                 const { cooldowns } = client
@@ -160,11 +165,9 @@ function checkInvite(message, utilObject) {
  * @param {Message} message Message object
  */
 function checkShort(message) {
-    if (message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')) {
-        return true
-    } else {
-        return false
-    }
+    return message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')
+        ? true
+        : false
 }
 
 /**
