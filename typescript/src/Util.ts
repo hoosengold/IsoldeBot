@@ -20,10 +20,10 @@ export class Util {
     private client: Client
 
     /**
-     * Constructor of the Util Object
-     * @param memberId ID of the member, that sent the message
-     * @param guildId ID of the guild
-     * @param client Client
+     *
+     * @param memberId {string}
+     * @param guildId {string}
+     * @param client {Client}
      */
     constructor(memberId: string, guildId: string, client: Client) {
         this.memberId = memberId
@@ -57,6 +57,14 @@ export class Util {
 
     /**
      *
+     * @returns Client
+     */
+    getClient(): Client {
+        return this.client
+    }
+
+    /**
+     *
      * Returns the Guild
      *
      * @function guild
@@ -68,18 +76,32 @@ export class Util {
     }
 
     /**
+     * @returns The ID of the guild
+     */
+    getGuildId(): string {
+        return this.guildId
+    }
+
+    /**
      *
-     * Fetches a member from a guild with a known ID.
+     * Fetches a member from a guild.
      *
      * @function member
-     * @param {String} id The ID of the member that needs to be fetched
      * @returns {undefined | GuildMember} the fetched member or `undefined` if the ID is invalid or if no such user is found in the guild
      *
      */
-    getMember(): undefined | GuildMember {
+    getMember(): GuildMember | undefined {
         const guild = this.getGuild()
         const member = guild.members.cache.get(this.memberId)
         return member ? member : undefined
+    }
+
+    /**
+     *
+     * @returns The ID of the member
+     */
+    getMemberId(): string {
+        return this.memberId
     }
 
     /**
@@ -136,6 +158,22 @@ export class Util {
      * @returns Logs the objects as a string
      */
     toString(): void {
-        return console.log(`memberId: ${this.memberId}\nguildId: ${this.guildId}\nclient: ${this.client}`)
+        console.log(`memberId: ${this.memberId}\nguildId: ${this.guildId}`)
+    }
+
+    /**
+     *
+     * @returns The ID of the owner of the guild
+     */
+    fetchOwner(): string {
+        return this.getGuild().ownerId
+    }
+
+    /**
+     *
+     * @returns True if the message author is the owner of the guild
+     */
+    isOwner(): boolean {
+        return this.memberId == this.fetchOwner() ? true : false
     }
 }
