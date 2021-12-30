@@ -183,7 +183,7 @@ WHERE prefix='${prefix}';`
                 })
             client.release()
         })
-        prefix = interaction.component.label
+        prefix = interaction.values[0]
         index.prefixes.set(interaction.guildId, prefix)
         let ch = interaction.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'isoldebot')
         if (!ch) {

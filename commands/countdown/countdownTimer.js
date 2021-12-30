@@ -1,5 +1,5 @@
 const { Message } = require('discord.js'),
-    { Util } = require('../../typescript/dist/Util')
+    { Util } = require('../../typescript/dist/typescript/src/Util')
 
 module.exports = {
     name: 'countdown',
@@ -18,11 +18,11 @@ module.exports = {
      * @returns
      */
     execute(message, args, utilObject) {
+        setTimeout(() => {
+            message.delete().catch(console.error())
+        }, 1500)
         //check for mods
         if (!utilObject.isAdmin()) {
-            setTimeout(() => {
-                message.delete().catch(console.error())
-            }, 1500)
             return message
                 .reply({
                     content: `You don't have the right permsissions to use the \`countdown\` command.`,
@@ -33,9 +33,6 @@ module.exports = {
 
         //check for args
         if (args[0] == null || isNaN(args[0])) {
-            setTimeout(() => {
-                message.delete().catch(console.error())
-            }, 1500)
             return message
                 .reply({
                     content: `Please specify the duration of the countdown. Type \`*help\` if you want to see more details about he command. \n Your message was: __${message}__`,
@@ -43,9 +40,6 @@ module.exports = {
                 })
                 .catch((err) => console.log(err))
         } else if (args[0] == 0 && (isNaN(args[1]) || args[1] == 0)) {
-            setTimeout(() => {
-                message.delete().catch(console.error())
-            }, 1500)
             return message
                 .reply({
                     content: `You have to specify the amount of minutes if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__`,
@@ -73,9 +67,6 @@ module.exports = {
                 })
                 .catch((err) => console.log(err))
         } else if (hoursLeft > 24) {
-            setTimeout(() => {
-                message.delete().catch(console.error())
-            }, 1500)
             return message
                 .reply({
                     content: `The maximum duration of a countdown cannot exceed 24 hours because of limitations in the hosting platform. Sorry for the inconvenience! \n Please set hours to **0** if you want to use the command with minutes only, e.g. \`*countdown 0 35 Some message to display when the countdown is over\` \n Your message was: __${message}__`,
@@ -156,8 +147,6 @@ ${dateJST.toDateString()} __*${dateJST.toLocaleTimeString('ja-JP-u-ca-japanese',
                 msg = msg + args[i] + ' '
             }
         }
-
-        console.log(msg)
 
         var messageCountHour = 0
         var messageCountMinute = 0
