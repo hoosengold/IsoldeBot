@@ -4,7 +4,7 @@ IsoldeBot
 <br>
 </h1>
 <h4 align="center">
-Polls, Quiz, Welcome Greetings, Integration with PostgreSQL
+Polls, Quiz, Welcome Greetings, Custom Settings, Integration with PostgreSQL
 </h3>
 
 <p>
@@ -161,6 +161,25 @@ without compromising the integrity of the bot but bugs are to be expected in tha
             </td>
             <td><code>everyone</code></td>
         </tr>
+        <tr>
+            <td><code>setup</code></td>
+            <td>Initiate an initial setup for a guild, if it wasn't done, when the bot first joined the guild. Can also be used if the owner wants to change something.</td>
+            <td><code>*setup</code></td>
+            <td>
+                <ul>
+                    <li>Creates an additional private channel ("setup");</li>
+                </ul>
+            </td>
+            <td><code>owner</code></td>
+        </tr>
+        <tr>
+            <td><code>privacy</code></td>
+            <td>Statement about the data that IsoldeBot uses, how it's used and why it's needed.</td>
+            <td><code>*privacy</code></td>
+            <td>
+            </td>
+            <td><code>everyone</code></td>
+        </tr>
     </tbody>
 </table>
 
@@ -169,7 +188,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
 <br>
 <h4>Prerequisites:</h4>
 <ol>
-<li>Node.js</li>
+<li>Node.js and TypeScript</li>
 <li>Code editor</li>
 <li>Git</li>
 <li>All dependency packages used in the project:</li>
@@ -198,18 +217,16 @@ without compromising the integrity of the bot but bugs are to be expected in tha
 
 ```
 DISCORD_TOKEN= //login token of the bot
-app_id= //bot application id
-public_key= //public key of the bot application
-guild_id= //id of the guild/server
+secret= //needed for crypto
 
 //the following variables are needed for the database integration
 host=
 password=
 user=
 database=
+DATABASE_URL=
 ```
 
-<li>Change the prefix if you don't like the <code>*</code> prefix.</li>
 <li>That's it! The bot is ready to be deployed! <strong>Make sure to follow another guide on how to deploy the bot on the desired platform.</strong></li>
 </ol>
 <h4>Adding new commands:</h4>
@@ -218,23 +235,69 @@ database=
 <li>Write your new command in the file. Here is a template you can use:</li>
 
 ```
+const { Message } = require('discord.js'),
+    { Util } = require('../../typescript/dist/typescript/src/Util')
+
 module.exports = {
     name: '', //name of the command
     description: '', //short description of the command
-    aliases: ['', '', ...], //aliases for the command
+    aliases: ['', ''], //aliases for the command
     cooldown: 2, //cooldown for the command in seconds, the default cooldown is 5 seconds
     permissions: '', //permissions needed to use the command
     syntax: '', //syntax of the command
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
-    execute(message, args) {
-    //put your code here, you can list dependencies here or before module.exports
-    }
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     */
+    execute(message, args, utilObject) {
+        //put your code here, you can list dependencies here or before module.exports
+    },
 }
+
 ```
 
-<li>You can test the bot with <code>node index.js</code>.</li>
-<li>That's it! You can update <code>help.js</code>, <code>aliases.js</code> and <code>changelog.js</code> so that they include your new command.</li>
+<li>You can test the bot with <code>npm start</code>.</li>
+<li>That's it! You can update <code>changelog.js</code> so that it mentions your new command.</li>
 </ol>
+
+<h4>Adding new events:</h4>
+<ol>
+<li>Create a new <code>.js</code> file in the <code>events/</code> folder. The file needs to have the same name as the client event you want to implement.</li>
+<li>Write your new event in the file. Here is a template you can use:</li>
+
+```
+module.exports = {
+    name: '', //same as the file name/event
+    once: false / true, //boolean
+    execute(...args) {
+        //code
+    },
+}
+
+```
+
+<li>You can test the bot with <code>npm start</code>.</li>
+<li>That's it!</li>
+</ol>
+
+<h4>Additional features:</h4>
+<ol><strong>Creating a graph of the dependencies</strong>
+    <ul> 
+        <li>You can create dependency graph using <code>madge</code>. There is a script in <code>package.json</code> called "graph". With it you can create <code>.svg</code> graph (you can find it in the <code>graphs/</code> folder; it is ignored by git by default), which you can export as <code>.png</code> and see the dependency tree. This is extremely useful when you want to avoid circular dependencies.</li>
+        <li><code>npm run graph</code></li>
+    </ul>
+</ol>
+<ol><strong>TypeScript support</strong>
+    <ul>
+        <li>The config file for compiling TypeScript (<code>tsconfig.json</code>) is configured to support JavaScript integration into TypeScript files. This means that you can write a module in JavaScript and then use it inside TypeScript files (you can see such implementaion inside Setup);</li>
+        <li>In order to use TypeScript, you have to do 2 things. First, you have to install the TypeScript compiler with <code>npm install -g typescript</code>. Then you have to put all of the source files inside <code>typescript/src/</code>. You can also modify the config file in order to add more source folders. When you run <code>npm start</code>, the TypeScript files are compiled before the node application is started. You can compile the TypeScript by running <code>tsc</code>;</li>
+        <li>You can't use TypeScript directly into the <code>.js</code> files, e.g. you can do: <br><code>const { Class } = require('./typescript/src/Class.ts')</code>
+        <br> In order to use the specific class, you have to require the compiled files, e.g.: <br><code>const { Class } = require('./typescript/dist/Class.js')</code>
+        <br>Notice, that the parent folder of the Class is <code>dist/</code> and not `src/` and that the files ends with <code>.js</code>. Here we are basically using the compiled version of the TypeScript file.</li>
+    </ul>
 
 # Roadmap
 
