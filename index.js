@@ -2,8 +2,7 @@ const { Client, Intents, Collection } = require('discord.js'),
     fs = require('fs'),
     db = require('./utils/database/database')
 
-//FIXME fix dynamic dynamic requre (__dirname)
-//TODO initial setup (custom notif roles, streamers to follow/going live) -> to be loaded at the start of the application + command for owner/dev just in case
+//FIXME fix dynamic dynamic require (__dirname)
 
 /*
 Possible Intents:
@@ -57,6 +56,36 @@ for (const file of eventFiles) {
         client.on(event.name, (...args) => event.execute(...args))
     }
 }
+
+const prefixes = new Collection()
+client.guilds.fetch().then((res) => {
+    res.forEach((element) => {
+        db.getClient().then(async (client) => {
+            let text = `SELECT EXISTS (SELECT FROM pg_tables WHERE schemaname = 'guild_${element.id}' AND tablename = 'settings');`
+            await client
+                .query({
+                    text: text,
+                    rowMode: 'array',
+                })
+                .then(async (result) => {
+                    if (result.rows[0][0]) {
+                        text = `SELECT prefix FROM guild_${element.id}.settings`
+                        await client
+                            .query({
+                                text: text,
+                                rowMode: 'array',
+                            })
+                            .then((res) => {
+                                prefixes.set(element.id, res.rows[0][0])
+                            })
+                    }
+                })
+            client.release()
+        })
+    })
+})
+
+exports.prefixes = prefixes
 
 //Login with the bot
 require('dotenv').config()
