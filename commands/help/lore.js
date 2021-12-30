@@ -6,12 +6,9 @@ module.exports = {
     permissions: 'everyone in AI Stream Fam',
     syntax: '*lore',
     args: false,
-    execute(message, utilObject) {
-        const Discord = require('discord.js')
-
+    execute(message, args, utilObject) {
         require('dotenv').config()
 
-        //TODO dynamic lore for every guild???
         const guild = utilObject.getGuild()
         if (guild.id != process.env.aiStreamFam) {
             setTimeout(() => {

@@ -6,7 +6,7 @@ module.exports = {
     permissions: 'moderators',
     syntax: '*clear',
     args: false,
-    execute(message, utilObject) {
+    execute(message, args, utilObject) {
         const Discord = require('discord.js'),
             db = require('../../utils/database/database')
 

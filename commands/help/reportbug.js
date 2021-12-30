@@ -6,7 +6,7 @@ module.exports = {
     permissions: 'everyone',
     syntax: '*bug',
     args: false,
-    execute(message) {
+    execute(message, args, utilObject) {
         const Discord = require('discord.js')
 
         const embed = {

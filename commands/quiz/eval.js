@@ -1,7 +1,7 @@
 const { Message, MessageEmbed } = require('discord.js'),
     db = require('../../utils/database/database'),
     crypto = require('crypto'),
-    { Util } = require('../../typescript/dist/Util')
+    { Util } = require('../../typescript/dist/typescript/src/Util')
 
 const evalMapResults = new Map()
 
@@ -146,7 +146,7 @@ module.exports = {
 
                         const correctUsers = mostCorrectAnswers.toString()
 
-                        //TODO if mostCorrectAnswers.lenght > 25
+                        //TODO if mostCorrectAnswers.length > 25
                         const embedMVP = new MessageEmbed()
                             .setColor(embed1.color)
                             .addField(`Most correct answers: \*${maxElement}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)

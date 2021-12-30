@@ -1,3 +1,6 @@
+const { Message } = require('discord.js'),
+    { Util } = require('../../typescript/dist/typescript/src/Util')
+
 module.exports = {
     name: 'answer', //name of the command
     description: 'Takes an answer for one of the quiz questions.', //short description of the command
@@ -6,6 +9,13 @@ module.exports = {
     permissions: 'moderators',
     syntax: '*answer <number_of_question> <letter_of_correct_answer>',
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     * @returns
+     */
     execute(message, args, utilObject) {
         //take answer and question number in args and insert the answer into quiz column answer for the specific question
         const Discord = require('discord.js')
@@ -66,7 +76,8 @@ module.exports = {
                         break
                 }
 
-                await db.query('update public.quiz set answers=$1 where counter=$2', [answerID, question])
+                let text = `update guild_${utilObject.guildId()}.quiz set answers=$1 where counter=$2`
+                await db.query(text, [answerID, question])
                 await message
                     .reply({
                         content: `Answer ${answer} to question ${question} added successfully.`,
