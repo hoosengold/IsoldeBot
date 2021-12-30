@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['clearquiz', 'quizclear', 'resetquiz', 'quizreset'],
     cooldown: 10,
     permissions: 'moderators',
-    syntax: '*clear',
+    syntax: 'clear',
     args: false,
     execute(message, args, utilObject) {
         const Discord = require('discord.js'),

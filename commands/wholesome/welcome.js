@@ -5,7 +5,7 @@ module.exports = {
     aliases: ['huggies', 'welcome'],
     cooldown: 2,
     permissions: 'everyone',
-    syntax: '*hug <guild_member?>',
+    syntax: 'hug <guild_member?>',
     args: true,
     execute(message, args, utilObject) {
         const Discord = require('discord.js')

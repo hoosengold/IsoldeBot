@@ -42,7 +42,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>poll</code></td>
             <td>Makes a poll with reactions.</td>
-            <td><code>*poll &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption20&gt!</code></td>
+            <td><code>poll &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption20&gt!</code></td>
             <td>
                 <ul>
                     <li>Questions/options can be fairly long, still have to stay below ca. 80 characters;</li>
@@ -54,7 +54,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>countdown</code></td>
             <td>Creates a countdown for a specific amount of hours.</td>
-            <td><code>*countdown &lthours&gt &ltmessage?&gt</code></td>
+            <td><code>countdown &lthours&gt &ltmessage?&gt</code></td>
             <td>
                 <ul>
                     <li>24h limit;</li>
@@ -67,7 +67,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>say</code></td>
             <td>Makes the bot say something.</td>
-            <td><code>*say &ltthings_to_say&gt</code></td>
+            <td><code>say &ltthings_to_say&gt</code></td>
             <td>
                 <ul>
                     <li>The parameter can be up to <em>1024</em> characters.</li>
@@ -78,7 +78,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>clear</code></td>
             <td>Delete the quiz entries from the table in the database.</td>
-            <td><code>*clear</code></td>
+            <td><code>clear</code></td>
             <td>
             </td>
             <td><code>moderators</code></td>
@@ -86,7 +86,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>updates</code></td>
             <td>Returns an embed message with the most recent changes to the bot.</td>
-            <td><code>*updates</code></td>
+            <td><code>updates</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
@@ -94,7 +94,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>help</code></td>
             <td>Returns an embed message with all commands, their short description and an example on how to use them.</td>
-            <td><code>*help</code></td>
+            <td><code>help</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
@@ -102,7 +102,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>lore</code></td>
             <td>Returns an embed message with the story behind the name of the bot in the guild, for which the bot was made. </td>
-            <td><code>*lore</code></td>
+            <td><code>lore</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
@@ -110,7 +110,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>bug</code></td>
             <td>Returns an embed message with information on how to report a bug or an issue in the bot.</td>
-            <td><code>*bug</code></td>
+            <td><code>bug</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
@@ -118,7 +118,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>answer</code></td>
             <td>Takes an answer for one of the quiz questions.</td>
-            <td><code>*answer &ltnumber_of_question&gt &ltletter_of_correct_answer&gt</code></td>
+            <td><code>answer &ltnumber_of_question&gt &ltletter_of_correct_answer&gt</code></td>
             <td>
                 <ul>
                     <li>Capital and non-capital letters are accepted;</li>
@@ -130,7 +130,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>evalquiz</code></td>
             <td>Returns an embed message with the count of correct answers of every participant in the quizzes and notes down the member with the most correct answers.</td>
-            <td><code>*evalquiz</code></td>
+            <td><code>evalquiz</code></td>
             <td>
             </td>
             <td><code>moderator</code></td>
@@ -138,7 +138,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>quiz</code></td>
             <td>Returns a poll-like embed message, but it uses buttons instead of reactions.</td>
-            <td><code>*quiz &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption5&gt!</code></td>
+            <td><code>quiz &ltquestion&gt? &ltoption1&gt! &ltoption2&gt! ... &ltoption5&gt!</code></td>
             <td>
                 <ul>
                     <li>Max. 5 options;</li>
@@ -155,7 +155,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
                     <li>If 1 or more tagged members are passed, it returns a "hug" to the tagged members.</li>
                 </ul>
             </td>
-            <td><code>*hug &lttagged_member?&gt</code>
+            <td><code>hug &lttagged_member?&gt</code>
             </td>
             <td>
             </td>
@@ -164,7 +164,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>setup</code></td>
             <td>Initiate an initial setup for a guild, if it wasn't done, when the bot first joined the guild. Can also be used if the owner wants to change something.</td>
-            <td><code>*setup</code></td>
+            <td><code>setup</code></td>
             <td>
                 <ul>
                     <li>Creates an additional private channel ("setup");</li>
@@ -175,7 +175,7 @@ without compromising the integrity of the bot but bugs are to be expected in tha
         <tr>
             <td><code>privacy</code></td>
             <td>Statement about the data that IsoldeBot uses, how it's used and why it's needed.</td>
-            <td><code>*privacy</code></td>
+            <td><code>privacy</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
@@ -296,7 +296,7 @@ module.exports = {
         <li>In order to use TypeScript, you have to do 2 things. First, you have to install the TypeScript compiler with <code>npm install -g typescript</code>. Then you have to put all of the source files inside <code>typescript/src/</code>. You can also modify the config file in order to add more source folders. When you run <code>npm start</code>, the TypeScript files are compiled before the node application is started. You can compile the TypeScript by running <code>tsc</code>;</li>
         <li>You can't use TypeScript directly into the <code>.js</code> files, e.g. you can do: <br><code>const { Class } = require('./typescript/src/Class.ts')</code>
         <br> In order to use the specific class, you have to require the compiled files, e.g.: <br><code>const { Class } = require('./typescript/dist/Class.js')</code>
-        <br>Notice, that the parent folder of the Class is <code>dist/</code> and not `src/` and that the files ends with <code>.js</code>. Here we are basically using the compiled version of the TypeScript file.</li>
+        <br>Notice, that the parent folder of the Class is <code>dist/</code> and not <code>src/</code> and that the file ends with <code>.js</code>. Here we are basically using the compiled version of the TypeScript file.</li>
     </ul>
 
 # Roadmap

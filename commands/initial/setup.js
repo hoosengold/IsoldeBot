@@ -11,7 +11,7 @@ module.exports = {
     aliases: ['init', 'firstsetup'],
     cooldown: 10,
     permissions: 'owner',
-    syntax: '*setup',
+    syntax: 'setup',
     args: false,
     /**
      *

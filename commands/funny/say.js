@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['repeat'], //aliases for the command
     cooldown: 2, //cooldown for the command in seconds, the default cooldown is 5 seconds
     permissions: 'everyone',
-    syntax: '*say <things_to_say>',
+    syntax: 'say <things_to_say>',
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     execute(message, args, utilObject) {
         const Discord = require('discord.js')

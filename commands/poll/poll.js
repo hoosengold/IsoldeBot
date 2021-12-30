@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['makepoll'],
     cooldown: 5,
     permissions: 'everyone',
-    syntax: '*poll <question>? <option1>! <option2>! ... <option20>!',
+    syntax: 'poll <question>? <option1>! <option2>! ... <option20>!',
     args: true,
     execute(message, args, utilObject) {
         try {

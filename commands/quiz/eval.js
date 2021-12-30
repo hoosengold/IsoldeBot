@@ -14,7 +14,7 @@ module.exports = {
     aliases: ['quizeval', 'evaluatequiz', 'quizevaluate'], //aliases for the command
     cooldown: 10, //cooldown for the command in seconds, the default cooldown is 5 seconds
     permissions: 'moderators',
-    syntax: '*evalquiz',
+    syntax: 'evalquiz',
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
 
     /**

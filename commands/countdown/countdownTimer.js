@@ -8,7 +8,7 @@ module.exports = {
     aliases: ['timer', 'countdowntimer', 'timercountdown'],
     cooldown: 5,
     permissions: 'moderators',
-    syntax: '*countdown <hours> <minutes?> <message?>',
+    syntax: 'countdown <hours> <minutes?> <message?>',
     args: true,
     /**
      *

@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['quizanswer', 'answerquiz'], //aliases for the command
     cooldown: 1, //cooldown for the command in seconds, the default cooldown is 5 seconds
     permissions: 'moderators',
-    syntax: '*answer <number_of_question> <letter_of_correct_answer>',
+    syntax: 'answer <number_of_question> <letter_of_correct_answer>',
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
     /**
      *

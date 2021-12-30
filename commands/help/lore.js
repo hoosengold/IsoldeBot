@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['story', 'friend', 'thefriend', 'origin', 'originstory', 'trivia'],
     cooldown: 5,
     permissions: 'everyone in AI Stream Fam',
-    syntax: '*lore',
+    syntax: 'lore',
     args: false,
     execute(message, args, utilObject) {
         require('dotenv').config()

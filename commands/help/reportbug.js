@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['bugreport', 'reportbug', 'reportabug', 'bugs', 'issue', 'openissue'],
     cooldown: 5,
     permissions: 'everyone',
-    syntax: '*bug',
+    syntax: 'bug',
     args: false,
     execute(message, args, utilObject) {
         const Discord = require('discord.js')
