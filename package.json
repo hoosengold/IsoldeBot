@@ -14,8 +14,8 @@
     "main": "index.js",
     "scripts": {
         "test": "mocha",
-        "start": "tsc | node index.js",
-        "docs": "./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.config.json",
+        "start": "tsc && node index.js",
+        "docs": "./node_modules/jsdoc/jsdoc.js -c ./.jsdoc.config.json -r",
         "graph": "madge --warning --image ./graphs/graph.svg /home/hoosengold/workspaces/VSCodeWorkspace/Personal/IsoldeBot/"
     },
     "repository": {
