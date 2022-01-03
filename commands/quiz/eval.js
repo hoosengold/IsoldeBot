@@ -48,10 +48,10 @@ module.exports = {
                             await db
                                 .getClient()
                                 .then(async (client) => {
+                                    let text = `select * from guild_${utilObject.getGuildId()}.quiz_users where user_id='${hashedID}'`
                                     await client
                                         .query({
-                                            text: 'select * from quiz_users where user_id=$1',
-                                            values: [hashedID],
+                                            text: text,
                                             rowMode: 'array',
                                         })
                                         .then(async (result) => {
@@ -78,9 +78,10 @@ module.exports = {
                             console.log(`Map size: ${evalMap.size}`)
                         }
 
+                        let text = `select answers from guild_${utilObject.getGuildId()}.quiz`
                         await db
                             .query({
-                                text: 'select answers from public.quiz',
+                                text: text,
                                 rowMode: 'array',
                             })
                             .then(async (result) => {
@@ -117,12 +118,19 @@ module.exports = {
 
                         //FIXME max 25 fields per embed message
                         //add field for every participant
-                        for (const entries of evalMapResults) {
-                            const member = utilObject.getMemberById(entries[0])
-                            if (embedCounter % 2 == 0) {
+                        if (evalMapResults.size > 25) {
+                            for (const entries of evalMapResults) {
+                                const member = utilObject.getMemberById(entries[0])
+                                if (embedCounter % 2 == 0) {
+                                    embed1.addField(member.user.username, `Correct answers: ${entries[1]}`)
+                                } else {
+                                    embed2.addField(member.user.username, `Correct answers: ${entries[1]}`)
+                                }
+                            }
+                        } else {
+                            for (const entries of evalMapResults) {
+                                const member = utilObject.getMemberById(entries[0])
                                 embed1.addField(member.user.username, `Correct answers: ${entries[1]}`)
-                            } else {
-                                embed2.addField(member.user.username, `Correct answers: ${entries[1]}`)
                             }
                         }
 
@@ -151,7 +159,11 @@ module.exports = {
                             .setColor(embed1.color)
                             .addField(`Most correct answers: \*${maxElement}\* by \__${correctUsers}\__`, `Congrats! :purple_heart:`)
 
-                        message.channel.send({ embeds: [embed1, embed2, embedMVP] })
+                        if (evalMapResults.size > 25) {
+                            message.channel.send({ embeds: [embed1, embed2, embedMVP] })
+                        } else {
+                            message.channel.send({ embeds: [embed1, embedMVP] })
+                        }
                         message.delete().catch(console.error())
 
                         listOfUsers = []
