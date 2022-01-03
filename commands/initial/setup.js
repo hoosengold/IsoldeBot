@@ -22,12 +22,13 @@ module.exports = {
     async execute(message, args, utilObject) {
         //TODO custom notification role
         if (!utilObject.isOwner()) {
-            setTimeout(() => {
-                message.delete().catch(console.error())
-            }, 1000)
-            return message.channel.send(`Only the owner can use this command!`)
+            message.delete().catch(console.error())
+            return message.channel.send(`**Only the owner can use the \`${this.name}\` command!**`)
         }
-        //const guild = utilObject.getGuild()
+
+        setTimeout(() => {
+            message.delete().catch(console.error())
+        }, 1000)
 
         const channelName = message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'setup')
         if (!channelName) {
@@ -43,9 +44,15 @@ module.exports = {
                     ],
                 })
                 .then(async () => {
-                    message.channel.send(
-                        `New channel ("setup") created. Please continue the setup there. (If you do not see the channel or any buttons there after a 10 seconds, run \`*setup\` again.)`
-                    )
+                    message.channel
+                        .send(
+                            `New channel ("setup") created. Please continue the setup there. (If you do not see the channel or any buttons there after a 10 seconds, run \`*setup\` again.)`
+                        )
+                        .then((message) => {
+                            setTimeout(() => {
+                                message.delete().catch(console.error())
+                            }, 100000)
+                        })
                     await this.handle(
                         message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'setup'),
                         utilObject
