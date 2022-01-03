@@ -173,9 +173,17 @@ without compromising the integrity of the bot but bugs are to be expected in tha
             <td><code>owner</code></td>
         </tr>
         <tr>
-            <td><code>privacy</code></td>
-            <td>Statement about the data that IsoldeBot uses, how it's used and why it's needed.</td>
-            <td><code>privacy</code></td>
+            <td><code>permissions</code></td>
+            <td>Comprehensive list for all permissions, that IsoldeBot needs in order to function correctly.</td>
+            <td><code>permissions</code></td>
+            <td>
+            </td>
+            <td><code>everyone</code></td>
+        </tr>
+        <tr>
+            <td><code>invite</code></td>
+            <td>Invite IsoldeBot in your server.</td>
+            <td><code>invite</code></td>
             <td>
             </td>
             <td><code>everyone</code></td>
