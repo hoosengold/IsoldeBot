@@ -1,6 +1,7 @@
 const { Client, Intents, Collection } = require('discord.js'),
     fs = require('fs'),
-    db = require('./utils/database/database')
+    path = require('path'),
+    db = require(path.join(__dirname, '/utils/database/database'))
 
 //FIXME fix dynamic dynamic require (__dirname)
 
@@ -37,19 +38,19 @@ const client = new Client({
 exports.client = client
 
 client.commands = new Collection() //make new collection for the commands
-const commandFolders = fs.readdirSync('./commands') //find the command files
+const commandFolders = fs.readdirSync(path.join(__dirname, '/commands')) //find the command files
 //set a new item in the Collection with the key as the command name and the value as the exported module
 for (const folder of commandFolders) {
-    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith('.js')) //filter the command files
+    const commandFiles = fs.readdirSync(path.join(__dirname, `/commands/${folder}`)).filter((file) => file.endsWith('.js')) //filter the command files
     for (const file of commandFiles) {
-        const command = require(`./commands/${folder}/${file}`)
+        const command = require(path.join(__dirname, `/commands/${folder}/${file}`))
         client.commands.set(command.name, command)
     }
 }
 
-const eventFiles = fs.readdirSync('./events').filter((file) => file.endsWith('.js'))
+const eventFiles = fs.readdirSync(path.join(__dirname, './events')).filter((file) => file.endsWith('.js'))
 for (const file of eventFiles) {
-    const event = require(`./events/${file}`)
+    const event = require(path.join(__dirname, `/events/${file}`))
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args))
     } else {
