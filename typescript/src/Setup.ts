@@ -146,7 +146,6 @@ export class Setup {
         return new MessageActionRow().addComponents(this.getYes(), this.getNo())
     }
 
-    //TODO check in with quiz (counter = 0)
     public async initDatabase(guildId: string): Promise<void> {
         await db.getClient().then(async (client) => {
             let text = `CREATE SCHEMA IF NOT EXISTS guild_${guildId}`
@@ -161,6 +160,12 @@ export class Setup {
     options text, 
     answers text
 );`
+                    await client.query({
+                        text: text,
+                    })
+                })
+                .then(async () => {
+                    text = `INSERT INTO guild_${guildId}.quiz (counter) VALUES (0)`
                     await client.query({
                         text: text,
                     })
