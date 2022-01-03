@@ -1,11 +1,20 @@
+const { Message } = require('discord.js'),
+    { Util } = require('../../typescript/dist/typescript/src/Util')
+
 module.exports = {
     name: 'help',
     description: 'Returns an embed message with all commands, a short description, aliases, permissions and syntax.',
     aliases: ['helpmenu', 'menu'],
     cooldown: 5,
     permissions: 'everyone',
-    syntax: '*help',
+    syntax: 'help',
     args: false,
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     */
     execute(message, args, utilObject) {
         const Discord = require('discord.js')
         const fs = require('fs')
@@ -35,13 +44,17 @@ module.exports = {
                 const command = require(`../../commands/${folder}/${file}`)
                 if (!(j % 2 == 0)) {
                     helpEmbed.addField(
-                        `\`\*${command.name}\``,
-                        `\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${command.permissions}** \n __Syntax:__ \`${command.syntax}\` \n\n \u200b`
+                        `\`${utilObject.getPrefix()}${command.name}\``,
+                        `\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${
+                            command.permissions
+                        }** \n __Syntax:__ \`${utilObject.getPrefix()}${command.syntax}\` \n\n \u200b`
                     )
                 } else {
                     helpEmbed2.addField(
-                        `\`\*${command.name}\``,
-                        `\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${command.permissions}** \n __Syntax:__ \`${command.syntax}\` \n\n \u200b`
+                        `\`${utilObject.getPrefix()}${command.name}\``,
+                        `\*${command.description}\* \n __Aliases:__ ${command.aliases} \n __Permissions:__ **${
+                            command.permissions
+                        }** \n __Syntax:__ \`${utilObject.getPrefix()}${command.syntax}\` \n\n \u200b`
                     )
                 }
             }
