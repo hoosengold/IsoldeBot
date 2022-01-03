@@ -1,3 +1,8 @@
+const { MessageActionRow, MessageButton, Message } = require('discord.js'),
+    emojiArray = require('../../utils/emojiArray'),
+    db = require('../../utils/database/database'),
+    { Util } = require('../../typescript/dist/typescript/src/Util')
+
 module.exports = {
     name: 'quiz', //name of the command
     description: 'Returns a poll-like embed message, but it uses buttons instead of reactions.', //short description of the command
@@ -6,12 +11,14 @@ module.exports = {
     permissions: 'moderators',
     syntax: 'quiz <question>? <option1>! <option2>! ... <option5>!',
     args: true, //does the command have arguments, type false if it doesn't and remove args in execute
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     * @returns
+     */
     execute(message, args, utilObject) {
-        const Discord = require('discord.js')
-        const emojiArray = require('../../utils/emojiArray')
-        const db = require('../../utils/database/database')
-
-        //FIXME dynamic databases (not only for 1 guild)
         //check for mods
         if (!utilObject.isAdmin()) {
             setTimeout(() => {
@@ -111,14 +118,15 @@ module.exports = {
                 let btnOptions = ['A', 'B', 'C', 'D', 'E']
 
                 //get the row count
-                var rs = await db.query('select * from quiz')
+                let text = `select counter from guild_${utilObject.getGuildId()}.quiz`
+                var rs = await db.query(text)
                 var quizCounter = rs.rows.length
 
-                let btn = new Discord.MessageActionRow()
+                let btn = new MessageActionRow()
 
                 for (let m = 1; m < quizArray.length; m++) {
                     btn.addComponents(
-                        new Discord.MessageButton()
+                        new MessageButton()
                             .setStyle('PRIMARY')
                             .setCustomId(`option${m}question${quizCounter}`)
                             .setLabel(`Option ${btnOptions[m - 1]}`)
@@ -132,9 +140,11 @@ module.exports = {
                     description: `${quizMessage} \n\n`,
                 }
 
-                await db.query('insert into quiz(counter, question, options) values ($1, $2, $3)', [quizCounter, quizArray[0], quizOptions])
+                text = `insert into guild_${utilObject.getGuildId()}.quiz(counter, question, options) values ($1, $2, $3)`
+                await db.query(text, [quizCounter, quizArray[0], quizOptions])
                 await message.channel.send({ embeds: [embed], components: [btn] })
             } finally {
+                message.delete()
                 console.log('Quiz executed succesfully.')
             }
         })().catch((err) => {

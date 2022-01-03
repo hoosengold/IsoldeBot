@@ -1,3 +1,7 @@
+const { Message } = require('discord.js'),
+    db = require('../../utils/database/database'),
+    { Util } = require('../../typescript/dist/typescript/src/Util')
+
 module.exports = {
     name: 'clear',
     description: 'Delete the quiz entries from the table in the database.',
@@ -6,10 +10,14 @@ module.exports = {
     permissions: 'moderators',
     syntax: 'clear',
     args: false,
+    /**
+     *
+     * @param {Message} message
+     * @param {string[]} args
+     * @param {Util} utilObject
+     * @returns
+     */
     execute(message, args, utilObject) {
-        const Discord = require('discord.js'),
-            db = require('../../utils/database/database')
-
         //check for mods
         if (!utilObject.isAdmin()) {
             setTimeout(() => {
@@ -25,13 +33,13 @@ module.exports = {
 
         ;(async () => {
             try {
-                db.query({
-                    text: 'select counter from public.quiz',
-                })
+                let text = `select counter from guild_${utilObject.getGuildId()}.quiz`
+                db.query(text)
                     .then((result) => {
                         for (let i = 0; i < result.rowCount; i++) {
                             if (i != 0) {
-                                db.query({ text: 'delete from public.quiz where counter=$1', values: [i] })
+                                text = `delete from guild_${utilObject.getGuildId()}.quiz where counter='${i}'`
+                                db.query(text)
                             }
                         }
                     })

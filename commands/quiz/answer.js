@@ -1,5 +1,7 @@
 const { Message } = require('discord.js'),
-    { Util } = require('../../typescript/dist/typescript/src/Util')
+    { Util } = require('../../typescript/dist/typescript/src/Util'),
+    db = require('../../utils/database/database')
+require('dotenv').config()
 
 module.exports = {
     name: 'answer', //name of the command
@@ -18,10 +20,6 @@ module.exports = {
      */
     execute(message, args, utilObject) {
         //take answer and question number in args and insert the answer into quiz column answer for the specific question
-        const Discord = require('discord.js')
-        const db = require('../../utils/database/database')
-        require('dotenv').config()
-
         if (!utilObject.isAdmin()) {
             console.log(`Permission to use a command denied`)
             setTimeout(() => {
@@ -76,8 +74,11 @@ module.exports = {
                         break
                 }
 
-                let text = `update guild_${utilObject.guildId()}.quiz set answers=$1 where counter=$2`
-                await db.query(text, [answerID, question])
+                let text = `update guild_${utilObject.getGuildId()}.quiz set answers='${answerID}' where counter='${question}'`
+                await db.getClient().then(async (client) => {
+                    await client.query(text)
+                    client.release()
+                })
                 await message
                     .reply({
                         content: `Answer ${answer} to question ${question} added successfully.`,
