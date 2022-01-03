@@ -20,14 +20,14 @@ require('dotenv').config()
  *
  * */
 const config = {
-	user: process.env.user,
-	password: process.env.password,
-	host: process.env.host,
-	port: 5432,
-	database: process.env.database,
-	ssl: { rejectUnauthorized: false },
-	max: 10,
-	idleTimeoutMillis: 30000,
+    user: process.env.user,
+    password: process.env.password,
+    host: process.env.host,
+    port: 5432,
+    database: process.env.database,
+    ssl: { rejectUnauthorized: false },
+    max: 10,
+    idleTimeoutMillis: 30000,
 }
 
 var pool = new pg.Pool(config)
@@ -41,68 +41,73 @@ var pool = new pg.Pool(config)
  *
  * @property {function} query Execute the actual query and log the duration of the query.
  * @property {function} getClient Checks out a client if several queries need to be executed in a row. It logs the last query by that client and releases the client afterwards.
+ * @property {pg.Pool} pool
  *
  */
 
 module.exports = {
-	/**
-	 *
-	 * Execute the actual query and log the duration of the query.
-	 *
-	 * @memberof Database
-	 * @instance
-	 *
-	 * @async
-	 * @param {string} text Text of the query that needs to be executed;
-	 * @param {*} [params] Possible parameters of the query that needs to be executed.
-	 * @returns Returns the result of the query.
-	 */
+    /**
+     *
+     * Execute the actual query and log the duration of the query.
+     *
+     * @memberof Database
+     * @instance
+     *
+     * @async
+     * @param {string} text Text of the query that needs to be executed;
+     * @param {[]} [params] Possible parameters of the query that needs to be executed.
+     * @returns Returns the result of the query.
+     */
 
-	async query(text, params) {
-		const start = Date.now()
-		const res = await pool.query(text, params).catch(console.error())
-		const duration = Date.now() - start
-		console.log(`query executed`, { text, duration, rows: res.rowCount })
-		return res
-	},
+    async query(text, params) {
+        const start = Date.now()
+        const res = await pool.query(text, params).catch(console.error())
+        const duration = Date.now() - start
+        console.log(`query executed`, { text, duration, rows: res.rowCount })
+        return res
+    },
 
-	/**
-	 * Checks out a client if several queries need to be executed in a row. It logs the last query by that client and releases the client afterwards.
-	 *
-	 * @memberof Database
-	 * @instance
-	 *
-	 * @async
-	 * @returns Returns the client.
-	 */
+    /**
+     * Checks out a client if several queries need to be executed in a row. It logs the last query by that client and releases the client afterwards.
+     *
+     * @memberof Database
+     * @instance
+     *
+     * @async
+     * @returns Returns the client.
+     */
 
-	async getClient() {
-		try {
-			const client = await pool.connect()
-			const query = client.query
-			const release = client.release
+    async getClient() {
+        try {
+            const client = await pool.connect()
+            const query = client.query
+            const release = client.release
 
-			client.query = (...args) => {
-				client.lastQuery = args
-				return query.apply(client, args)
-			}
+            client.query = (...args) => {
+                client.lastQuery = args
+                return query.apply(client, args)
+            }
 
-			const timeout = setTimeout(() => {
-				console.error('A client has been checked out for more than 5 seconds!')
-				console.error(`The last executed query on this client was: ${client.lastQuery}`)
-			}, 5000)
+            const timeout = setTimeout(() => {
+                console.error('A client has been checked out for more than 5 seconds!')
+                console.error(`The last executed query on this client was: ${client.lastQuery}`)
+            }, 5000)
 
-			client.release = () => {
-				clearTimeout(timeout)
-				client.query = query
-				client.release = release
-				return release.apply(client)
-			}
-			return client
-		} catch {
-			console.error()
-		}
-	},
+            client.release = () => {
+                clearTimeout(timeout)
+                client.query = query
+                client.release = release
+                return release.apply(client)
+            }
+            return client
+        } catch {
+            console.error()
+        }
+    },
 
-	pool: pool,
+    /**
+     *@property {pg.Pool} pool
+     */
+
+    pool: pool,
 }

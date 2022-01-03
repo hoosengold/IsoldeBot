@@ -114,4 +114,16 @@ frontend/template.html
 
 #ignore jsdoc output files
 jsdocs/
+out/
 .jsdoc.config.json
+test/
+
+# Templates
+.templates/
+
+#Graphs
+graphs/
+
+#Typescript files
+typescript/dist/
+typescript/src/commands/
