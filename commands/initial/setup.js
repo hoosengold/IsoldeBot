@@ -120,7 +120,7 @@ module.exports = {
         const setup = new Setup()
         const profilePic = new MessageAttachment('./images/git_profile-pic.png')
         const msg = new MessageEmbed()
-            .setAuthor('hoosengold', 'attachment://git_profile-pic.png', 'https://github.com/hoosengold/IsoldeBot')
+            .setAuthor({ name: 'hoosengold', iconURL: 'attachment://git_profile-pic.png', url: 'https://github.com/hoosengold/IsoldeBot' })
             .setColor('RED')
             .setTitle('IsoldeBot Setup Menu')
             .setDescription('Setup commands for IsoldeBot')
