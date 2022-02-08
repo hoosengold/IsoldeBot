@@ -12,6 +12,8 @@ import { Guild, GuildMember, Client, Permissions } from 'discord.js'
  * @function `isAdmin` {boolean}
  * @function `fetchMembers` {string[]}
  * @function `toString`
+ * @function `fetchOwner` {string}
+ * @function `isOwner` {boolean}
  */
 
 export class Util {
