@@ -21,11 +21,11 @@ module.exports = {
         //put your code here, you can list dependencies here or before module.exports
         const profilePic = new MessageAttachment('./images/git_profile-pic.png')
         let embedMessage = new MessageEmbed()
-            .setAuthor('hoosengold', 'attachment://git_profile-pic.png', 'https://github.com/hoosengold/IsoldeBot')
+            .setAuthor({ name: 'hoosengold', iconURL: 'attachment://git_profile-pic.png', url: 'https://github.com/hoosengold/IsoldeBot' })
             .setColor('AQUA')
             .setTitle('Why does IsoldeBot need so many permissions?')
             .setTimestamp(new Date())
-            .setFooter('Last updated: ' + fs.statSync(__filename).mtime.toUTCString())
+            .setFooter({ text: 'Last updated: ' + fs.statSync(__filename).mtime.toUTCString() })
             .addFields(
                 {
                     name: 'Send messages',

@@ -1,7 +1,8 @@
 const events = require('../commands/quiz/events/event'),
     { Interaction } = require('discord.js'),
     setup = require('../commands/initial/setup'),
-    { Util } = require('../typescript/dist/typescript/src/Util')
+    { Util } = require('../typescript/dist/typescript/src/Util'),
+    { handleTtcButtons } = require('../utils/interactions/ticTacToeHandler')
 
 module.exports = {
     name: 'interactionCreate',
@@ -14,6 +15,8 @@ module.exports = {
         if (interaction.isButton()) {
             if (interaction.customId.includes('Setup')) {
                 handleSetupButtons(interaction)
+            } else if (interaction.customId.includes('ttc')) {
+                handleTtcButtons(interaction)
             } else {
                 events.execute(interaction)
             }

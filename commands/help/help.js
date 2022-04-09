@@ -21,7 +21,7 @@ module.exports = {
         const profilePic = new Discord.MessageAttachment('./images/git_profile-pic.png')
 
         let helpEmbed = new Discord.MessageEmbed()
-            .setAuthor('hoosengold', 'attachment://git_profile-pic.png', 'https://github.com/hoosengold/IsoldeBot')
+            .setAuthor({ name: 'hoosengold', iconURL: 'attachment://git_profile-pic.png', url: 'https://github.com/hoosengold/IsoldeBot' })
             .setColor('RANDOM')
             .setTitle('IsoldeBot Help Menu')
             .setDescription('A comprehensive list with all commands and how to use them.')
@@ -29,7 +29,7 @@ module.exports = {
         let helpEmbed2 = new Discord.MessageEmbed()
             .setColor(helpEmbed.color)
             .setTimestamp(new Date())
-            .setFooter(`Note: undefined = no aliases \n Last updated: ` + fs.statSync('commands/help/help.js').mtime.toUTCString())
+            .setFooter({ text: `Note: undefined = no aliases \n Last updated: ` + fs.statSync('commands/help/help.js').mtime.toUTCString() })
 
         const commandFolders = fs.readdirSync('commands')
 

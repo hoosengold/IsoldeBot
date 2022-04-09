@@ -53,7 +53,7 @@ module.exports = {
                     value: 'If you encountered a bug or have an idea how to improve IsoldeBot, just open an [issue](https://github.com/hoosengold/IsoldeBot/issues) on Github and help us improve. :purple_heart:',
                 },
             ])
-            .setFooter(`Last updated: ` + fs.statSync(__filename).mtime.toUTCString())
+            .setFooter({ text: `Last updated: ` + fs.statSync(__filename).mtime.toUTCString() })
             .setTimestamp(new Date())
 
         const embedNY = new MessageEmbed()

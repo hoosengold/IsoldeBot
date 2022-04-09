@@ -126,11 +126,6 @@ export class Setup {
                     description: 'underscore/understrike',
                     value: '_',
                 },
-                {
-                    label: '/',
-                    description: 'slash',
-                    value: '/',
-                },
             ])
     }
 
