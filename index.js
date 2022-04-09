@@ -88,6 +88,10 @@ client.guilds.fetch().then((res) => {
 
 exports.prefixes = prefixes
 
+const ticTacToeUsers = new Collection()
+
+exports.ticTacToeUsers = ticTacToeUsers
+
 //Login with the bot
 require('dotenv').config()
 client.login(process.env.DISCORD_TOKEN).catch((err) => console.error(err))
