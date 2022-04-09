@@ -1,7 +1,7 @@
 const index = require('../index'),
-    url = require('../utils/regexURL'),
     { Collection, Message } = require('discord.js'),
-    { Util } = require('../typescript/dist/typescript/src/Util')
+    { Util } = require('../typescript/dist/typescript/src/Util'),
+    { UrlHandler } = require('../typescript/dist/typescript/src/UrlHandler')
 
 const client = index.client
 
@@ -111,69 +111,35 @@ module.exports = {
  */
 
 async function matchUrl(message, utilObject) {
-    if (checkInvite(message, utilObject)) {
+    const urlHandler = new UrlHandler(message)
+    if (urlHandler.checkInvite() && !utilObject.isAdmin()) {
+        //TODO add the returned/matched invite link in a blacklist
         console.log(`Discord invite link deleted`)
         message.channel.send(`**Only moderators can post Discord invite links!**`)
         return true
     }
 
-    if (checkShort(message)) {
-        console.log(`Shortened link deleted.`)
-        message.channel.send(`**No shortened links allowed!**`)
-        return true
-    }
-
-    if (await checkUrl(message)) {
-        console.log(`Possibly malicious link detected and deleted.`)
-        return true
-    }
-
-    return false
-}
-
-/**
- *
- * @description Checks if the message with the invite link has to be deleted
- * @param {Message} message Message object
- * @returns `true` when the message has to be deleted
- */
-function checkInvite(message, utilObject) {
-    if (message.content.match(url.invite)) {
-        if (utilObject.isAdmin()) {
-            console.log('Invite link posted by an admin')
-            return false
-        } else {
+    await urlHandler.checkShortenedUrl().then((res) => {
+        if (res) {
+            console.log(`Shortened link deleted.`)
+            message.channel.send(`**No shortened links allowed!**`)
             return true
         }
-    } else {
-        return false
-    }
-}
+    })
 
-/**
- *
- * @param {Message} message Message object
- */
-function checkShort(message) {
-    return message.content.includes('bit.ly' || 'goo.gl' || 'buff.ly' || 'j.mp' || 'mz.cm' || 'fb.me' || 'tinyurl.' || 't.co' || 'rebrand.ly' || 'b.link')
-        ? true
-        : false
-}
+    //FIXME too many false positives
+    /*await urlHandler.checkUrl().then((matchArray) => {
+        matchArray.forEach((innerMatchArray) => {
+            if (innerMatchArray) {
+                innerMatchArray.forEach((element) => {
+                    console.log(element)
+                    let urlString = element.toString().replace(/\s+/g, '')
+                    urlString = element.toString().replace(/,/g, '')
+                    console.log(`Test passed! Possible url: ${urlString}`)
+                })
+            }
+        })
+    })*/
 
-/**
- *
- * @param {Message} message Message object
- */
-//TODO implement url checking
-async function checkUrl(message) {
-    let urlString =
-        message.content.match(url.main) || message.content.match(url.alphanumeric) || message.content.match(url.iPv4) || message.content.match(url.iPv6)
-
-    if (urlString) {
-        //remove all blank spaces
-        urlString = urlString.toString().replace(/ /g, '')
-        urlString = urlString.toString().replace(/,/g, '')
-        console.log(`Test passed! url: ${urlString}`)
-        return false
-    }
+    return false
 }
