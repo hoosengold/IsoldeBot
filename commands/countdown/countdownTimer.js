@@ -74,6 +74,7 @@ module.exports = {
                 .catch(console.error())
         }
 
+        //FIXME incorrect jst day
         //Get the date when the countdown should end
         var countdownDate = new Date()
         countdownDate.setUTCHours(countdownDate.getUTCHours() + hoursLeft)

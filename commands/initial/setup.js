@@ -33,7 +33,7 @@ module.exports = {
         const channelName = message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'setup')
         if (!channelName) {
             message.guild.channels
-                .create('setup', {
+                .create('isoldebot-setup', {
                     reason: 'Setup IsoldeBot',
                     type: 'GUILD_TEXT',
                     permissionOverwrites: [
@@ -46,7 +46,7 @@ module.exports = {
                 .then(async () => {
                     message.channel
                         .send(
-                            `New channel ("setup") created. Please continue the setup there. (If you do not see the channel or any buttons there after a 10 seconds, run \`*setup\` again.)`
+                            `New channel ("isoldebot-setup") created. Please continue the setup there. (If you do not see the channel or any buttons there after a 10 seconds, run \`*setup\` again.)`
                         )
                         .then((message) => {
                             setTimeout(() => {
@@ -54,13 +54,13 @@ module.exports = {
                             }, 100000)
                         })
                     await this.handle(
-                        message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'setup'),
+                        message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'isoldebot-setup'),
                         utilObject
                     )
                 })
         } else {
             await this.handle(
-                message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'setup'),
+                message.guild.channels.cache.find((ch) => ch.name.toLowerCase() === 'isoldebot-setup'),
                 utilObject
             )
         }
